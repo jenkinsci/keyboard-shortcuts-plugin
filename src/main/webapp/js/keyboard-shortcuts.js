@@ -65,6 +65,10 @@ if (keyboard_shortcuts_enabled) {
               keyboard_shortcuts_do_refresh();
               break;
 
+            case '/':
+              keyboard_shortcuts_do_focus_search_box();
+              break;
+
             case '?':
               keyboard_shortcuts_show_keyboard_shortcuts_help();
               break;
@@ -167,6 +171,10 @@ if (keyboard_shortcuts_enabled) {
 
   function keyboard_shortcuts_do_refresh() {
     window.location.href = window.location.href;
+  }
+
+  function keyboard_shortcuts_do_focus_search_box() {
+    $('search-box').focus();
   }
 
   function keyboard_shortcuts_job_do_build_now() {
