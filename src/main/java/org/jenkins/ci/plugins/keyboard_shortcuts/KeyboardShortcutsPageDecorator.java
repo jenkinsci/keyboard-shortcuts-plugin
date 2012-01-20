@@ -26,6 +26,11 @@ package org.jenkins.ci.plugins.keyboard_shortcuts;
 
 import hudson.Extension;
 import hudson.model.PageDecorator;
+import net.sf.json.JSONArray;
+
+import org.kohsuke.stapler.DataBoundConstructor;
+import org.kohsuke.stapler.Stapler;
+import org.kohsuke.stapler.StaplerRequest;
 
 /**
  * The <a
@@ -38,16 +43,78 @@ import hudson.model.PageDecorator;
 @Extension
 public final class KeyboardShortcutsPageDecorator extends PageDecorator
 {
-  // @DataBoundConstructor
-  // public KeyboardShortcutsPageDecorator()
-  // {
-  // super();
-  // load();
-  // }
+  public static String getAllJobNamesAsJson()
+  {
+    final JSONArray jobNames = new JSONArray();
+    jobNames.addAll(JobUtils.getAllJobNames());
+    return jobNames.toString();
+  }
+
+  public static String getAllViewNamesAsJson()
+  {
+    final JSONArray viewNames = new JSONArray();
+    viewNames.addAll(ViewUtils.getAllViewNames());
+    return viewNames.toString();
+  }
+
+  public static boolean isJobPage(final StaplerRequest currentRequest)
+  {
+    if (currentRequest == null)
+    {
+      return false;
+    }
+
+    final String pathInfo = currentRequest.getPathInfo();
+
+    if (pathInfo == null)
+    {
+      return false;
+    }
+
+    return pathInfo.contains("/job/");
+  }
+
+  public static boolean isViewPage(final StaplerRequest currentRequest)
+  {
+    if (currentRequest == null)
+    {
+      return false;
+    }
+
+    if (isJobPage(currentRequest))
+    {
+      return false;
+    }
+
+    final String pathInfo = currentRequest.getPathInfo();
+
+    if (pathInfo == null)
+    {
+      return false;
+    }
+
+    return pathInfo.contains("/view/");
+  }
+
+  @DataBoundConstructor
+  public KeyboardShortcutsPageDecorator()
+  {
+    super();
+  }
 
   @Override
   public String getDisplayName()
   {
     return Messages.Keyboard_Shortcuts_Plugin_DisplayName();
+  }
+
+  public boolean isJobPage()
+  {
+    return isJobPage(Stapler.getCurrentRequest());
+  }
+
+  public boolean isViewPage()
+  {
+    return isViewPage(Stapler.getCurrentRequest());
   }
 }

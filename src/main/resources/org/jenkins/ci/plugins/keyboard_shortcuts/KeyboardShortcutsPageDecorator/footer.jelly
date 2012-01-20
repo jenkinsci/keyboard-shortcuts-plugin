@@ -1,6 +1,6 @@
 <?jelly escape-by-default='true'?>
 <j:jelly xmlns:j="jelly:core">
-  <div id="keyboard-shortcuts-help" <!-- style="display: none;" -->>
+  <div id="keyboard-shortcuts-help" style="display: none;">
     <table>
       <tr>
         <td colspan="2">Keyboard Shortcuts</td>
