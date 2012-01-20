@@ -1,0 +1,114 @@
+<?jelly escape-by-default='true'?>
+<j:jelly xmlns:j="jelly:core">
+  <div id="keyboard-shortcuts-help" <!-- style="display: none;" -->>
+    <table>
+      <tr>
+        <td colspan="2">Keyboard Shortcuts</td>
+      </tr>
+      <tr>
+        <td>
+          <table>
+            <tr>
+              <td colspan="2">Application</td>
+            </tr>
+            <tr>
+              <td>r:</td>
+              <td>refresh page</td>
+            </tr>
+            <tr>
+              <td>/:</td>
+              <td>move cursor to search box</td>
+            </tr>
+          </table>
+        </td>
+        <td>
+          <table>
+            <tr>
+              <td colspan="2">View</td>
+            </tr>
+            <tr>
+              <td>j:</td>
+              <td>next job item</td>
+            </tr>
+            <tr>
+              <td>k:</td>
+              <td>previous job item</td>
+            </tr>
+          </table>
+        </td>
+      </tr>
+      <tr>
+        <td>
+          <table>
+            <tr>
+              <td colspan="2">General</td>
+            </tr>
+            <tr>
+              <td>g-h:</td>
+              <td>Go Home</td>
+            </tr>
+            <tr>
+              <td>g-H:</td>
+              <td>Go to History</td>
+            </tr>
+            <tr>
+              <td>g-m:</td>
+              <td>Go to Manage</td>
+            </tr>
+            <tr>
+              <td>g-p:</td>
+              <td>Go to People</td>
+            </tr>
+            <tr>
+              <td>g-j:</td>
+              <td>Job Selector</td>
+            </tr>
+            <tr>
+              <td>g-v:</td>
+              <td>View Selector</td>
+            </tr>
+          </table>
+        </td>
+        <td>
+          <table>
+            <tr>
+              <td colspan="2">Job</td>
+            </tr>
+            <tr>
+              <td>b:</td>
+              <td>Build now</td>
+            </tr>
+            <tr>
+              <td>g-s:</td>
+              <td>Go to Status</td>
+            </tr>
+            <tr>
+              <td>g-c:</td>
+              <td>Go to Changes</td>
+            </tr>
+            <tr>
+              <td>g-w:</td>
+              <td>Go to Workspace</td>
+            </tr>
+            <tr>
+              <td>g-C:</td>
+              <td>Go to Configure</td>
+            </tr>
+            <tr>
+              <td>g-m:</td>
+              <td>Go to Modules</td>
+            </tr>
+            <tr>
+              <td>g-P:</td>
+              <td>Go to SCM Polling</td>
+            </tr>
+            <tr>
+              <td>g-p:</td>
+              <td>Permalink Selector</td>
+            </tr>
+          </table>
+        </td>
+      </tr>
+    </table>
+  </div>
+</j:jelly>
