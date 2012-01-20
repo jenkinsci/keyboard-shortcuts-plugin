@@ -170,27 +170,27 @@ if (keyboard_shortcuts_enabled) {
   }
 
   function keyboard_shortcuts_job_do_build_now() {
-    window.location.href = keyboard_shortcuts_url_job + '/build?delay=0sec';
+    window.location.href = keyboard_shortcuts_url + '/' + keyboard_shortcuts_url_job + '/build?delay=0sec';
   }
 
   function keyboard_shortcuts_job_go_changes() {
-    window.location.href = keyboard_shortcuts_url_job + '/changes';
+    window.location.href = keyboard_shortcuts_url + '/' + keyboard_shortcuts_url_job + '/changes';
   }
 
   function keyboard_shortcuts_job_go_configure() {
-    window.location.href = keyboard_shortcuts_url_job + '/configure';
+    window.location.href = keyboard_shortcuts_url + '/' + keyboard_shortcuts_url_job + '/configure';
   }
 
   function keyboard_shortcuts_job_go_modules() {
-    window.location.href = keyboard_shortcuts_url_job + '/modules';
+    window.location.href = keyboard_shortcuts_url + '/' + keyboard_shortcuts_url_job + '/modules';
   }
 
   function keyboard_shortcuts_job_go_scm_poll_log() {
-    window.location.href = keyboard_shortcuts_url_job + '/scmPollLog';
+    window.location.href = keyboard_shortcuts_url + '/' + keyboard_shortcuts_url_job + '/scmPollLog';
   }
 
   function keyboard_shortcuts_job_go_status() {
-    window.location.href = keyboard_shortcuts_url_job;
+    window.location.href = keyboard_shortcuts_url + '/' + keyboard_shortcuts_url_job;
   }
 
   function keyboard_shortcuts_job_go_workspace() {
