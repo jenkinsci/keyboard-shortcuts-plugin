@@ -25,12 +25,14 @@
 package org.jenkins.ci.plugins.keyboard_shortcuts;
 
 import hudson.Extension;
+import hudson.model.Item;
 import hudson.model.PageDecorator;
+import hudson.model.View;
+import jenkins.model.Jenkins;
 import net.sf.json.JSONArray;
 
+import org.apache.commons.lang.StringUtils;
 import org.kohsuke.stapler.DataBoundConstructor;
-import org.kohsuke.stapler.Stapler;
-import org.kohsuke.stapler.StaplerRequest;
 
 /**
  * The <a
@@ -57,43 +59,38 @@ public final class KeyboardShortcutsPageDecorator extends PageDecorator
     return viewNames.toString();
   }
 
-  public static boolean isJobPage(final StaplerRequest currentRequest)
+  public static String getBaseUrl()
   {
-    if (currentRequest == null)
-    {
-      return false;
-    }
-
-    final String pathInfo = currentRequest.getPathInfo();
-
-    if (pathInfo == null)
-    {
-      return false;
-    }
-
-    return pathInfo.contains("/job/");
+    return Jenkins.getInstance().getRootUrlFromRequest();
   }
 
-  public static boolean isViewPage(final StaplerRequest currentRequest)
+  public static String getBaseJobUrl()
   {
-    if (currentRequest == null)
+    final Item job = JobUtils.getJob();
+
+    if (job != null)
     {
-      return false;
+      return job.getUrl();
     }
 
-    if (isJobPage(currentRequest))
+    return "undefined";
+  }
+
+  public static String getBaseViewUrl()
+  {
+    final View view = ViewUtils.getView();
+    if (view != null)
     {
-      return false;
+      final String viewUrl = view.getUrl();
+      if (StringUtils.isEmpty(viewUrl))
+      {
+        return "/";
+      }
+
+      return viewUrl;
     }
 
-    final String pathInfo = currentRequest.getPathInfo();
-
-    if (pathInfo == null)
-    {
-      return false;
-    }
-
-    return pathInfo.contains("/view/");
+    return "undefined";
   }
 
   @DataBoundConstructor
@@ -106,15 +103,5 @@ public final class KeyboardShortcutsPageDecorator extends PageDecorator
   public String getDisplayName()
   {
     return Messages.Keyboard_Shortcuts_Plugin_DisplayName();
-  }
-
-  public boolean isJobPage()
-  {
-    return isJobPage(Stapler.getCurrentRequest());
-  }
-
-  public boolean isViewPage()
-  {
-    return isViewPage(Stapler.getCurrentRequest());
   }
 }

@@ -72,13 +72,13 @@ if (keyboard_shortcuts_enabled) {
             /* job related keyboard shortcuts */
 
             case 'b':
-              if (keyboard_shortcuts_is_job) {
+              if (keyboard_shortcuts_is_job()) {
                 keyboard_shortcuts_job_do_build_now();
               }
               break;
 
             case 'c':
-              if (keyboard_shortcuts_is_job) {
+              if (keyboard_shortcuts_is_job()) {
                 if (keyboard_shortcuts_previous_character_was_character('g')) {
                   keyboard_shortcuts_job_go_changes();
                 }
@@ -86,7 +86,7 @@ if (keyboard_shortcuts_enabled) {
               break;
 
             case 'C':
-              if (keyboard_shortcuts_is_job) {
+              if (keyboard_shortcuts_is_job()) {
                 if (keyboard_shortcuts_previous_character_was_character('g')) {
                   keyboard_shortcuts_job_go_configure();
                 }
@@ -94,7 +94,7 @@ if (keyboard_shortcuts_enabled) {
               break;
 
             case 'm':
-              if (keyboard_shortcuts_is_job) {
+              if (keyboard_shortcuts_is_job()) {
                 if (keyboard_shortcuts_previous_character_was_character('g')) {
                   keyboard_shortcuts_job_go_modules();
                 }
@@ -102,7 +102,7 @@ if (keyboard_shortcuts_enabled) {
               break;
 
             case 'P':
-              if (keyboard_shortcuts_is_job) {
+              if (keyboard_shortcuts_is_job()) {
                 if (keyboard_shortcuts_previous_character_was_character('g')) {
                   keyboard_shortcuts_job_go_scm_poll_log();
                 }
@@ -110,7 +110,7 @@ if (keyboard_shortcuts_enabled) {
               break;
 
             case 's':
-              if (keyboard_shortcuts_is_job) {
+              if (keyboard_shortcuts_is_job()) {
                 if (keyboard_shortcuts_previous_character_was_character('g')) {
                   keyboard_shortcuts_job_go_status();
                 }
@@ -118,7 +118,7 @@ if (keyboard_shortcuts_enabled) {
               break;
 
             case 'w':
-              if (keyboard_shortcuts_is_job) {
+              if (keyboard_shortcuts_is_job()) {
                 if (keyboard_shortcuts_previous_character_was_character('g')) {
                   keyboard_shortcuts_job_go_workspace();
                 }
@@ -157,36 +157,44 @@ if (keyboard_shortcuts_enabled) {
     return keyboard_shortcuts_previous_character == character;
   }
 
+  function keyboard_shortcuts_is_job() {
+    return typeof keyboard_shortcuts_url_job != undefined;
+  }
+
+  function keyboard_shortcuts_is_view() {
+    return typeof keyboard_shortcuts_url_view != undefined;
+  }
+
   function keyboard_shortcuts_do_refresh() {
     window.location.href = window.location.href;
   }
 
   function keyboard_shortcuts_job_do_build_now() {
-    document.location.href = 'build?delay=0sec';
+    window.location.href = keyboard_shortcuts_url_job + '/build?delay=0sec';
   }
 
   function keyboard_shortcuts_job_go_changes() {
-    document.location.href = 'changes';
+    window.location.href = keyboard_shortcuts_url_job + '/changes';
   }
 
   function keyboard_shortcuts_job_go_configure() {
-    document.location.href = 'configure';
+    window.location.href = keyboard_shortcuts_url_job + '/configure';
   }
 
   function keyboard_shortcuts_job_go_modules() {
-    document.location.href = 'modules';
+    window.location.href = keyboard_shortcuts_url_job + '/modules';
   }
 
   function keyboard_shortcuts_job_go_scm_poll_log() {
-    document.location.href = 'scmPollLog';
+    window.location.href = keyboard_shortcuts_url_job + '/scmPollLog';
   }
 
   function keyboard_shortcuts_job_go_status() {
-    document.location.href = '';
+    window.location.href = keyboard_shortcuts_url_job;
   }
 
   function keyboard_shortcuts_job_go_workspace() {
-    document.location.href = 'ws';
+    window.location.href = keyboard_shortcuts_url_job + '/ws';
   }
 }
 

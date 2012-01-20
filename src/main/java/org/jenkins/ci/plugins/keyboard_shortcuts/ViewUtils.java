@@ -33,6 +33,8 @@ import java.util.TreeSet;
 import jenkins.model.Jenkins;
 
 import org.apache.commons.lang.StringUtils;
+import org.kohsuke.stapler.Stapler;
+import org.kohsuke.stapler.StaplerRequest;
 
 /**
  * Common utilities for {@link hudson.model.View}s.
@@ -65,6 +67,40 @@ public final class ViewUtils
     }
 
     return viewNames;
+  }
+
+  public static View getView()
+  {
+    return getView(Stapler.getCurrentRequest());
+  }
+
+  protected static View getView(final StaplerRequest currentRequest)
+  {
+    if (currentRequest != null)
+    {
+      final String pathInfo = currentRequest.getPathInfo();
+
+      if (StringUtils.isNotEmpty(pathInfo))
+      {
+        final int vidx = pathInfo.indexOf("/view/");
+
+        if (vidx >= 0)
+        {
+          final String viewPathInfo = pathInfo.substring(vidx + 6);
+
+          final int slash = viewPathInfo.indexOf("/");
+          if (slash >= 0)
+          {
+            return Jenkins.getInstance().getView(
+                viewPathInfo.substring(0, slash));
+          }
+
+          return Jenkins.getInstance().getView(viewPathInfo);
+        }
+      }
+    }
+
+    return null;
   }
 
   /**

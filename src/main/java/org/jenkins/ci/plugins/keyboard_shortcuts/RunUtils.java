@@ -24,15 +24,8 @@
 
 package org.jenkins.ci.plugins.keyboard_shortcuts;
 
-import hudson.model.Item;
+import hudson.model.Run;
 
-import java.util.Collection;
-import java.util.SortedSet;
-import java.util.TreeSet;
-
-import jenkins.model.Jenkins;
-
-import org.apache.commons.lang.StringUtils;
 import org.kohsuke.stapler.Stapler;
 import org.kohsuke.stapler.StaplerRequest;
 
@@ -41,74 +34,23 @@ import org.kohsuke.stapler.StaplerRequest;
  * 
  * @author <a href="mailto:jieryn@gmail.com">Jesse Farinacci</a>
  */
-public final class JobUtils
+public final class RunUtils
 {
-  public static SortedSet<String> getAllJobNames()
+  public static Run getRun()
   {
-    final SortedSet<String> set = new TreeSet<String>();
-
-    final Collection<String> jobNames = Jenkins.getInstance().getJobNames();
-
-    if (jobNames != null)
-    {
-      set.addAll(jobNames);
-    }
-
-    return set;
+    return getRun(Stapler.getCurrentRequest());
   }
 
-  public static Item getJob()
+  public static Run getRun(final StaplerRequest currentRequest)
   {
-    return getJob(Stapler.getCurrentRequest());
-  }
-
-  public static Item getJob(final StaplerRequest currentRequest)
-  {
-    if (currentRequest != null)
-    {
-      final String pathInfo = currentRequest.getPathInfo();
-
-      if (StringUtils.isNotEmpty(pathInfo))
-      {
-        final int jidx = pathInfo.indexOf("/job/");
-        if (jidx >= 0)
-        {
-          final String jobPathInfo = pathInfo.substring(jidx + 5);
-
-          final int slash = jobPathInfo.indexOf("/");
-          if (slash >= 0)
-          {
-            return Jenkins.getInstance().getItem(
-                jobPathInfo.substring(0, slash));
-          }
-
-          return Jenkins.getInstance().getItem(jobPathInfo);
-        }
-      }
-    }
-
-    return null;
-  }
-
-  public static String getJobName()
-  {
-    return getJobName(getJob());
-  }
-
-  public static String getJobName(final Item item)
-  {
-    if (item != null)
-    {
-      return item.getName();
-    }
-
+    // TODO Auto-generated method stub
     return null;
   }
 
   /**
    * Static-only access.
    */
-  private JobUtils()
+  private RunUtils()
   {
     // static-only access
   }
