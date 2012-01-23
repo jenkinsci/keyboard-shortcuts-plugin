@@ -178,42 +178,52 @@ if (keyboard_shortcuts_enabled) {
   }
 
   function keyboard_shortcuts_do_refresh() {
+    keyboard_shortcuts_hide_keyboard_shortcuts_help();
     window.location.href = window.location.href;
   }
 
   function keyboard_shortcuts_do_focus_search_box() {
+    keyboard_shortcuts_hide_keyboard_shortcuts_help();
     $('search-box').focus();
   }
 
   function keyboard_shortcuts_go_home() {
+    keyboard_shortcuts_hide_keyboard_shortcuts_help();
     window.location.href = keyboard_shortcuts_url;
   }
 
   function keyboard_shortcuts_job_do_build_now() {
+    keyboard_shortcuts_hide_keyboard_shortcuts_help();
     window.location.href = keyboard_shortcuts_url + '/' + keyboard_shortcuts_url_job + '/build?delay=0sec';
   }
 
   function keyboard_shortcuts_job_go_changes() {
+    keyboard_shortcuts_hide_keyboard_shortcuts_help();
     window.location.href = keyboard_shortcuts_url + '/' + keyboard_shortcuts_url_job + '/changes';
   }
 
   function keyboard_shortcuts_job_go_configure() {
+    keyboard_shortcuts_hide_keyboard_shortcuts_help();
     window.location.href = keyboard_shortcuts_url + '/' + keyboard_shortcuts_url_job + '/configure';
   }
 
   function keyboard_shortcuts_job_go_modules() {
+    keyboard_shortcuts_hide_keyboard_shortcuts_help();
     window.location.href = keyboard_shortcuts_url + '/' + keyboard_shortcuts_url_job + '/modules';
   }
 
   function keyboard_shortcuts_job_go_scm_poll_log() {
+    keyboard_shortcuts_hide_keyboard_shortcuts_help();
     window.location.href = keyboard_shortcuts_url + '/' + keyboard_shortcuts_url_job + '/scmPollLog';
   }
 
   function keyboard_shortcuts_job_go_status() {
+    keyboard_shortcuts_hide_keyboard_shortcuts_help();
     window.location.href = keyboard_shortcuts_url + '/' + keyboard_shortcuts_url_job;
   }
 
   function keyboard_shortcuts_job_go_workspace() {
+    keyboard_shortcuts_hide_keyboard_shortcuts_help();
     window.location.href = keyboard_shortcuts_url_job + '/ws';
   }
 }
