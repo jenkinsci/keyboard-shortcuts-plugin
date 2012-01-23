@@ -14,14 +14,19 @@
               </thead>
               <tbody>
                 <tr>
-                  <td class="keyboard-shortcuts-help-section-key">r</td>
+                  <td class="keyboard-shortcuts-help-section-key">?</td>
                   <td>:</td>
-                  <td class="keyboard-shortcuts-help-section-desc">refresh page</td>
+                  <td class="keyboard-shortcuts-help-section-desc">show keyboard shortcut help</td>
                 </tr>
                 <tr>
                   <td class="keyboard-shortcuts-help-section-key">/</td>
                   <td>:</td>
                   <td class="keyboard-shortcuts-help-section-desc">move cursor to search box</td>
+                </tr>
+                <tr>
+                  <td class="keyboard-shortcuts-help-section-key">r</td>
+                  <td>:</td>
+                  <td class="keyboard-shortcuts-help-section-desc">refresh current page</td>
                 </tr>
                 <tr>
                   <td class="keyboard-shortcuts-help-section-key">g-h</td>

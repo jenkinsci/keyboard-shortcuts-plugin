@@ -31,7 +31,7 @@
     var keyboard_shortcuts_url_job = '${it.baseJobUrl}';
     var keyboard_shortcuts_url_view = '${it.baseViewUrl}';
     var keyboard_shortcuts_job_names = ${it.allJobNamesAsJson};
-    var keyboard_shortcuts_view_names = ${it.allViewNamesAsJson};    
+    var keyboard_shortcuts_view_names = ${it.allViewNamesAsJson};
   </script>
   <!-- we require advanced features found in prototype-1.7 -->
   <script type="text/javascript" src="${pluginUrl}/js/prototype-1.7.js" />
