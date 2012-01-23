@@ -22,5 +22,90 @@
  * THE SOFTWARE.
  */
 #keyboard-shortcuts-help {
+	background: #000;
+	border-radius: 10px;
+	-moz-border-radius: 10px;
+	-webkit-border-radius: 10px;
+	filter: alpha(opacity = 80);
+	left: 5%;
+	margin: 0;
+	padding: 3em;
+	position: absolute;
+	opacity: .8;
+	-moz-opacity: .8;
+	overflow: auto;
+	top: 5%;
+	width: 85%;
+	z-index: 1001;
+}
+
+#keyboard-shortcuts-help .keyboard-shortcuts-help-section-top {
+	color: orange; font-size : xx-large;
+	font-weight: bold;
+	text-align: center;
+	font-size: xx-large;
+}
+
+#keyboard-shortcuts-help .keyboard-shortcuts-help-section-bottom {
+	color: orange; border-top-color : orange; border-top-style : solid;
+	border-top-width: medium;
+	margin-top: 3px;
+	width: 100%;
+	border-top-style: solid;
+	border-top-color: orange;
+}
+
+#keyboard-shortcuts-help  .keyboard-shortcuts-help-section-container {
+	text-align: center;
+}
+
+#keyboard-shortcuts-help  .keyboard-shortcuts-help-section-container table
+	{
+	padding-bottom: 1em;
+	padding-left: 2em;
+	padding-right: 2em;
+	padding-top: 1em;
+	width: 100%;
+}
+
+#keyboard-shortcuts-help .keyboard-shortcuts-help-section-container td {
+	vertical-align: top;
+}
+
+#keyboard-shortcuts-help .keyboard-shortcuts-help-section-container .keyboard-shortcuts-help-section
+	{
+	
+}
+
+#keyboard-shortcuts-help .keyboard-shortcuts-help-section-container .keyboard-shortcuts-help-section table
+	{
+	
+}
+
+#keyboard-shortcuts-help .keyboard-shortcuts-help-section-container .keyboard-shortcuts-help-section th
+	{
+	color: orange;
+	font-size: x-large;
+	font-weight: bold;
+	border-bottom-color: orange;
+	border-bottom-style: solid;
+	border-bottom-width: thin;
+}
+
+#keyboard-shortcuts-help .keyboard-shortcuts-help-section-container .keyboard-shortcuts-help-section td
+	{
+	color: white;
+	font-size: large;
+}
+
+#keyboard-shortcuts-help  .keyboard-shortcuts-help-section-container .keyboard-shortcuts-help-section td.keyboard-shortcuts-help-section-key
+	{
+	color: orange;
+	font-weight: bold;
+	text-align: right;
+}
+
+#keyboard-shortcuts-help  .keyboard-shortcuts-help-section-container .keyboard-shortcuts-help-section td.keyboard-shortcuts-help-section-desc
+	{
 	
 }

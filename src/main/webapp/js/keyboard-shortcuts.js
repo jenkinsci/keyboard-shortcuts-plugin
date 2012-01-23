@@ -30,6 +30,8 @@ if (keyboard_shortcuts_enabled) {
     Event.observe(document, 'keypress', function(e) {
       var keyboard_shortcuts_code;
 
+      console.log('activeElement: ' + document.activeElement);
+
       if (!e) {
         e = window.event;
       }
@@ -94,6 +96,12 @@ if (keyboard_shortcuts_enabled) {
                 if (keyboard_shortcuts_previous_character_was_character('g')) {
                   keyboard_shortcuts_job_go_configure();
                 }
+              }
+              break;
+
+            case 'h':
+              if (keyboard_shortcuts_previous_character_was_character('g')) {
+                keyboard_shortcuts_go_home();
               }
               break;
 
@@ -175,6 +183,10 @@ if (keyboard_shortcuts_enabled) {
 
   function keyboard_shortcuts_do_focus_search_box() {
     $('search-box').focus();
+  }
+
+  function keyboard_shortcuts_go_home() {
+    window.location.href = keyboard_shortcuts_url;
   }
 
   function keyboard_shortcuts_job_do_build_now() {

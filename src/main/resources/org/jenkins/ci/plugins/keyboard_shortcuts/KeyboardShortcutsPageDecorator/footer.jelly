@@ -1,114 +1,146 @@
 <?jelly escape-by-default='true'?>
 <j:jelly xmlns:j="jelly:core">
-  <div id="keyboard-shortcuts-help" style="display: none;">
-    <table>
-      <tr>
-        <td colspan="2">Keyboard Shortcuts</td>
-      </tr>
-      <tr>
-        <td>
-          <table>
-            <tr>
-              <td colspan="2">Application</td>
-            </tr>
-            <tr>
-              <td>r:</td>
-              <td>refresh page</td>
-            </tr>
-            <tr>
-              <td>/:</td>
-              <td>move cursor to search box</td>
-            </tr>
-          </table>
-        </td>
-        <td>
-          <table>
-            <tr>
-              <td colspan="2">View</td>
-            </tr>
-            <tr>
-              <td>j:</td>
-              <td>next job item</td>
-            </tr>
-            <tr>
-              <td>k:</td>
-              <td>previous job item</td>
-            </tr>
-          </table>
-        </td>
-      </tr>
-      <tr>
-        <td>
-          <table>
-            <tr>
-              <td colspan="2">General</td>
-            </tr>
-            <tr>
-              <td>g-h:</td>
-              <td>Go Home</td>
-            </tr>
-            <tr>
-              <td>g-H:</td>
-              <td>Go to History</td>
-            </tr>
-            <tr>
-              <td>g-m:</td>
-              <td>Go to Manage</td>
-            </tr>
-            <tr>
-              <td>g-p:</td>
-              <td>Go to People</td>
-            </tr>
-            <tr>
-              <td>g-j:</td>
-              <td>Job Selector</td>
-            </tr>
-            <tr>
-              <td>g-v:</td>
-              <td>View Selector</td>
-            </tr>
-          </table>
-        </td>
-        <td>
-          <table>
-            <tr>
-              <td colspan="2">Job</td>
-            </tr>
-            <tr>
-              <td>b:</td>
-              <td>Build now</td>
-            </tr>
-            <tr>
-              <td>g-s:</td>
-              <td>Go to Status</td>
-            </tr>
-            <tr>
-              <td>g-c:</td>
-              <td>Go to Changes</td>
-            </tr>
-            <tr>
-              <td>g-w:</td>
-              <td>Go to Workspace</td>
-            </tr>
-            <tr>
-              <td>g-C:</td>
-              <td>Go to Configure</td>
-            </tr>
-            <tr>
-              <td>g-m:</td>
-              <td>Go to Modules</td>
-            </tr>
-            <tr>
-              <td>g-P:</td>
-              <td>Go to SCM Polling</td>
-            </tr>
-            <tr>
-              <td>g-p:</td>
-              <td>Permalink Selector</td>
-            </tr>
-          </table>
-        </td>
-      </tr>
-    </table>
+  <div id="keyboard-shortcuts-help" style="display: none">
+    <div class="keyboard-shortcuts-help-section-top">Keyboard Shortcuts</div>
+    <div class="keyboard-shortcuts-help-section-bottom">
+      <table class="keyboard-shortcuts-help-section-container" width="100%">
+        <tr>
+          <td>
+            <table class="keyboard-shortcuts-help-section">
+              <thead>
+                <tr>
+                  <th colspan="3">General Application</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td class="keyboard-shortcuts-help-section-key">r</td>
+                  <td>:</td>
+                  <td class="keyboard-shortcuts-help-section-desc">refresh page</td>
+                </tr>
+                <tr>
+                  <td class="keyboard-shortcuts-help-section-key">/</td>
+                  <td>:</td>
+                  <td class="keyboard-shortcuts-help-section-desc">move cursor to search box</td>
+                </tr>
+                <tr>
+                  <td class="keyboard-shortcuts-help-section-key">g-h</td>
+                  <td>:</td>
+                  <td class="keyboard-shortcuts-help-section-desc">Go Home</td>
+                </tr>
+                <tr>
+                  <td class="keyboard-shortcuts-help-section-key">g-H</td>
+                  <td>:</td>
+                  <td class="keyboard-shortcuts-help-section-desc">Go to History</td>
+                </tr>
+                <tr>
+                  <td class="keyboard-shortcuts-help-section-key">g-m</td>
+                  <td>:</td>
+                  <td class="keyboard-shortcuts-help-section-desc">Go to Manage</td>
+                </tr>
+                <tr>
+                  <td class="keyboard-shortcuts-help-section-key">g-p</td>
+                  <td>:</td>
+                  <td class="keyboard-shortcuts-help-section-desc">Go to People</td>
+                </tr>
+                <tr>
+                  <td class="keyboard-shortcuts-help-section-key">g-j</td>
+                  <td>:</td>
+                  <td class="keyboard-shortcuts-help-section-desc">Job Selector</td>
+                </tr>
+                <tr>
+                  <td class="keyboard-shortcuts-help-section-key">g-v</td>
+                  <td>:</td>
+                  <td class="keyboard-shortcuts-help-section-desc">View Selector</td>
+                </tr>
+              </tbody>
+            </table>
+          </td>
+          <td>
+            <table class="keyboard-shortcuts-help-section">
+              <tbody>
+                <tr>
+                  <th colspan="3">View Pages</th>
+                </tr>
+                <tr>
+                  <td class="keyboard-shortcuts-help-section-key">j</td>
+                  <td>:</td>
+                  <td class="keyboard-shortcuts-help-section-desc">next job item</td>
+                </tr>
+                <tr>
+                  <td class="keyboard-shortcuts-help-section-key">k</td>
+                  <td>:</td>
+                  <td class="keyboard-shortcuts-help-section-desc">previous job item</td>
+                </tr>
+                <tr>
+                  <td class="keyboard-shortcuts-help-section-key">n</td>
+                  <td>:</td>
+                  <td class="keyboard-shortcuts-help-section-desc">next job item</td>
+                </tr>
+                <tr>
+                  <td class="keyboard-shortcuts-help-section-key">p</td>
+                  <td>:</td>
+                  <td class="keyboard-shortcuts-help-section-desc">previous job item</td>
+                </tr>
+                <tr>
+                  <td class="keyboard-shortcuts-help-section-key">o</td>
+                  <td>:</td>
+                  <td class="keyboard-shortcuts-help-section-desc">open current job item</td>
+                </tr>
+              </tbody>
+            </table>
+          </td>
+          <td>
+            <table class="keyboard-shortcuts-help-section">
+              <tbody>
+                <tr>
+                  <th colspan="3">Job Pages</th>
+                </tr>
+                <tr>
+                  <td class="keyboard-shortcuts-help-section-key">b</td>
+                  <td>:</td>
+                  <td class="keyboard-shortcuts-help-section-desc">Build now</td>
+                </tr>
+                <tr>
+                  <td class="keyboard-shortcuts-help-section-key">g-s</td>
+                  <td>:</td>
+                  <td class="keyboard-shortcuts-help-section-desc">Go to Status</td>
+                </tr>
+                <tr>
+                  <td class="keyboard-shortcuts-help-section-key">g-c</td>
+                  <td>:</td>
+                  <td class="keyboard-shortcuts-help-section-desc">Go to Changes</td>
+                </tr>
+                <tr>
+                  <td class="keyboard-shortcuts-help-section-key">g-w</td>
+                  <td>:</td>
+                  <td class="keyboard-shortcuts-help-section-desc">Go to Workspace</td>
+                </tr>
+                <tr>
+                  <td class="keyboard-shortcuts-help-section-key">g-C</td>
+                  <td>:</td>
+                  <td class="keyboard-shortcuts-help-section-desc">Go to Configure</td>
+                </tr>
+                <tr>
+                  <td class="keyboard-shortcuts-help-section-key">g-m</td>
+                  <td>:</td>
+                  <td class="keyboard-shortcuts-help-section-desc">Go to Modules</td>
+                </tr>
+                <tr>
+                  <td class="keyboard-shortcuts-help-section-key">g-P</td>
+                  <td>:</td>
+                  <td class="keyboard-shortcuts-help-section-desc">Go to SCM Polling</td>
+                </tr>
+                <tr>
+                  <td class="keyboard-shortcuts-help-section-key">g-p</td>
+                  <td>:</td>
+                  <td class="keyboard-shortcuts-help-section-desc">Permalink Selector</td>
+                </tr>
+              </tbody>
+            </table>
+          </td>
+        </tr>
+      </table>
+    </div>
   </div>
 </j:jelly>
