@@ -28,9 +28,17 @@ if (keyboard_shortcuts_enabled) {
 
   Event.observe(window, 'load', function() {
     Event.observe(document, 'keypress', function(e) {
-      var keyboard_shortcuts_code;
 
-      console.log('activeElement: ' + document.activeElement);
+      /* try to play nicely with forms, so no keyboard shortcuts */
+      var activeElement = document.activeElement;
+      if (activeElement == null || 'INPUT' == activeElement.tagName || 'PASSWORD' == activeElement.tagName
+          || 'TEXTAREA' == activeElement.tagName) {
+        return;
+      }
+
+      // ---
+
+      var keyboard_shortcuts_code;
 
       if (!e) {
         e = window.event;
