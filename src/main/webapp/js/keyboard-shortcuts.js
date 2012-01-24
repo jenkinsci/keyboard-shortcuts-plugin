@@ -31,8 +31,7 @@ if (keyboard_shortcuts_enabled) {
 
       /* try to play nicely with forms, so no keyboard shortcuts */
       var activeElement = document.activeElement;
-      if (activeElement == null || 'INPUT' == activeElement.tagName || 'PASSWORD' == activeElement.tagName
-          || 'TEXTAREA' == activeElement.tagName) {
+      if (activeElement == null || 'INPUT' == activeElement.tagName) {
         return;
       }
 
@@ -73,21 +72,24 @@ if (keyboard_shortcuts_enabled) {
               break;
 
             case '/':
-              keyboard_shortcuts_app_focus_search_box();
+              keyboard_shortcuts_hide_keyboard_shortcuts_help();
+              $('search-box').focus();
               break;
 
             /* job related keyboard shortcuts */
 
             case 'b':
               if (keyboard_shortcuts_is_job()) {
-                keyboard_shortcuts_job_build_now();
+                keyboard_shortcuts_hide_keyboard_shortcuts_help();
+                window.location.href = keyboard_shortcuts_url + '/' + keyboard_shortcuts_url_job + '/build?delay=0sec';
               }
               break;
 
             case 'c':
               if (keyboard_shortcuts_previous_character_was_character('g')) {
                 if (keyboard_shortcuts_is_job()) {
-                  keyboard_shortcuts_job_go_changes();
+                  keyboard_shortcuts_hide_keyboard_shortcuts_help();
+                  window.location.href = keyboard_shortcuts_url + '/' + keyboard_shortcuts_url_job + '/changes';
                 }
               }
               break;
@@ -95,38 +97,43 @@ if (keyboard_shortcuts_enabled) {
             case 'C':
               if (keyboard_shortcuts_previous_character_was_character('g')) {
                 if (keyboard_shortcuts_is_job()) {
-                  keyboard_shortcuts_job_go_configure();
+                  keyboard_shortcuts_hide_keyboard_shortcuts_help();
+                  window.location.href = keyboard_shortcuts_url + '/' + keyboard_shortcuts_url_job + '/configure';
                 }
               }
               break;
 
             case 'h':
               if (keyboard_shortcuts_previous_character_was_character('g')) {
-                keyboard_shortcuts_app_go_home();
+                keyboard_shortcuts_hide_keyboard_shortcuts_help();
+                window.location.href = keyboard_shortcuts_url;
               }
               break;
 
             case 'H':
               if (keyboard_shortcuts_previous_character_was_character('g')) {
                 if (keyboard_shortcuts_is_view()) {
-                  keyboard_shortcuts_view_go_history();
+                  keyboard_shortcuts_hide_keyboard_shortcuts_help();
+                  window.location.href = keyboard_shortcuts_url + '/' + keyboard_shortcuts_url_view + '/builds';
                 }
               }
               break;
 
             case 'j':
               if (keyboard_shortcuts_previous_character_was_character('g')) {
-                keyboard_shortcuts_app_job_selector();
+                window.alert('keyboard_shortcuts_app_job_selector');
               }
               break;
 
             case 'm':
               if (keyboard_shortcuts_previous_character_was_character('g')) {
                 if (keyboard_shortcuts_is_job()) {
-                  keyboard_shortcuts_job_go_modules();
+                  keyboard_shortcuts_hide_keyboard_shortcuts_help();
+                  window.location.href = keyboard_shortcuts_url + '/' + keyboard_shortcuts_url_job + '/modules';
                 }
                 else if (keyboard_shortcuts_is_app()) {
-                  keyboard_shortcuts_app_go_manage();
+                  keyboard_shortcuts_hide_keyboard_shortcuts_help();
+                  window.location.href = keyboard_shortcuts_url + '/manage';
                 }
               }
               break;
@@ -134,10 +141,11 @@ if (keyboard_shortcuts_enabled) {
             case 'p':
               if (keyboard_shortcuts_previous_character_was_character('g')) {
                 if (keyboard_shortcuts_is_job()) {
-                  keyboard_shortcuts_job_permalink_selector();
+                  window.alert('keyboard_shortcuts_job_permalink_selector');
                 }
                 else if (keyboard_shortcuts_is_app()) {
-                  keyboard_shortcuts_app_go_people();
+                  keyboard_shortcuts_hide_keyboard_shortcuts_help();
+                  window.location.href = keyboard_shortcuts_url + '/people';
                 }
               }
               break;
@@ -145,33 +153,37 @@ if (keyboard_shortcuts_enabled) {
             case 'P':
               if (keyboard_shortcuts_previous_character_was_character('g')) {
                 if (keyboard_shortcuts_is_job()) {
-                  keyboard_shortcuts_job_go_scm_poll_log();
+                  keyboard_shortcuts_hide_keyboard_shortcuts_help();
+                  window.location.href = keyboard_shortcuts_url + '/' + keyboard_shortcuts_url_job + '/scmPollLog';
                 }
               }
               break;
 
             case 'r':
-              keyboard_shortcuts_app_refresh();
+              keyboard_shortcuts_hide_keyboard_shortcuts_help();
+              window.location.href = window.location.href;
               break;
 
             case 's':
               if (keyboard_shortcuts_previous_character_was_character('g')) {
                 if (keyboard_shortcuts_is_job()) {
-                  keyboard_shortcuts_job_go_status();
+                  keyboard_shortcuts_hide_keyboard_shortcuts_help();
+                  window.location.href = keyboard_shortcuts_url + '/' + keyboard_shortcuts_url_job;
                 }
               }
               break;
 
             case 'v':
               if (keyboard_shortcuts_previous_character_was_character('g')) {
-                keyboard_shortcuts_app_view_selector();
+                window.alert('keyboard_shortcuts_app_view_selector');
               }
               break;
 
             case 'w':
               if (keyboard_shortcuts_previous_character_was_character('g')) {
                 if (keyboard_shortcuts_is_job()) {
-                  keyboard_shortcuts_job_go_workspace();
+                  keyboard_shortcuts_hide_keyboard_shortcuts_help();
+                  window.location.href = keyboard_shortcuts_url_job + '/ws';
                 }
               }
               break;
@@ -187,6 +199,14 @@ if (keyboard_shortcuts_enabled) {
       keyboard_shortcuts_previous_character = String.fromCharCode(keyboard_shortcuts_code);
     });
   });
+
+  function keyboard_shortcuts_is_job() {
+    return typeof keyboard_shortcuts_url_job != undefined;
+  }
+
+  function keyboard_shortcuts_is_view() {
+    return typeof keyboard_shortcuts_url_view != undefined;
+  }
 
   function keyboard_shortcuts_show_keyboard_shortcuts_help() {
     $('keyboard-shortcuts-help').show();
@@ -206,91 +226,6 @@ if (keyboard_shortcuts_enabled) {
     }
 
     return keyboard_shortcuts_previous_character == character;
-  }
-
-  function keyboard_shortcuts_is_job() {
-    return typeof keyboard_shortcuts_url_job != undefined;
-  }
-
-  function keyboard_shortcuts_is_view() {
-    return typeof keyboard_shortcuts_url_view != undefined;
-  }
-
-  function keyboard_shortcuts_app_refresh() {
-    keyboard_shortcuts_hide_keyboard_shortcuts_help();
-    window.location.href = window.location.href;
-  }
-
-  function keyboard_shortcuts_app_focus_search_box() {
-    keyboard_shortcuts_hide_keyboard_shortcuts_help();
-    $('search-box').focus();
-  }
-
-  function keyboard_shortcuts_app_go_home() {
-    keyboard_shortcuts_hide_keyboard_shortcuts_help();
-    window.location.href = keyboard_shortcuts_url;
-  }
-
-  function keyboard_shortcuts_app_go_manage() {
-    keyboard_shortcuts_hide_keyboard_shortcuts_help();
-    window.location.href = keyboard_shortcuts_url + '/manage';
-  }
-
-  function keyboard_shortcuts_app_go_people() {
-    keyboard_shortcuts_hide_keyboard_shortcuts_help();
-    window.location.href = keyboard_shortcuts_url + '/people';
-  }
-
-  function keyboard_shortcuts_view_go_history() {
-    keyboard_shortcuts_hide_keyboard_shortcuts_help();
-    window.location.href = keyboard_shortcuts_url + '/' + keyboard_shortcuts_url_view + '/builds';
-  }
-
-  function keyboard_shortcuts_job_build_now() {
-    keyboard_shortcuts_hide_keyboard_shortcuts_help();
-    window.location.href = keyboard_shortcuts_url + '/' + keyboard_shortcuts_url_job + '/build?delay=0sec';
-  }
-
-  function keyboard_shortcuts_job_go_changes() {
-    keyboard_shortcuts_hide_keyboard_shortcuts_help();
-    window.location.href = keyboard_shortcuts_url + '/' + keyboard_shortcuts_url_job + '/changes';
-  }
-
-  function keyboard_shortcuts_job_go_configure() {
-    keyboard_shortcuts_hide_keyboard_shortcuts_help();
-    window.location.href = keyboard_shortcuts_url + '/' + keyboard_shortcuts_url_job + '/configure';
-  }
-
-  function keyboard_shortcuts_job_go_modules() {
-    keyboard_shortcuts_hide_keyboard_shortcuts_help();
-    window.location.href = keyboard_shortcuts_url + '/' + keyboard_shortcuts_url_job + '/modules';
-  }
-
-  function keyboard_shortcuts_job_go_scm_poll_log() {
-    keyboard_shortcuts_hide_keyboard_shortcuts_help();
-    window.location.href = keyboard_shortcuts_url + '/' + keyboard_shortcuts_url_job + '/scmPollLog';
-  }
-
-  function keyboard_shortcuts_job_go_status() {
-    keyboard_shortcuts_hide_keyboard_shortcuts_help();
-    window.location.href = keyboard_shortcuts_url + '/' + keyboard_shortcuts_url_job;
-  }
-
-  function keyboard_shortcuts_job_go_workspace() {
-    keyboard_shortcuts_hide_keyboard_shortcuts_help();
-    window.location.href = keyboard_shortcuts_url_job + '/ws';
-  }
-
-  function keyboard_shortcuts_app_job_selector() {
-    window.alert('keyboard_shortcuts_app_job_selector');
-  }
-
-  function keyboard_shortcuts_app_view_selector() {
-    window.alert('keyboard_shortcuts_app_view_selector');
-  }
-
-  function keyboard_shortcuts_job_permalink_selector() {
-    window.alert('keyboard_shortcuts_job_permalink_selector');
   }
 }
 
