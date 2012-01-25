@@ -147,14 +147,14 @@
                   <td class="keyboard-shortcuts-help-section-desc">${%KeyboardShortcuts.JobPages.GoToModules}</td>
                 </tr>
                 <tr>
-                  <td class="keyboard-shortcuts-help-section-key">g-P</td>
-                  <td>:</td>
-                  <td class="keyboard-shortcuts-help-section-desc">${%KeyboardShortcuts.JobPages.GoToSCMPolling}</td>
-                </tr>
-                <tr>
                   <td class="keyboard-shortcuts-help-section-key">g-p</td>
                   <td>:</td>
                   <td class="keyboard-shortcuts-help-section-desc">${%KeyboardShortcuts.JobPages.PermalinkSelector}</td>
+                </tr>
+                <tr>
+                  <td class="keyboard-shortcuts-help-section-key">g-P</td>
+                  <td>:</td>
+                  <td class="keyboard-shortcuts-help-section-desc">${%KeyboardShortcuts.JobPages.GoToSCMPolling}</td>
                 </tr>
                 <tr>
                   <td class="keyboard-shortcuts-help-section-key">g-s</td>
