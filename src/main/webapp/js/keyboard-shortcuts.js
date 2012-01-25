@@ -78,9 +78,6 @@ if (keyboard_shortcuts_enabled) {
             if (keyboard_shortcuts_is_job()) {
               window.location.href = keyboard_shortcuts_url + '/' + keyboard_shortcuts_url_job + '/changes';
             }
-            else {
-              window.location.href = keyboard_shortcuts_url + '/configure';
-            }
           }
           break;
 
@@ -88,6 +85,12 @@ if (keyboard_shortcuts_enabled) {
           if (keyboard_shortcuts_previous_character_was_character('g')) {
             if (keyboard_shortcuts_is_job()) {
               window.location.href = keyboard_shortcuts_url + '/' + keyboard_shortcuts_url_job + '/configure';
+            }
+            else if (keyboard_shortcuts_is_view()) {
+              window.location.href = keyboard_shortcuts_url + keyboard_shortcuts_url_view + '/configure';
+            }
+            else {
+              window.location.href = keyboard_shortcuts_url + '/configure';
             }
           }
           break;
