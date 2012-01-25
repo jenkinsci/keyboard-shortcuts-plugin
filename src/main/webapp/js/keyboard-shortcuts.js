@@ -191,7 +191,7 @@ if (keyboard_shortcuts_enabled) {
         case 'w':
           if (keyboard_shortcuts_previous_character_was_character('g')) {
             if (keyboard_shortcuts_is_job()) {
-              window.location.href = keyboard_shortcuts_url_job + '/ws';
+              window.location.href = keyboard_shortcuts_url + '/' + keyboard_shortcuts_url_job + '/ws';
             }
           }
           break;
