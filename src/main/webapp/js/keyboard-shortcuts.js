@@ -73,7 +73,8 @@ if (keyboard_shortcuts_enabled) {
           }
           else if (keyboard_shortcuts_is_view()) {
             if (typeof keyboard_shortcuts_view_job_selected != 'undefined') {
-              window.location.href = keyboard_shortcuts_url + '/job/' + keyboard_shortcuts_view_job_selected + '/build?delay=0sec';
+              window.location.href = keyboard_shortcuts_url + '/job/' + keyboard_shortcuts_view_job_selected
+                  + '/build?delay=0sec';
             }
           }
           break;
@@ -194,6 +195,14 @@ if (keyboard_shortcuts_enabled) {
           if (keyboard_shortcuts_previous_character_was_character('g')) {
             if (keyboard_shortcuts_is_job()) {
               window.location.href = keyboard_shortcuts_url + '/' + keyboard_shortcuts_url_job;
+            }
+          }
+          break;
+
+        case 't':
+          if (keyboard_shortcuts_previous_character_was_character('g')) {
+            if (keyboard_shortcuts_is_job()) {
+              window.location.href = keyboard_shortcuts_url + '/' + keyboard_shortcuts_url_job + '/buildTimeTrend';
             }
           }
           break;

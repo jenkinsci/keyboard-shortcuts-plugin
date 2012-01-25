@@ -83,6 +83,11 @@
                   <th colspan="3">${%KeyboardShortcuts.ViewPages.Title}</th>
                 </tr>
                 <tr>
+                  <td class="keyboard-shortcuts-help-section-key">b</td>
+                  <td>:</td>
+                  <td class="keyboard-shortcuts-help-section-desc">${%KeyboardShortcuts.ViewPages.BuildCurrentJobItem}</td>
+                </tr>
+                <tr>
                   <td class="keyboard-shortcuts-help-section-key">j</td>
                   <td>:</td>
                   <td class="keyboard-shortcuts-help-section-desc">${%KeyboardShortcuts.ViewPages.NextJobItem}</td>
@@ -155,6 +160,11 @@
                   <td class="keyboard-shortcuts-help-section-key">g-s</td>
                   <td>:</td>
                   <td class="keyboard-shortcuts-help-section-desc">${%KeyboardShortcuts.JobPages.GoToStatus}</td>
+                </tr>
+                <tr>
+                  <td class="keyboard-shortcuts-help-section-key">g-t</td>
+                  <td>:</td>
+                  <td class="keyboard-shortcuts-help-section-desc">${%KeyboardShortcuts.JobPages.GoToTimeTrend}</td>
                 </tr>
                 <tr>
                   <td class="keyboard-shortcuts-help-section-key">g-w</td>
