@@ -49,6 +49,11 @@
                   <td class="keyboard-shortcuts-help-section-desc">${%KeyboardShortcuts.GeneralApplication.GoToPeople}</td>
                 </tr>
                 <tr>
+                  <td class="keyboard-shortcuts-help-section-key">g-P</td>
+                  <td>:</td>
+                  <td class="keyboard-shortcuts-help-section-desc">${%KeyboardShortcuts.GeneralApplication.GoToPluginManager}</td>
+                </tr>
+                <tr>
                   <td class="keyboard-shortcuts-help-section-key">g-j</td>
                   <td>:</td>
                   <td class="keyboard-shortcuts-help-section-desc">${%KeyboardShortcuts.GeneralApplication.JobSelector}</td>

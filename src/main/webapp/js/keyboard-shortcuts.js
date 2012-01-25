@@ -156,6 +156,10 @@ if (keyboard_shortcuts_enabled) {
                   keyboard_shortcuts_hide_keyboard_shortcuts_help();
                   window.location.href = keyboard_shortcuts_url + '/' + keyboard_shortcuts_url_job + '/scmPollLog';
                 }
+                else if (keyboard_shortcuts_is_app()) {
+                  keyboard_shortcuts_hide_keyboard_shortcuts_help();
+                  window.location.href = keyboard_shortcuts_url + '/pluginManager';
+                }
               }
               break;
 
