@@ -44,6 +44,11 @@
                   <td class="keyboard-shortcuts-help-section-desc">${%KeyboardShortcuts.GeneralApplication.GoToManageJenkins}</td>
                 </tr>
                 <tr>
+                  <td class="keyboard-shortcuts-help-section-key">g-n</td>
+                  <td>:</td>
+                  <td class="keyboard-shortcuts-help-section-desc">${%KeyboardShortcuts.GeneralApplication.GoToNodes}</td>
+                </tr>
+                <tr>
                   <td class="keyboard-shortcuts-help-section-key">g-p</td>
                   <td>:</td>
                   <td class="keyboard-shortcuts-help-section-desc">${%KeyboardShortcuts.GeneralApplication.GoToPeople}</td>

@@ -132,8 +132,13 @@ if (keyboard_shortcuts_enabled) {
           break;
 
         case 'n':
-          if (keyboard_shortcuts_is_view()) {
-            keyboard_shortcuts_view_job_next();
+          if (keyboard_shortcuts_previous_character_was_character('g')) {
+            window.location.href = keyboard_shortcuts_url + '/computer';
+          }
+          else {
+            if (keyboard_shortcuts_is_view()) {
+              keyboard_shortcuts_view_job_next();
+            }
           }
           break;
 
