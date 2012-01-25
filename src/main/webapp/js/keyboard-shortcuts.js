@@ -52,180 +52,153 @@ if (keyboard_shortcuts_enabled) {
         keyboard_shortcuts_code = e.which;
       }
 
-      switch (keyboard_shortcuts_code) {
-        case Event.KEY_BACKSPACE:
-        case Event.KEY_DELETE:
-        case Event.KEY_ESC:
-        case Event.KEY_HOME:
-        case Event.KEY_PAGEUP:
-        case Event.KEY_PAGEDOWN:
-        case Event.KEY_RETURN:
-          keyboard_shortcuts_hide_keyboard_shortcuts_help();
+      /* always hide the shortcuts help, if user hits '?' again, re-display it */
+      keyboard_shortcuts_hide_keyboard_shortcuts_help();
+
+      var keyboard_shortcuts_character = String.fromCharCode(keyboard_shortcuts_code);
+
+      switch (keyboard_shortcuts_character) {
+
+        case '?':
+          keyboard_shortcuts_show_keyboard_shortcuts_help();
           break;
 
-        default: {
-          var keyboard_shortcuts_character = String.fromCharCode(keyboard_shortcuts_code);
+        case '/':
+          $('search-box').focus();
+          break;
 
-          switch (keyboard_shortcuts_character) {
-
-            case '?':
-              keyboard_shortcuts_show_keyboard_shortcuts_help();
-              break;
-
-            case '/':
-              keyboard_shortcuts_hide_keyboard_shortcuts_help();
-              $('search-box').focus();
-              break;
-
-            /* job related keyboard shortcuts */
-
-            case 'b':
-              if (keyboard_shortcuts_is_job()) {
-                keyboard_shortcuts_hide_keyboard_shortcuts_help();
-                window.location.href = keyboard_shortcuts_url + '/' + keyboard_shortcuts_url_job + '/build?delay=0sec';
-              }
-              break;
-
-            case 'c':
-              if (keyboard_shortcuts_previous_character_was_character('g')) {
-                if (keyboard_shortcuts_is_job()) {
-                  keyboard_shortcuts_hide_keyboard_shortcuts_help();
-                  window.location.href = keyboard_shortcuts_url + '/' + keyboard_shortcuts_url_job + '/changes';
-                }
-              }
-              break;
-
-            case 'C':
-              if (keyboard_shortcuts_previous_character_was_character('g')) {
-                if (keyboard_shortcuts_is_job()) {
-                  keyboard_shortcuts_hide_keyboard_shortcuts_help();
-                  window.location.href = keyboard_shortcuts_url + '/' + keyboard_shortcuts_url_job + '/configure';
-                }
-              }
-              break;
-
-            case 'h':
-              if (keyboard_shortcuts_previous_character_was_character('g')) {
-                keyboard_shortcuts_hide_keyboard_shortcuts_help();
-                window.location.href = keyboard_shortcuts_url;
-              }
-              break;
-
-            case 'H':
-              if (keyboard_shortcuts_previous_character_was_character('g')) {
-                if (keyboard_shortcuts_is_view()) {
-                  keyboard_shortcuts_hide_keyboard_shortcuts_help();
-                  window.location.href = keyboard_shortcuts_url + '/' + keyboard_shortcuts_url_view + '/builds';
-                }
-              }
-              break;
-
-            case 'j':
-              if (keyboard_shortcuts_previous_character_was_character('g')) {
-                window.alert('keyboard_shortcuts_app_job_selector');
-              }
-              else {
-                if (keyboard_shortcuts_is_view()) {
-                  keyboard_shortcuts_view_job_next();
-                }
-              }
-              break;
-
-            case 'k':
-              if (keyboard_shortcuts_is_view()) {
-                keyboard_shortcuts_view_job_prev();
-              }
-              break;
-
-            case 'm':
-              if (keyboard_shortcuts_previous_character_was_character('g')) {
-                if (keyboard_shortcuts_is_job()) {
-                  keyboard_shortcuts_hide_keyboard_shortcuts_help();
-                  window.location.href = keyboard_shortcuts_url + '/' + keyboard_shortcuts_url_job + '/modules';
-                }
-                else if (keyboard_shortcuts_is_app()) {
-                  keyboard_shortcuts_hide_keyboard_shortcuts_help();
-                  window.location.href = keyboard_shortcuts_url + '/manage';
-                }
-              }
-              break;
-
-            case 'n':
-              if (keyboard_shortcuts_is_view()) {
-                keyboard_shortcuts_view_job_next();
-              }
-              break;
-
-            case 'o':
-              if (keyboard_shortcuts_is_view()) {
-                keyboard_shortcuts_view_job_open();
-              }
-              break;
-
-            case 'p':
-              if (keyboard_shortcuts_previous_character_was_character('g')) {
-                if (keyboard_shortcuts_is_job()) {
-                  window.alert('keyboard_shortcuts_job_permalink_selector');
-                }
-                else if (keyboard_shortcuts_is_app()) {
-                  keyboard_shortcuts_hide_keyboard_shortcuts_help();
-                  window.location.href = keyboard_shortcuts_url + '/people';
-                }
-              }
-              else {
-                if (keyboard_shortcuts_is_view()) {
-                  keyboard_shortcuts_view_job_prev();
-                }
-              }
-              break;
-
-            case 'P':
-              if (keyboard_shortcuts_previous_character_was_character('g')) {
-                if (keyboard_shortcuts_is_job()) {
-                  keyboard_shortcuts_hide_keyboard_shortcuts_help();
-                  window.location.href = keyboard_shortcuts_url + '/' + keyboard_shortcuts_url_job + '/scmPollLog';
-                }
-                else if (keyboard_shortcuts_is_app()) {
-                  keyboard_shortcuts_hide_keyboard_shortcuts_help();
-                  window.location.href = keyboard_shortcuts_url + '/pluginManager';
-                }
-              }
-              break;
-
-            case 'r':
-              keyboard_shortcuts_hide_keyboard_shortcuts_help();
-              window.location.href = window.location.href;
-              break;
-
-            case 's':
-              if (keyboard_shortcuts_previous_character_was_character('g')) {
-                if (keyboard_shortcuts_is_job()) {
-                  keyboard_shortcuts_hide_keyboard_shortcuts_help();
-                  window.location.href = keyboard_shortcuts_url + '/' + keyboard_shortcuts_url_job;
-                }
-              }
-              break;
-
-            case 'v':
-              if (keyboard_shortcuts_previous_character_was_character('g')) {
-                window.alert('keyboard_shortcuts_app_view_selector');
-              }
-              break;
-
-            case 'w':
-              if (keyboard_shortcuts_previous_character_was_character('g')) {
-                if (keyboard_shortcuts_is_job()) {
-                  keyboard_shortcuts_hide_keyboard_shortcuts_help();
-                  window.location.href = keyboard_shortcuts_url_job + '/ws';
-                }
-              }
-              break;
-
-            default:
-              console.debug('code: ' + keyboard_shortcuts_code + ', character: ' + keyboard_shortcuts_character);
-              break;
+        case 'b':
+          if (keyboard_shortcuts_is_job()) {
+            window.location.href = keyboard_shortcuts_url + '/' + keyboard_shortcuts_url_job + '/build?delay=0sec';
           }
-        }
+          break;
+
+        case 'c':
+          if (keyboard_shortcuts_previous_character_was_character('g')) {
+            if (keyboard_shortcuts_is_job()) {
+              window.location.href = keyboard_shortcuts_url + '/' + keyboard_shortcuts_url_job + '/changes';
+            }
+          }
+          break;
+
+        case 'C':
+          if (keyboard_shortcuts_previous_character_was_character('g')) {
+            if (keyboard_shortcuts_is_job()) {
+              window.location.href = keyboard_shortcuts_url + '/' + keyboard_shortcuts_url_job + '/configure';
+            }
+          }
+          break;
+
+        case 'h':
+          if (keyboard_shortcuts_previous_character_was_character('g')) {
+            window.location.href = keyboard_shortcuts_url;
+          }
+          break;
+
+        case 'H':
+          if (keyboard_shortcuts_previous_character_was_character('g')) {
+            if (keyboard_shortcuts_is_view()) {
+              window.location.href = keyboard_shortcuts_url + '/' + keyboard_shortcuts_url_view + '/builds';
+            }
+          }
+          break;
+
+        case 'j':
+          if (keyboard_shortcuts_previous_character_was_character('g')) {
+            window.alert('keyboard_shortcuts_app_job_selector');
+          }
+          else {
+            if (keyboard_shortcuts_is_view()) {
+              keyboard_shortcuts_view_job_next();
+            }
+          }
+          break;
+
+        case 'k':
+          if (keyboard_shortcuts_is_view()) {
+            keyboard_shortcuts_view_job_prev();
+          }
+          break;
+
+        case 'm':
+          if (keyboard_shortcuts_previous_character_was_character('g')) {
+            if (keyboard_shortcuts_is_job()) {
+              window.location.href = keyboard_shortcuts_url + '/' + keyboard_shortcuts_url_job + '/modules';
+            }
+            else if (keyboard_shortcuts_is_app()) {
+              window.location.href = keyboard_shortcuts_url + '/manage';
+            }
+          }
+          break;
+
+        case 'n':
+          if (keyboard_shortcuts_is_view()) {
+            keyboard_shortcuts_view_job_next();
+          }
+          break;
+
+        case 'o':
+          if (keyboard_shortcuts_is_view()) {
+            keyboard_shortcuts_view_job_open();
+          }
+          break;
+
+        case 'p':
+          if (keyboard_shortcuts_previous_character_was_character('g')) {
+            if (keyboard_shortcuts_is_job()) {
+              window.alert('keyboard_shortcuts_job_permalink_selector');
+            }
+            else if (keyboard_shortcuts_is_app()) {
+              window.location.href = keyboard_shortcuts_url + '/people';
+            }
+          }
+          else {
+            if (keyboard_shortcuts_is_view()) {
+              keyboard_shortcuts_view_job_prev();
+            }
+          }
+          break;
+
+        case 'P':
+          if (keyboard_shortcuts_previous_character_was_character('g')) {
+            if (keyboard_shortcuts_is_job()) {
+              window.location.href = keyboard_shortcuts_url + '/' + keyboard_shortcuts_url_job + '/scmPollLog';
+            }
+            else if (keyboard_shortcuts_is_app()) {
+              window.location.href = keyboard_shortcuts_url + '/pluginManager';
+            }
+          }
+          break;
+
+        case 'r':
+          window.location.href = window.location.href;
+          break;
+
+        case 's':
+          if (keyboard_shortcuts_previous_character_was_character('g')) {
+            if (keyboard_shortcuts_is_job()) {
+              window.location.href = keyboard_shortcuts_url + '/' + keyboard_shortcuts_url_job;
+            }
+          }
+          break;
+
+        case 'v':
+          if (keyboard_shortcuts_previous_character_was_character('g')) {
+            window.alert('keyboard_shortcuts_app_view_selector');
+          }
+          break;
+
+        case 'w':
+          if (keyboard_shortcuts_previous_character_was_character('g')) {
+            if (keyboard_shortcuts_is_job()) {
+              window.location.href = keyboard_shortcuts_url_job + '/ws';
+            }
+          }
+          break;
+
+        default:
+          console.debug('code: ' + keyboard_shortcuts_code + ', character: ' + keyboard_shortcuts_character);
+          break;
       }
 
       keyboard_shortcuts_previous_code = keyboard_shortcuts_code;
@@ -234,11 +207,11 @@ if (keyboard_shortcuts_enabled) {
   });
 
   function keyboard_shortcuts_is_job() {
-    return typeof keyboard_shortcuts_url_job != undefined;
+    return typeof keyboard_shortcuts_url_job != 'undefined';
   }
 
   function keyboard_shortcuts_is_view() {
-    return typeof keyboard_shortcuts_url_view != undefined;
+    return typeof keyboard_shortcuts_url_view != 'undefined';
   }
 
   function keyboard_shortcuts_show_keyboard_shortcuts_help() {
@@ -279,7 +252,6 @@ if (keyboard_shortcuts_enabled) {
   }
 
   function keyboard_shortcuts_view_job_prev() {
-    keyboard_shortcuts_hide_keyboard_shortcuts_help();
     if (typeof keyboard_shortcuts_view_job_names != 'undefined') {
       if (keyboard_shortcuts_view_job_names.length > 0) {
         keyboard_shortcuts_view_job_names.each(function(job) {
