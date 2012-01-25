@@ -21,7 +21,7 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
  * THE SOFTWARE.
  */
-#ks-help {
+.ks-banner {
 	background: #000;
 	border-radius: 10px;
 	-moz-border-radius: 10px;
@@ -39,31 +39,23 @@
 	z-index: 1001;
 }
 
-#ks-help .ks-help-section-top {
+.ks-help-section-top {
 	color: orange;
 	font-size: xx-large;
 	font-weight: bold;
 	text-align: center;
-	font-size: xx-large;
 }
 
-#ks-help .ks-help-section-bottom {
+.ks-help-section-bottom {
 	color: orange;
 	border-top-color: orange;
 	border-top-style: solid;
 	border-top-width: medium;
 	margin-top: 3px;
 	width: 100%;
-	border-top-style: solid;
-	border-top-color: orange;
 }
 
-#ks-help  .ks-help-section-container {
-	
-}
-
-#ks-help  .ks-help-section-container table
-	{
+.ks-help-section-container table {
 	padding-bottom: 1em;
 	padding-left: 2em;
 	padding-right: 2em;
@@ -71,22 +63,11 @@
 	width: 100%;
 }
 
-#ks-help .ks-help-section-container td {
+.ks-help-section-container td {
 	vertical-align: top;
 }
 
-#ks-help .ks-help-section-container .ks-help-section
-	{
-	
-}
-
-#ks-help .ks-help-section-container .ks-help-section table
-	{
-	
-}
-
-#ks-help .ks-help-section-container .ks-help-section th
-	{
+.ks-help-section th {
 	color: orange;
 	font-size: x-large;
 	font-weight: bold;
@@ -95,22 +76,22 @@
 	border-bottom-width: thin;
 }
 
-#ks-help .ks-help-section-container .ks-help-section td
-	{
+.ks-help-section td {
 	color: white;
 	font-size: large;
 }
 
-#ks-help  .ks-help-section-container .ks-help-section td.ks-help-section-key
+.ks-help-section td.ks-help-section-key
 	{
 	color: orange;
 	font-weight: bold;
 	text-align: right;
 }
 
-#ks-help  .ks-help-section-container .ks-help-section td.ks-help-section-desc
+.ks-help-section td.ks-help-section-desc
 	{
-	
+	color: white;
+	text-align: left;
 }
 
 #projectstatus tr.ks-view-job-selected {

@@ -60,7 +60,7 @@ if (ks_enabled) {
       switch (ks_character) {
 
         case '?':
-          ks_show_ks_help();
+          ks_show_help();
           break;
 
         case '/':
@@ -238,7 +238,7 @@ if (ks_enabled) {
     return typeof ks_is_view_page != 'undefined' && ks_is_view_page;
   }
 
-  function ks_show_ks_help() {
+  function ks_show_help() {
     $('ks-help').show();
   }
 
