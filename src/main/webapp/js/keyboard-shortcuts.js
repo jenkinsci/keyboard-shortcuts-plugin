@@ -125,7 +125,7 @@ if (keyboard_shortcuts_enabled) {
             if (keyboard_shortcuts_is_job()) {
               window.location.href = keyboard_shortcuts_url + '/' + keyboard_shortcuts_url_job + '/modules';
             }
-            else if (keyboard_shortcuts_is_app()) {
+            else {
               window.location.href = keyboard_shortcuts_url + '/manage';
             }
           }
@@ -148,7 +148,7 @@ if (keyboard_shortcuts_enabled) {
             if (keyboard_shortcuts_is_job()) {
               window.alert('keyboard_shortcuts_job_permalink_selector');
             }
-            else if (keyboard_shortcuts_is_app()) {
+            else {
               window.location.href = keyboard_shortcuts_url + '/people';
             }
           }
@@ -164,7 +164,7 @@ if (keyboard_shortcuts_enabled) {
             if (keyboard_shortcuts_is_job()) {
               window.location.href = keyboard_shortcuts_url + '/' + keyboard_shortcuts_url_job + '/scmPollLog';
             }
-            else if (keyboard_shortcuts_is_app()) {
+            else {
               window.location.href = keyboard_shortcuts_url + '/pluginManager';
             }
           }
