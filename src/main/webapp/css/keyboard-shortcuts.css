@@ -26,13 +26,13 @@
 	border-radius: 10px;
 	-moz-border-radius: 10px;
 	-webkit-border-radius: 10px;
-	filter: alpha(opacity = 80);
+	filter: alpha(opacity = 85);
 	left: 5%;
 	margin: 0;
 	padding: 3em;
 	position: absolute;
-	opacity: .8;
-	-moz-opacity: .8;
+	opacity: .85;
+	-moz-opacity: .85;
 	overflow: auto;
 	top: 5%;
 	width: 85%;
@@ -59,6 +59,7 @@
 }
 
 #keyboard-shortcuts-help  .keyboard-shortcuts-help-section-container {
+	
 }
 
 #keyboard-shortcuts-help  .keyboard-shortcuts-help-section-container table
@@ -112,7 +113,9 @@
 	
 }
 
-#projectstatus tr.keyboard-shortcuts-view-job-selected {
-	border-width: 3px;
+#projectstatus tr.keyboard-shortcuts-view-job-selected { /*
+border-width: 1px;
 	border-color: orange;
+*/
+	background-color: orange;
 }
