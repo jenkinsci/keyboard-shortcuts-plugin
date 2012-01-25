@@ -36,6 +36,7 @@
     var ks_job_names = ${it.allJobNamesAsJson};
     var ks_view_names = ${it.allViewNamesAsJson};
     var ks_view_job_names = ${it.allViewJobNamesAsJson};
+    var ks_is_view_selector = false;
   </script>
   <!-- we require advanced features found in prototype-1.7 -->
   <script type="text/javascript" src="${pluginUrl}/js/prototype-1.7.js" />

@@ -28,207 +28,272 @@ if (ks_enabled) {
   var ks_view_job_selected;
 
   Event.observe(window, 'load', function() {
-    Event.observe(document, 'keypress', function(e) {
+    Event.observe(document, 'keydown', ks_keydown);
+    Event.observe(document, 'keypress', ks_keypress);
+  });
 
-      /* try to play nicely with forms, so no keyboard shortcuts */
-      var activeElement = document.activeElement;
-      if (activeElement == null || 'INPUT' == activeElement.tagName || 'TEXTAREA' == activeElement.tagName) {
-        return;
+  /* try to play nicely with forms, so no keyboard shortcuts */
+  function ks_in_form() {
+    return document.activeElement == null || 'INPUT' == document.activeElement.tagName
+        || 'TEXTAREA' == document.activeElement.tagName;
+  }
+
+  function ks_get_keycode(event) {
+    if (event == null) {
+      event = window.event;
+    }
+
+    if (event.keyCode) {
+      return event.keyCode;
+    }
+
+    if (event.which) {
+      return event.which;
+    }
+
+    return null;
+  }
+
+  function ks_keydown(e) {
+    /* always hide the shortcuts help, if user hits '?' again, re-display it */
+    ks_hide_help();
+
+    // ---
+
+    if (ks_in_form()) {
+      return;
+    }
+
+    // ---
+
+    var ks_code = ks_get_keycode(e);
+
+    if (ks_code != null) {
+      /* handle keydown inputs when inside view selector */
+      if (typeof ks_is_view_selector != 'undefined') {
+        if (ks_is_view_selector) {
+          switch (ks_code) {
+            case Event.KEY_RETURN:
+              ks_view_selector_open();
+              break;
+
+            case Event.KEY_BACKSPACE:
+            case Event.KEY_DELETE:
+            case Event.KEY_ESC:
+              ks_view_selector_hide();
+              break;
+
+            case Event.KEY_LEFT:
+            case Event.KEY_UP:
+              ks_view_selector_prev();
+              break;
+
+            case Event.KEY_RIGHT:
+            case Event.KEY_DOWN:
+              ks_view_selector_next();
+              break;
+
+            case Event.KEY_HOME:
+            case Event.KEY_PAGEUP:
+              ks_view_selector_first();
+              break;
+
+            case Event.KEY_END:
+            case Event.KEY_PAGEDOWN:
+              ks_view_selector_last();
+              break;
+          }
+        }
       }
+    }
+  }
 
-      // ---
+  function ks_keypress(e) {
+    /* always hide the shortcuts help, if user hits '?' again, re-display it */
+    ks_hide_help();
 
-      var ks_code;
+    // ---
 
-      if (!e) {
-        e = window.event;
-      }
+    if (ks_in_form()) {
+      return;
+    }
 
-      if (e.keyCode) {
-        ks_code = e.keyCode;
-      }
+    // ---
 
-      else if (e.which) {
-        ks_code = e.which;
-      }
+    var ks_code = ks_get_keycode(e);
+    var ks_character = String.fromCharCode(ks_code);
 
-      /* always hide the shortcuts help, if user hits '?' again, re-display it */
-      ks_hide_ks_help();
+    switch (ks_character) {
 
-      var ks_character = String.fromCharCode(ks_code);
+      case '?':
+        ks_show_help();
+        break;
 
-      switch (ks_character) {
+      case '/':
+        $('search-box').focus();
+        break;
 
-        case '?':
-          ks_show_help();
-          break;
+      case 'b':
+        if (ks_is_job()) {
+          window.location.href = ks_url + '/' + ks_url_job + '/build?delay=0sec';
+        }
+        else if (ks_is_view()) {
+          if (typeof ks_view_job_selected != 'undefined') {
+            window.location.href = ks_url + '/job/' + ks_view_job_selected + '/build?delay=0sec';
+          }
+        }
+        break;
 
-        case '/':
-          $('search-box').focus();
-          break;
-
-        case 'b':
+      case 'c':
+        if (ks_previous_character_was_character('g')) {
           if (ks_is_job()) {
-            window.location.href = ks_url + '/' + ks_url_job + '/build?delay=0sec';
+            window.location.href = ks_url + '/' + ks_url_job + '/changes';
+          }
+        }
+        break;
+
+      case 'C':
+        if (ks_previous_character_was_character('g')) {
+          if (ks_is_job()) {
+            window.location.href = ks_url + '/' + ks_url_job + '/configure';
           }
           else if (ks_is_view()) {
-            if (typeof ks_view_job_selected != 'undefined') {
-              window.location.href = ks_url + '/job/' + ks_view_job_selected + '/build?delay=0sec';
-            }
-          }
-          break;
-
-        case 'c':
-          if (ks_previous_character_was_character('g')) {
-            if (ks_is_job()) {
-              window.location.href = ks_url + '/' + ks_url_job + '/changes';
-            }
-          }
-          break;
-
-        case 'C':
-          if (ks_previous_character_was_character('g')) {
-            if (ks_is_job()) {
-              window.location.href = ks_url + '/' + ks_url_job + '/configure';
-            }
-            else if (ks_is_view()) {
-              window.location.href = ks_url + '/' + ks_url_view + '/configure';
-            }
-            else {
-              window.location.href = ks_url + '/configure';
-            }
-          }
-          break;
-
-        case 'h':
-          if (ks_previous_character_was_character('g')) {
-            window.location.href = ks_url;
-          }
-          break;
-
-        case 'H':
-          if (ks_previous_character_was_character('g')) {
-            if (ks_is_view()) {
-              window.location.href = ks_url + '/' + ks_url_view + '/builds';
-            }
-          }
-          break;
-
-        case 'j':
-          if (ks_previous_character_was_character('g')) {
-            window.alert('ks_app_job_selector');
+            window.location.href = ks_url + '/' + ks_url_view + '/configure';
           }
           else {
-            if (ks_is_view()) {
-              ks_view_job_next();
-            }
+            window.location.href = ks_url + '/configure';
           }
-          break;
+        }
+        break;
 
-        case 'k':
+      case 'h':
+        if (ks_previous_character_was_character('g')) {
+          window.location.href = ks_url;
+        }
+        break;
+
+      case 'H':
+        if (ks_previous_character_was_character('g')) {
+          if (ks_is_view()) {
+            window.location.href = ks_url + '/' + ks_url_view + '/builds';
+          }
+        }
+        break;
+
+      case 'j':
+        if (ks_previous_character_was_character('g')) {
+          window.alert('ks_app_job_selector');
+        }
+        else {
+          if (ks_is_view()) {
+            ks_view_job_next();
+          }
+        }
+        break;
+
+      case 'k':
+        if (ks_is_view()) {
+          ks_view_job_prev();
+        }
+        break;
+
+      case 'm':
+        if (ks_previous_character_was_character('g')) {
+          if (ks_is_job()) {
+            window.location.href = ks_url + '/' + ks_url_job + '/modules';
+          }
+          else {
+            window.location.href = ks_url + '/manage';
+          }
+        }
+        break;
+
+      case 'n':
+        if (ks_previous_character_was_character('g')) {
+          window.location.href = ks_url + '/computer';
+        }
+        else {
+          if (ks_is_view()) {
+            ks_view_job_next();
+          }
+        }
+        break;
+
+      case 'o':
+        if (ks_is_view()) {
+          ks_view_job_open();
+        }
+        break;
+
+      case 'p':
+        if (ks_previous_character_was_character('g')) {
+          if (ks_is_job()) {
+            window.alert('ks_job_permalink_selector');
+          }
+          else {
+            window.location.href = ks_url + '/people';
+          }
+        }
+        else {
           if (ks_is_view()) {
             ks_view_job_prev();
           }
-          break;
+        }
+        break;
 
-        case 'm':
-          if (ks_previous_character_was_character('g')) {
-            if (ks_is_job()) {
-              window.location.href = ks_url + '/' + ks_url_job + '/modules';
-            }
-            else {
-              window.location.href = ks_url + '/manage';
-            }
-          }
-          break;
-
-        case 'n':
-          if (ks_previous_character_was_character('g')) {
-            window.location.href = ks_url + '/computer';
+      case 'P':
+        if (ks_previous_character_was_character('g')) {
+          if (ks_is_job()) {
+            window.location.href = ks_url + '/' + ks_url_job + '/scmPollLog';
           }
           else {
-            if (ks_is_view()) {
-              ks_view_job_next();
-            }
+            window.location.href = ks_url + '/pluginManager';
           }
-          break;
+        }
+        break;
 
-        case 'o':
-          if (ks_is_view()) {
-            ks_view_job_open();
+      case 'r':
+        window.location.href = window.location.href;
+        break;
+
+      case 's':
+        if (ks_previous_character_was_character('g')) {
+          if (ks_is_job()) {
+            window.location.href = ks_url + '/' + ks_url_job;
           }
-          break;
+        }
+        break;
 
-        case 'p':
-          if (ks_previous_character_was_character('g')) {
-            if (ks_is_job()) {
-              window.alert('ks_job_permalink_selector');
-            }
-            else {
-              window.location.href = ks_url + '/people';
-            }
+      case 't':
+        if (ks_previous_character_was_character('g')) {
+          if (ks_is_job()) {
+            window.location.href = ks_url + '/' + ks_url_job + '/buildTimeTrend';
           }
-          else {
-            if (ks_is_view()) {
-              ks_view_job_prev();
-            }
+        }
+        break;
+
+      case 'v':
+        if (ks_previous_character_was_character('g')) {
+          ks_view_selector_show();
+        }
+        break;
+
+      case 'w':
+        if (ks_previous_character_was_character('g')) {
+          if (ks_is_job()) {
+            window.location.href = ks_url + '/' + ks_url_job + '/ws';
           }
-          break;
+        }
+        break;
 
-        case 'P':
-          if (ks_previous_character_was_character('g')) {
-            if (ks_is_job()) {
-              window.location.href = ks_url + '/' + ks_url_job + '/scmPollLog';
-            }
-            else {
-              window.location.href = ks_url + '/pluginManager';
-            }
-          }
-          break;
+      default:
+        // console.debug('code: ' + ks_code + ', character: ' + ks_character);
+        break;
+    }
 
-        case 'r':
-          window.location.href = window.location.href;
-          break;
-
-        case 's':
-          if (ks_previous_character_was_character('g')) {
-            if (ks_is_job()) {
-              window.location.href = ks_url + '/' + ks_url_job;
-            }
-          }
-          break;
-
-        case 't':
-          if (ks_previous_character_was_character('g')) {
-            if (ks_is_job()) {
-              window.location.href = ks_url + '/' + ks_url_job + '/buildTimeTrend';
-            }
-          }
-          break;
-
-        case 'v':
-          if (ks_previous_character_was_character('g')) {
-            window.alert('ks_app_view_selector');
-          }
-          break;
-
-        case 'w':
-          if (ks_previous_character_was_character('g')) {
-            if (ks_is_job()) {
-              window.location.href = ks_url + '/' + ks_url_job + '/ws';
-            }
-          }
-          break;
-
-        default:
-          console.debug('code: ' + ks_code + ', character: ' + ks_character);
-          break;
-      }
-
-      ks_previous_code = ks_code;
-      ks_previous_character = String.fromCharCode(ks_code);
-    });
-  });
+    ks_previous_code = ks_code;
+    ks_previous_character = String.fromCharCode(ks_code);
+  }
 
   function ks_is_job() {
     return typeof ks_is_job_page != 'undefined' && ks_is_job_page;
@@ -242,7 +307,7 @@ if (ks_enabled) {
     $('ks-help').show();
   }
 
-  function ks_hide_ks_help() {
+  function ks_hide_help() {
     $('ks-help').hide();
   }
 
@@ -259,7 +324,7 @@ if (ks_enabled) {
   }
 
   function ks_view_job_next() {
-    ks_hide_ks_help();
+    ks_hide_help();
     if (typeof ks_view_job_names != 'undefined') {
       if (ks_view_job_names.length > 0) {
         ks_view_job_names.each(function(job) {
@@ -292,10 +357,83 @@ if (ks_enabled) {
   }
 
   function ks_view_job_open() {
-    ks_hide_ks_help();
     if (typeof ks_view_job_selected != 'undefined') {
       window.location.href = ks_url + '/' + ks_url_view + '/job/' + ks_view_job_selected;
     }
+  }
+
+  // ----------------------------------------------------------------------- //
+  // ----------------------------------------------------------------------- //
+
+  /*
+   * View Selector stuff
+   */
+
+  var ks_view_selector_input;
+  var ks_view_selector_selected;
+
+  function ks_view_selector_select(view) {
+    console.debug('ks_view_selector_select(' + view + ')');
+    if (typeof ks_is_view_selector != 'undefined') {
+      if (ks_is_view_selector) {
+        ks_view_names.each(function(v) {
+          $('view_' + v).removeClassName('ks-view-selector-selected');
+        });
+
+        ks_view_selector_selected = view
+        $('view_' + view).addClassName('ks-view-selector-selected');
+      }
+    }
+  }
+
+  function ks_view_selector_first() {
+    ks_view_selector_select(ks_view_names[0]);
+  }
+
+  function ks_view_selector_hide() {
+    $('ks-view-selector').hide();
+    ks_is_view_selector = false;
+  }
+
+  function ks_view_selector_last() {
+    ks_view_selector_select(ks_view_names[ks_view_names.length - 1]);
+  }
+
+  function ks_view_selector_next() {
+    var idx = ks_view_names.indexOf(ks_view_selector_selected) + 1;
+    if (idx >= ks_view_names.length) {
+      idx = 0;
+    }
+
+    ks_view_selector_select(ks_view_names[idx]);
+  }
+
+  function ks_view_selector_open() {
+    if (typeof ks_view_selector_selected != 'undefined') {
+      ks_view_selector_hide();
+      window.location.href = ks_url + '/view/' + ks_view_selector_selected;
+    }
+  }
+
+  function ks_view_selector_prev() {
+    var idx = ks_view_names.indexOf(ks_view_selector_selected) - 1;
+    if (idx < 0) {
+      idx = ks_view_names.length - 1;
+    }
+
+    ks_view_selector_select(ks_view_names[idx]);
+  }
+
+  function ks_view_selector_show() {
+    $('ks-view-selector').show();
+    if (typeof ks_view_names != 'undefined') {
+      $('ks-view-selector-views').innerHTML = ks_view_names.map(function(view) {
+        return '<li id="view_#{view}">#{view}</li>'.interpolate({
+          view : view
+        });
+      }).join('');
+    }
+    ks_is_view_selector = true;
   }
 }
 

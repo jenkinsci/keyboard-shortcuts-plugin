@@ -39,14 +39,14 @@
 	z-index: 1001;
 }
 
-.ks-help-section-top {
+.ks-banner-section-top {
 	color: orange;
-	font-size: xx-large;
+	font-size: x-large;
 	font-weight: bold;
 	text-align: center;
 }
 
-.ks-help-section-bottom {
+.ks-banner-section-bottom {
 	color: orange;
 	border-top-color: orange;
 	border-top-style: solid;
@@ -69,7 +69,7 @@
 
 .ks-help-section th {
 	color: orange;
-	font-size: x-large;
+	font-size: large;
 	font-weight: bold;
 	border-bottom-color: orange;
 	border-bottom-style: solid;
@@ -78,22 +78,38 @@
 
 .ks-help-section td {
 	color: white;
-	font-size: large;
+	font-size: medium;
 }
 
-.ks-help-section td.ks-help-section-key
-	{
+.ks-help-section td.ks-help-section-key {
 	color: orange;
 	font-weight: bold;
 	text-align: right;
 }
 
-.ks-help-section td.ks-help-section-desc
-	{
+.ks-help-section td.ks-help-section-desc {
 	color: white;
 	text-align: left;
 }
 
 #projectstatus tr.ks-view-job-selected {
 	background-color: orange;
+}
+
+ul#ks-view-selector-views {
+	list-style-type: none;
+}
+
+ul#ks-view-selector-views li {
+	color: white;
+	display: inline;
+	font-size: large;
+	padding-left: 0.5em;
+	padding-right: 0.5em;
+}
+
+ul#ks-view-selector-views li.ks-view-selector-selected {
+	background: grey;
+	color: orange;
+	font-weight: bold;
 }

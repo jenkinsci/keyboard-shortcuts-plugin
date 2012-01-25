@@ -1,8 +1,8 @@
 <?jelly escape-by-default='true'?>
 <j:jelly xmlns:j="jelly:core">
   <div id="ks-help" class="ks-banner" style="display: none">
-    <div class="ks-help-section-top">${%KeyboardShortcuts.Title}</div>
-    <div class="ks-help-section-bottom">
+    <div class="ks-banner-section-top">${%KeyboardShortcuts.Title}</div>
+    <div class="ks-banner-section-bottom">
       <table class="ks-help-section-container" width="100%">
         <tr>
           <td>
@@ -176,6 +176,12 @@
           </td>
         </tr>
       </table>
+    </div>
+  </div>
+  <div id="ks-view-selector" class="ks-banner" style="display: none">
+    <div class="ks-banner-section-top">View Selector - Start Typing or Use Arrows</div>
+    <div class="ks-banner-section-bottom">
+      <ul id="ks-view-selector-views" />
     </div>
   </div>
 </j:jelly>
