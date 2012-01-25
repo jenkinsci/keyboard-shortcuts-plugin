@@ -1,7 +1,7 @@
 <?jelly escape-by-default='true'?>
 <j:jelly xmlns:j="jelly:core">
   <div id="keyboard-shortcuts-help" style="display: none">
-    <div class="keyboard-shortcuts-help-section-top">Keyboard Shortcuts</div>
+    <div class="keyboard-shortcuts-help-section-top">${%KeyboardShortcuts.Title}</div>
     <div class="keyboard-shortcuts-help-section-bottom">
       <table class="keyboard-shortcuts-help-section-container" width="100%">
         <tr>
@@ -9,54 +9,54 @@
             <table class="keyboard-shortcuts-help-section">
               <thead>
                 <tr>
-                  <th colspan="3">General Application</th>
+                  <th colspan="3">${%KeyboardShortcuts.GeneralApplication.Title}</th>
                 </tr>
               </thead>
               <tbody>
                 <tr>
                   <td class="keyboard-shortcuts-help-section-key">?</td>
                   <td>:</td>
-                  <td class="keyboard-shortcuts-help-section-desc">show keyboard shortcut help</td>
+                  <td class="keyboard-shortcuts-help-section-desc">${%KeyboardShortcuts.GeneralApplication.ShowKeyboardShortcutHelp}</td>
                 </tr>
                 <tr>
                   <td class="keyboard-shortcuts-help-section-key">/</td>
                   <td>:</td>
-                  <td class="keyboard-shortcuts-help-section-desc">move cursor to search box</td>
+                  <td class="keyboard-shortcuts-help-section-desc">${%KeyboardShortcuts.GeneralApplication.MoveCursorToSearchBox}</td>
                 </tr>
                 <tr>
                   <td class="keyboard-shortcuts-help-section-key">r</td>
                   <td>:</td>
-                  <td class="keyboard-shortcuts-help-section-desc">refresh current page</td>
+                  <td class="keyboard-shortcuts-help-section-desc">${%KeyboardShortcuts.GeneralApplication.RefreshCurrentPage}</td>
                 </tr>
                 <tr>
                   <td class="keyboard-shortcuts-help-section-key">g-h</td>
                   <td>:</td>
-                  <td class="keyboard-shortcuts-help-section-desc">Go Home</td>
+                  <td class="keyboard-shortcuts-help-section-desc">${%KeyboardShortcuts.GeneralApplication.GoToHome}</td>
                 </tr>
                 <tr>
                   <td class="keyboard-shortcuts-help-section-key">g-H</td>
                   <td>:</td>
-                  <td class="keyboard-shortcuts-help-section-desc">Go to History</td>
+                  <td class="keyboard-shortcuts-help-section-desc">${%KeyboardShortcuts.GeneralApplication.GoToBuildHistory}</td>
                 </tr>
                 <tr>
                   <td class="keyboard-shortcuts-help-section-key">g-m</td>
                   <td>:</td>
-                  <td class="keyboard-shortcuts-help-section-desc">Go to Manage</td>
+                  <td class="keyboard-shortcuts-help-section-desc">${%KeyboardShortcuts.GeneralApplication.GoToManageJenkins}</td>
                 </tr>
                 <tr>
                   <td class="keyboard-shortcuts-help-section-key">g-p</td>
                   <td>:</td>
-                  <td class="keyboard-shortcuts-help-section-desc">Go to People</td>
+                  <td class="keyboard-shortcuts-help-section-desc">${%KeyboardShortcuts.GeneralApplication.GoToPeople}</td>
                 </tr>
                 <tr>
                   <td class="keyboard-shortcuts-help-section-key">g-j</td>
                   <td>:</td>
-                  <td class="keyboard-shortcuts-help-section-desc">Job Selector</td>
+                  <td class="keyboard-shortcuts-help-section-desc">${%KeyboardShortcuts.GeneralApplication.JobSelector}</td>
                 </tr>
                 <tr>
                   <td class="keyboard-shortcuts-help-section-key">g-v</td>
                   <td>:</td>
-                  <td class="keyboard-shortcuts-help-section-desc">View Selector</td>
+                  <td class="keyboard-shortcuts-help-section-desc">${%KeyboardShortcuts.GeneralApplication.ViewSelector}</td>
                 </tr>
               </tbody>
             </table>
@@ -65,32 +65,32 @@
             <table class="keyboard-shortcuts-help-section">
               <tbody>
                 <tr>
-                  <th colspan="3">View Pages</th>
+                  <th colspan="3">${%KeyboardShortcuts.ViewPages.Title}</th>
                 </tr>
                 <tr>
                   <td class="keyboard-shortcuts-help-section-key">j</td>
                   <td>:</td>
-                  <td class="keyboard-shortcuts-help-section-desc">next job item</td>
+                  <td class="keyboard-shortcuts-help-section-desc">${%KeyboardShortcuts.ViewPages.NextJobItem}</td>
                 </tr>
                 <tr>
                   <td class="keyboard-shortcuts-help-section-key">k</td>
                   <td>:</td>
-                  <td class="keyboard-shortcuts-help-section-desc">previous job item</td>
+                  <td class="keyboard-shortcuts-help-section-desc">${%KeyboardShortcuts.ViewPages.PreviousJobItem}</td>
                 </tr>
                 <tr>
                   <td class="keyboard-shortcuts-help-section-key">n</td>
                   <td>:</td>
-                  <td class="keyboard-shortcuts-help-section-desc">next job item</td>
+                  <td class="keyboard-shortcuts-help-section-desc">${%KeyboardShortcuts.ViewPages.NextJobItem}</td>
                 </tr>
                 <tr>
                   <td class="keyboard-shortcuts-help-section-key">p</td>
                   <td>:</td>
-                  <td class="keyboard-shortcuts-help-section-desc">previous job item</td>
+                  <td class="keyboard-shortcuts-help-section-desc">${%KeyboardShortcuts.ViewPages.PreviousJobItem}</td>
                 </tr>
                 <tr>
                   <td class="keyboard-shortcuts-help-section-key">o</td>
                   <td>:</td>
-                  <td class="keyboard-shortcuts-help-section-desc">open current job item</td>
+                  <td class="keyboard-shortcuts-help-section-desc">${%KeyboardShortcuts.ViewPages.OpenCurrentJobItem}</td>
                 </tr>
               </tbody>
             </table>
@@ -99,47 +99,47 @@
             <table class="keyboard-shortcuts-help-section">
               <tbody>
                 <tr>
-                  <th colspan="3">Job Pages</th>
+                  <th colspan="3">${%KeyboardShortcuts.JobPages.Title}</th>
                 </tr>
                 <tr>
                   <td class="keyboard-shortcuts-help-section-key">b</td>
                   <td>:</td>
-                  <td class="keyboard-shortcuts-help-section-desc">Build now</td>
+                  <td class="keyboard-shortcuts-help-section-desc">${%KeyboardShortcuts.JobPages.BuildNow}</td>
                 </tr>
                 <tr>
                   <td class="keyboard-shortcuts-help-section-key">g-s</td>
                   <td>:</td>
-                  <td class="keyboard-shortcuts-help-section-desc">Go to Status</td>
+                  <td class="keyboard-shortcuts-help-section-desc">${%KeyboardShortcuts.JobPages.GoToStatus}</td>
                 </tr>
                 <tr>
                   <td class="keyboard-shortcuts-help-section-key">g-c</td>
                   <td>:</td>
-                  <td class="keyboard-shortcuts-help-section-desc">Go to Changes</td>
+                  <td class="keyboard-shortcuts-help-section-desc">${%KeyboardShortcuts.JobPages.GoToChanges}</td>
                 </tr>
                 <tr>
                   <td class="keyboard-shortcuts-help-section-key">g-w</td>
                   <td>:</td>
-                  <td class="keyboard-shortcuts-help-section-desc">Go to Workspace</td>
+                  <td class="keyboard-shortcuts-help-section-desc">${%KeyboardShortcuts.JobPages.GoToWorkspace}</td>
                 </tr>
                 <tr>
                   <td class="keyboard-shortcuts-help-section-key">g-C</td>
                   <td>:</td>
-                  <td class="keyboard-shortcuts-help-section-desc">Go to Configure</td>
+                  <td class="keyboard-shortcuts-help-section-desc">${%KeyboardShortcuts.JobPages.GoToConfigure}</td>
                 </tr>
                 <tr>
                   <td class="keyboard-shortcuts-help-section-key">g-m</td>
                   <td>:</td>
-                  <td class="keyboard-shortcuts-help-section-desc">Go to Modules</td>
+                  <td class="keyboard-shortcuts-help-section-desc">${%KeyboardShortcuts.JobPages.GoToModules}</td>
                 </tr>
                 <tr>
                   <td class="keyboard-shortcuts-help-section-key">g-P</td>
                   <td>:</td>
-                  <td class="keyboard-shortcuts-help-section-desc">Go to SCM Polling</td>
+                  <td class="keyboard-shortcuts-help-section-desc">${%KeyboardShortcuts.JobPages.GoToSCMPolling}</td>
                 </tr>
                 <tr>
                   <td class="keyboard-shortcuts-help-section-key">g-p</td>
                   <td>:</td>
-                  <td class="keyboard-shortcuts-help-section-desc">Permalink Selector</td>
+                  <td class="keyboard-shortcuts-help-section-desc">${%KeyboardShortcuts.JobPages.PermalinkSelector}</td>
                 </tr>
               </tbody>
             </table>
