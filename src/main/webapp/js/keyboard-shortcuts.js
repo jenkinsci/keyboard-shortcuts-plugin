@@ -32,7 +32,7 @@ if (keyboard_shortcuts_enabled) {
 
       /* try to play nicely with forms, so no keyboard shortcuts */
       var activeElement = document.activeElement;
-      if (activeElement == null || 'INPUT' == activeElement.tagName) {
+      if (activeElement == null || 'INPUT' == activeElement.tagName || 'TEXTAREA' == activeElement.tagName) {
         return;
       }
 
