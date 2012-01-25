@@ -40,14 +40,17 @@
 }
 
 #keyboard-shortcuts-help .keyboard-shortcuts-help-section-top {
-	color: orange; font-size : xx-large;
+	color: orange;
+	font-size: xx-large;
 	font-weight: bold;
 	text-align: center;
 	font-size: xx-large;
 }
 
 #keyboard-shortcuts-help .keyboard-shortcuts-help-section-bottom {
-	color: orange; border-top-color : orange; border-top-style : solid;
+	color: orange;
+	border-top-color: orange;
+	border-top-style: solid;
 	border-top-width: medium;
 	margin-top: 3px;
 	width: 100%;
@@ -108,4 +111,9 @@
 #keyboard-shortcuts-help  .keyboard-shortcuts-help-section-container .keyboard-shortcuts-help-section td.keyboard-shortcuts-help-section-desc
 	{
 	
+}
+
+#projectstatus tr.keyboard-shortcuts-view-job-selected {
+	border-width: 3px;
+	border-color: orange;
 }

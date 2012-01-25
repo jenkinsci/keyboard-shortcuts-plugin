@@ -27,6 +27,7 @@ package org.jenkins.ci.plugins.keyboard_shortcuts;
 import hudson.Extension;
 import hudson.model.Item;
 import hudson.model.PageDecorator;
+import hudson.model.TopLevelItem;
 import hudson.model.View;
 import jenkins.model.Jenkins;
 import net.sf.json.JSONArray;
@@ -57,6 +58,25 @@ public final class KeyboardShortcutsPageDecorator extends PageDecorator
     final JSONArray viewNames = new JSONArray();
     viewNames.addAll(ViewUtils.getAllViewNames());
     return viewNames.toString();
+  }
+
+  public static String getAllViewJobNamesAsJson()
+  {
+    final View view = ViewUtils.getView();
+
+    if (view != null)
+    {
+      final JSONArray viewJobNames = new JSONArray();
+
+      for (final TopLevelItem topLevelItem : view.getItems())
+      {
+        viewJobNames.add(topLevelItem.getDisplayName());
+      }
+
+      return viewJobNames.toString();
+    }
+
+    return "undefined";
   }
 
   public static String getBaseUrl()
