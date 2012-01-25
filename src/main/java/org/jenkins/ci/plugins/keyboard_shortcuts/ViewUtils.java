@@ -82,7 +82,12 @@ public final class ViewUtils
 
       if (StringUtils.isEmpty(pathInfo))
       {
-        Jenkins.getInstance().getPrimaryView();
+        return Jenkins.getInstance().getPrimaryView();
+      }
+
+      else if ("/".equals(pathInfo))
+      {
+        return Jenkins.getInstance().getPrimaryView();
       }
 
       else
