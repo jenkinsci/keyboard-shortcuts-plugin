@@ -78,6 +78,9 @@ if (keyboard_shortcuts_enabled) {
             if (keyboard_shortcuts_is_job()) {
               window.location.href = keyboard_shortcuts_url + '/' + keyboard_shortcuts_url_job + '/changes';
             }
+            else {
+              window.location.href = keyboard_shortcuts_url + '/configure';
+            }
           }
           break;
 

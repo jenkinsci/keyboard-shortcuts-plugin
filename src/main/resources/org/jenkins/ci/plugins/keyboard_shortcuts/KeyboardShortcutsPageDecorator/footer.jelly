@@ -29,6 +29,11 @@
                   <td class="keyboard-shortcuts-help-section-desc">${%KeyboardShortcuts.GeneralApplication.RefreshCurrentPage}</td>
                 </tr>
                 <tr>
+                  <td class="keyboard-shortcuts-help-section-key">g-c</td>
+                  <td>:</td>
+                  <td class="keyboard-shortcuts-help-section-desc">${%KeyboardShortcuts.GeneralApplication.GoToConfigureJenkins}</td>
+                </tr>
+                <tr>
                   <td class="keyboard-shortcuts-help-section-key">g-h</td>
                   <td>:</td>
                   <td class="keyboard-shortcuts-help-section-desc">${%KeyboardShortcuts.GeneralApplication.GoToHome}</td>
