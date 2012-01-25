@@ -80,7 +80,12 @@ public final class ViewUtils
     {
       final String pathInfo = currentRequest.getPathInfo();
 
-      if (StringUtils.isNotEmpty(pathInfo))
+      if (StringUtils.isEmpty(pathInfo))
+      {
+        Jenkins.getInstance().getPrimaryView();
+      }
+
+      else
       {
         final int vidx = pathInfo.indexOf("/view/");
 

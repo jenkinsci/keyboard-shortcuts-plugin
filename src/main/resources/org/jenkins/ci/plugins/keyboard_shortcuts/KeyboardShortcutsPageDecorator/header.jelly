@@ -28,6 +28,8 @@
   <link type="text/css" rel="stylesheet" href="${pluginUrl}/css/keyboard-shortcuts.css" />
   <script type="text/javascript">
     var keyboard_shortcuts_enabled = true;
+    var keyboard_shortcuts_is_job_page = ${it.jobPage};
+    var keyboard_shortcuts_is_view_page = ${it.viewPage};
     var keyboard_shortcuts_url = '${it.baseUrl}';
     var keyboard_shortcuts_url_job = '${it.baseJobUrl}';
     var keyboard_shortcuts_url_view = '${it.baseViewUrl}';

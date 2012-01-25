@@ -207,11 +207,11 @@ if (keyboard_shortcuts_enabled) {
   });
 
   function keyboard_shortcuts_is_job() {
-    return typeof keyboard_shortcuts_url_job != 'undefined';
+    return typeof keyboard_shortcuts_is_job_page != 'undefined' && keyboard_shortcuts_is_job_page;
   }
 
   function keyboard_shortcuts_is_view() {
-    return typeof keyboard_shortcuts_url_view != 'undefined';
+    return typeof keyboard_shortcuts_is_view_page != 'undefined' && keyboard_shortcuts_is_view_page;
   }
 
   function keyboard_shortcuts_show_keyboard_shortcuts_help() {

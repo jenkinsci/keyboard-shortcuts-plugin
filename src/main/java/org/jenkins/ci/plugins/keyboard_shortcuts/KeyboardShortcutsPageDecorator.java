@@ -53,13 +53,6 @@ public final class KeyboardShortcutsPageDecorator extends PageDecorator
     return jobNames.toString();
   }
 
-  public static String getAllViewNamesAsJson()
-  {
-    final JSONArray viewNames = new JSONArray();
-    viewNames.addAll(ViewUtils.getAllViewNames());
-    return viewNames.toString();
-  }
-
   public static String getAllViewJobNamesAsJson()
   {
     final View view = ViewUtils.getView();
@@ -79,9 +72,11 @@ public final class KeyboardShortcutsPageDecorator extends PageDecorator
     return "undefined";
   }
 
-  public static String getBaseUrl()
+  public static String getAllViewNamesAsJson()
   {
-    return Jenkins.getInstance().getRootUrlFromRequest();
+    final JSONArray viewNames = new JSONArray();
+    viewNames.addAll(ViewUtils.getAllViewNames());
+    return viewNames.toString();
   }
 
   public static String getBaseJobUrl()
@@ -94,6 +89,11 @@ public final class KeyboardShortcutsPageDecorator extends PageDecorator
     }
 
     return "undefined";
+  }
+
+  public static String getBaseUrl()
+  {
+    return Jenkins.getInstance().getRootUrlFromRequest();
   }
 
   public static String getBaseViewUrl()
@@ -111,6 +111,16 @@ public final class KeyboardShortcutsPageDecorator extends PageDecorator
     }
 
     return "undefined";
+  }
+
+  public static boolean isJobPage()
+  {
+    return JobUtils.getJob() != null;
+  }
+
+  public static boolean isViewPage()
+  {
+    return !isJobPage() && ViewUtils.getView() != null;
   }
 
   @DataBoundConstructor
