@@ -21,7 +21,7 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
  * THE SOFTWARE.
  */
-#keyboard-shortcuts-help {
+#ks-help {
 	background: #000;
 	border-radius: 10px;
 	-moz-border-radius: 10px;
@@ -39,7 +39,7 @@
 	z-index: 1001;
 }
 
-#keyboard-shortcuts-help .keyboard-shortcuts-help-section-top {
+#ks-help .ks-help-section-top {
 	color: orange;
 	font-size: xx-large;
 	font-weight: bold;
@@ -47,7 +47,7 @@
 	font-size: xx-large;
 }
 
-#keyboard-shortcuts-help .keyboard-shortcuts-help-section-bottom {
+#ks-help .ks-help-section-bottom {
 	color: orange;
 	border-top-color: orange;
 	border-top-style: solid;
@@ -58,11 +58,11 @@
 	border-top-color: orange;
 }
 
-#keyboard-shortcuts-help  .keyboard-shortcuts-help-section-container {
+#ks-help  .ks-help-section-container {
 	
 }
 
-#keyboard-shortcuts-help  .keyboard-shortcuts-help-section-container table
+#ks-help  .ks-help-section-container table
 	{
 	padding-bottom: 1em;
 	padding-left: 2em;
@@ -71,21 +71,21 @@
 	width: 100%;
 }
 
-#keyboard-shortcuts-help .keyboard-shortcuts-help-section-container td {
+#ks-help .ks-help-section-container td {
 	vertical-align: top;
 }
 
-#keyboard-shortcuts-help .keyboard-shortcuts-help-section-container .keyboard-shortcuts-help-section
+#ks-help .ks-help-section-container .ks-help-section
 	{
 	
 }
 
-#keyboard-shortcuts-help .keyboard-shortcuts-help-section-container .keyboard-shortcuts-help-section table
+#ks-help .ks-help-section-container .ks-help-section table
 	{
 	
 }
 
-#keyboard-shortcuts-help .keyboard-shortcuts-help-section-container .keyboard-shortcuts-help-section th
+#ks-help .ks-help-section-container .ks-help-section th
 	{
 	color: orange;
 	font-size: x-large;
@@ -95,27 +95,24 @@
 	border-bottom-width: thin;
 }
 
-#keyboard-shortcuts-help .keyboard-shortcuts-help-section-container .keyboard-shortcuts-help-section td
+#ks-help .ks-help-section-container .ks-help-section td
 	{
 	color: white;
 	font-size: large;
 }
 
-#keyboard-shortcuts-help  .keyboard-shortcuts-help-section-container .keyboard-shortcuts-help-section td.keyboard-shortcuts-help-section-key
+#ks-help  .ks-help-section-container .ks-help-section td.ks-help-section-key
 	{
 	color: orange;
 	font-weight: bold;
 	text-align: right;
 }
 
-#keyboard-shortcuts-help  .keyboard-shortcuts-help-section-container .keyboard-shortcuts-help-section td.keyboard-shortcuts-help-section-desc
+#ks-help  .ks-help-section-container .ks-help-section td.ks-help-section-desc
 	{
 	
 }
 
-#projectstatus tr.keyboard-shortcuts-view-job-selected { /*
-border-width: 1px;
-	border-color: orange;
-*/
+#projectstatus tr.ks-view-job-selected {
 	background-color: orange;
 }

@@ -22,10 +22,10 @@
  * THE SOFTWARE.
  */
 
-if (keyboard_shortcuts_enabled) {
-  var keyboard_shortcuts_previous_code;
-  var keyboard_shortcuts_previous_char;
-  var keyboard_shortcuts_view_job_selected;
+if (ks_enabled) {
+  var ks_previous_code;
+  var ks_previous_char;
+  var ks_view_job_selected;
 
   Event.observe(window, 'load', function() {
     Event.observe(document, 'keypress', function(e) {
@@ -38,29 +38,29 @@ if (keyboard_shortcuts_enabled) {
 
       // ---
 
-      var keyboard_shortcuts_code;
+      var ks_code;
 
       if (!e) {
         e = window.event;
       }
 
       if (e.keyCode) {
-        keyboard_shortcuts_code = e.keyCode;
+        ks_code = e.keyCode;
       }
 
       else if (e.which) {
-        keyboard_shortcuts_code = e.which;
+        ks_code = e.which;
       }
 
       /* always hide the shortcuts help, if user hits '?' again, re-display it */
-      keyboard_shortcuts_hide_keyboard_shortcuts_help();
+      ks_hide_ks_help();
 
-      var keyboard_shortcuts_character = String.fromCharCode(keyboard_shortcuts_code);
+      var ks_character = String.fromCharCode(ks_code);
 
-      switch (keyboard_shortcuts_character) {
+      switch (ks_character) {
 
         case '?':
-          keyboard_shortcuts_show_keyboard_shortcuts_help();
+          ks_show_ks_help();
           break;
 
         case '/':
@@ -68,121 +68,120 @@ if (keyboard_shortcuts_enabled) {
           break;
 
         case 'b':
-          if (keyboard_shortcuts_is_job()) {
-            window.location.href = keyboard_shortcuts_url + '/' + keyboard_shortcuts_url_job + '/build?delay=0sec';
+          if (ks_is_job()) {
+            window.location.href = ks_url + '/' + ks_url_job + '/build?delay=0sec';
           }
-          else if (keyboard_shortcuts_is_view()) {
-            if (typeof keyboard_shortcuts_view_job_selected != 'undefined') {
-              window.location.href = keyboard_shortcuts_url + '/job/' + keyboard_shortcuts_view_job_selected
-                  + '/build?delay=0sec';
+          else if (ks_is_view()) {
+            if (typeof ks_view_job_selected != 'undefined') {
+              window.location.href = ks_url + '/job/' + ks_view_job_selected + '/build?delay=0sec';
             }
           }
           break;
 
         case 'c':
-          if (keyboard_shortcuts_previous_character_was_character('g')) {
-            if (keyboard_shortcuts_is_job()) {
-              window.location.href = keyboard_shortcuts_url + '/' + keyboard_shortcuts_url_job + '/changes';
+          if (ks_previous_character_was_character('g')) {
+            if (ks_is_job()) {
+              window.location.href = ks_url + '/' + ks_url_job + '/changes';
             }
           }
           break;
 
         case 'C':
-          if (keyboard_shortcuts_previous_character_was_character('g')) {
-            if (keyboard_shortcuts_is_job()) {
-              window.location.href = keyboard_shortcuts_url + '/' + keyboard_shortcuts_url_job + '/configure';
+          if (ks_previous_character_was_character('g')) {
+            if (ks_is_job()) {
+              window.location.href = ks_url + '/' + ks_url_job + '/configure';
             }
-            else if (keyboard_shortcuts_is_view()) {
-              window.location.href = keyboard_shortcuts_url + '/' + keyboard_shortcuts_url_view + '/configure';
+            else if (ks_is_view()) {
+              window.location.href = ks_url + '/' + ks_url_view + '/configure';
             }
             else {
-              window.location.href = keyboard_shortcuts_url + '/configure';
+              window.location.href = ks_url + '/configure';
             }
           }
           break;
 
         case 'h':
-          if (keyboard_shortcuts_previous_character_was_character('g')) {
-            window.location.href = keyboard_shortcuts_url;
+          if (ks_previous_character_was_character('g')) {
+            window.location.href = ks_url;
           }
           break;
 
         case 'H':
-          if (keyboard_shortcuts_previous_character_was_character('g')) {
-            if (keyboard_shortcuts_is_view()) {
-              window.location.href = keyboard_shortcuts_url + '/' + keyboard_shortcuts_url_view + '/builds';
+          if (ks_previous_character_was_character('g')) {
+            if (ks_is_view()) {
+              window.location.href = ks_url + '/' + ks_url_view + '/builds';
             }
           }
           break;
 
         case 'j':
-          if (keyboard_shortcuts_previous_character_was_character('g')) {
-            window.alert('keyboard_shortcuts_app_job_selector');
+          if (ks_previous_character_was_character('g')) {
+            window.alert('ks_app_job_selector');
           }
           else {
-            if (keyboard_shortcuts_is_view()) {
-              keyboard_shortcuts_view_job_next();
+            if (ks_is_view()) {
+              ks_view_job_next();
             }
           }
           break;
 
         case 'k':
-          if (keyboard_shortcuts_is_view()) {
-            keyboard_shortcuts_view_job_prev();
+          if (ks_is_view()) {
+            ks_view_job_prev();
           }
           break;
 
         case 'm':
-          if (keyboard_shortcuts_previous_character_was_character('g')) {
-            if (keyboard_shortcuts_is_job()) {
-              window.location.href = keyboard_shortcuts_url + '/' + keyboard_shortcuts_url_job + '/modules';
+          if (ks_previous_character_was_character('g')) {
+            if (ks_is_job()) {
+              window.location.href = ks_url + '/' + ks_url_job + '/modules';
             }
             else {
-              window.location.href = keyboard_shortcuts_url + '/manage';
+              window.location.href = ks_url + '/manage';
             }
           }
           break;
 
         case 'n':
-          if (keyboard_shortcuts_previous_character_was_character('g')) {
-            window.location.href = keyboard_shortcuts_url + '/computer';
+          if (ks_previous_character_was_character('g')) {
+            window.location.href = ks_url + '/computer';
           }
           else {
-            if (keyboard_shortcuts_is_view()) {
-              keyboard_shortcuts_view_job_next();
+            if (ks_is_view()) {
+              ks_view_job_next();
             }
           }
           break;
 
         case 'o':
-          if (keyboard_shortcuts_is_view()) {
-            keyboard_shortcuts_view_job_open();
+          if (ks_is_view()) {
+            ks_view_job_open();
           }
           break;
 
         case 'p':
-          if (keyboard_shortcuts_previous_character_was_character('g')) {
-            if (keyboard_shortcuts_is_job()) {
-              window.alert('keyboard_shortcuts_job_permalink_selector');
+          if (ks_previous_character_was_character('g')) {
+            if (ks_is_job()) {
+              window.alert('ks_job_permalink_selector');
             }
             else {
-              window.location.href = keyboard_shortcuts_url + '/people';
+              window.location.href = ks_url + '/people';
             }
           }
           else {
-            if (keyboard_shortcuts_is_view()) {
-              keyboard_shortcuts_view_job_prev();
+            if (ks_is_view()) {
+              ks_view_job_prev();
             }
           }
           break;
 
         case 'P':
-          if (keyboard_shortcuts_previous_character_was_character('g')) {
-            if (keyboard_shortcuts_is_job()) {
-              window.location.href = keyboard_shortcuts_url + '/' + keyboard_shortcuts_url_job + '/scmPollLog';
+          if (ks_previous_character_was_character('g')) {
+            if (ks_is_job()) {
+              window.location.href = ks_url + '/' + ks_url_job + '/scmPollLog';
             }
             else {
-              window.location.href = keyboard_shortcuts_url + '/pluginManager';
+              window.location.href = ks_url + '/pluginManager';
             }
           }
           break;
@@ -192,63 +191,63 @@ if (keyboard_shortcuts_enabled) {
           break;
 
         case 's':
-          if (keyboard_shortcuts_previous_character_was_character('g')) {
-            if (keyboard_shortcuts_is_job()) {
-              window.location.href = keyboard_shortcuts_url + '/' + keyboard_shortcuts_url_job;
+          if (ks_previous_character_was_character('g')) {
+            if (ks_is_job()) {
+              window.location.href = ks_url + '/' + ks_url_job;
             }
           }
           break;
 
         case 't':
-          if (keyboard_shortcuts_previous_character_was_character('g')) {
-            if (keyboard_shortcuts_is_job()) {
-              window.location.href = keyboard_shortcuts_url + '/' + keyboard_shortcuts_url_job + '/buildTimeTrend';
+          if (ks_previous_character_was_character('g')) {
+            if (ks_is_job()) {
+              window.location.href = ks_url + '/' + ks_url_job + '/buildTimeTrend';
             }
           }
           break;
 
         case 'v':
-          if (keyboard_shortcuts_previous_character_was_character('g')) {
-            window.alert('keyboard_shortcuts_app_view_selector');
+          if (ks_previous_character_was_character('g')) {
+            window.alert('ks_app_view_selector');
           }
           break;
 
         case 'w':
-          if (keyboard_shortcuts_previous_character_was_character('g')) {
-            if (keyboard_shortcuts_is_job()) {
-              window.location.href = keyboard_shortcuts_url + '/' + keyboard_shortcuts_url_job + '/ws';
+          if (ks_previous_character_was_character('g')) {
+            if (ks_is_job()) {
+              window.location.href = ks_url + '/' + ks_url_job + '/ws';
             }
           }
           break;
 
         default:
-          console.debug('code: ' + keyboard_shortcuts_code + ', character: ' + keyboard_shortcuts_character);
+          console.debug('code: ' + ks_code + ', character: ' + ks_character);
           break;
       }
 
-      keyboard_shortcuts_previous_code = keyboard_shortcuts_code;
-      keyboard_shortcuts_previous_character = String.fromCharCode(keyboard_shortcuts_code);
+      ks_previous_code = ks_code;
+      ks_previous_character = String.fromCharCode(ks_code);
     });
   });
 
-  function keyboard_shortcuts_is_job() {
-    return typeof keyboard_shortcuts_is_job_page != 'undefined' && keyboard_shortcuts_is_job_page;
+  function ks_is_job() {
+    return typeof ks_is_job_page != 'undefined' && ks_is_job_page;
   }
 
-  function keyboard_shortcuts_is_view() {
-    return typeof keyboard_shortcuts_is_view_page != 'undefined' && keyboard_shortcuts_is_view_page;
+  function ks_is_view() {
+    return typeof ks_is_view_page != 'undefined' && ks_is_view_page;
   }
 
-  function keyboard_shortcuts_show_keyboard_shortcuts_help() {
-    $('keyboard-shortcuts-help').show();
+  function ks_show_ks_help() {
+    $('ks-help').show();
   }
 
-  function keyboard_shortcuts_hide_keyboard_shortcuts_help() {
-    $('keyboard-shortcuts-help').hide();
+  function ks_hide_ks_help() {
+    $('ks-help').hide();
   }
 
-  function keyboard_shortcuts_previous_character_was_character(character) {
-    if (typeof keyboard_shortcuts_previous_character == 'undefined') {
+  function ks_previous_character_was_character(character) {
+    if (typeof ks_previous_character == 'undefined') {
       return false;
     }
 
@@ -256,47 +255,46 @@ if (keyboard_shortcuts_enabled) {
       return false;
     }
 
-    return keyboard_shortcuts_previous_character == character;
+    return ks_previous_character == character;
   }
 
-  function keyboard_shortcuts_view_job_next() {
-    keyboard_shortcuts_hide_keyboard_shortcuts_help();
-    if (typeof keyboard_shortcuts_view_job_names != 'undefined') {
-      if (keyboard_shortcuts_view_job_names.length > 0) {
-        keyboard_shortcuts_view_job_names.each(function(job) {
-          $('job_' + job).removeClassName('keyboard-shortcuts-view-job-selected');
+  function ks_view_job_next() {
+    ks_hide_ks_help();
+    if (typeof ks_view_job_names != 'undefined') {
+      if (ks_view_job_names.length > 0) {
+        ks_view_job_names.each(function(job) {
+          $('job_' + job).removeClassName('ks-view-job-selected');
         });
-        var idx = keyboard_shortcuts_view_job_names.indexOf(keyboard_shortcuts_view_job_selected) + 1;
-        if (idx >= keyboard_shortcuts_view_job_names.length) {
+        var idx = ks_view_job_names.indexOf(ks_view_job_selected) + 1;
+        if (idx >= ks_view_job_names.length) {
           idx = 0;
         }
-        keyboard_shortcuts_view_job_selected = keyboard_shortcuts_view_job_names[idx];
-        $('job_' + keyboard_shortcuts_view_job_selected).addClassName('keyboard-shortcuts-view-job-selected');
+        ks_view_job_selected = ks_view_job_names[idx];
+        $('job_' + ks_view_job_selected).addClassName('ks-view-job-selected');
       }
     }
   }
 
-  function keyboard_shortcuts_view_job_prev() {
-    if (typeof keyboard_shortcuts_view_job_names != 'undefined') {
-      if (keyboard_shortcuts_view_job_names.length > 0) {
-        keyboard_shortcuts_view_job_names.each(function(job) {
-          $('job_' + job).removeClassName('keyboard-shortcuts-view-job-selected');
+  function ks_view_job_prev() {
+    if (typeof ks_view_job_names != 'undefined') {
+      if (ks_view_job_names.length > 0) {
+        ks_view_job_names.each(function(job) {
+          $('job_' + job).removeClassName('ks-view-job-selected');
         });
-        var idx = keyboard_shortcuts_view_job_names.indexOf(keyboard_shortcuts_view_job_selected) - 1;
+        var idx = ks_view_job_names.indexOf(ks_view_job_selected) - 1;
         if (idx < 0) {
-          idx = keyboard_shortcuts_view_job_names.length - 1;
+          idx = ks_view_job_names.length - 1;
         }
-        keyboard_shortcuts_view_job_selected = keyboard_shortcuts_view_job_names[idx];
-        $('job_' + keyboard_shortcuts_view_job_selected).addClassName('keyboard-shortcuts-view-job-selected');
+        ks_view_job_selected = ks_view_job_names[idx];
+        $('job_' + ks_view_job_selected).addClassName('ks-view-job-selected');
       }
     }
   }
 
-  function keyboard_shortcuts_view_job_open() {
-    keyboard_shortcuts_hide_keyboard_shortcuts_help();
-    if (typeof keyboard_shortcuts_view_job_selected != 'undefined') {
-      window.location.href = keyboard_shortcuts_url + '/' + keyboard_shortcuts_url_view + '/job/'
-          + keyboard_shortcuts_view_job_selected;
+  function ks_view_job_open() {
+    ks_hide_ks_help();
+    if (typeof ks_view_job_selected != 'undefined') {
+      window.location.href = ks_url + '/' + ks_url_view + '/job/' + ks_view_job_selected;
     }
   }
 }
