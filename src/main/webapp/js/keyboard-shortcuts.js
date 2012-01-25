@@ -105,6 +105,43 @@ if (ks_enabled) {
           }
         }
       }
+
+      /* handle keydown inputs when inside job selector */
+      if (typeof ks_is_job_selector != 'undefined') {
+        if (ks_is_job_selector) {
+          switch (ks_code) {
+            case Event.KEY_RETURN:
+              ks_job_selector_open();
+              break;
+
+            case Event.KEY_BACKSPACE:
+            case Event.KEY_DELETE:
+            case Event.KEY_ESC:
+              ks_job_selector_hide();
+              break;
+
+            case Event.KEY_LEFT:
+            case Event.KEY_UP:
+              ks_job_selector_prev();
+              break;
+
+            case Event.KEY_RIGHT:
+            case Event.KEY_DOWN:
+              ks_job_selector_next();
+              break;
+
+            case Event.KEY_HOME:
+            case Event.KEY_PAGEUP:
+              ks_job_selector_first();
+              break;
+
+            case Event.KEY_END:
+            case Event.KEY_PAGEDOWN:
+              ks_job_selector_last();
+              break;
+          }
+        }
+      }
     }
   }
 
@@ -182,7 +219,7 @@ if (ks_enabled) {
 
       case 'j':
         if (ks_previous_character_was_character('g')) {
-          window.alert('ks_app_job_selector');
+          ks_job_selector_show();
         }
         else {
           if (ks_is_view()) {
@@ -377,11 +414,11 @@ if (ks_enabled) {
     if (typeof ks_is_view_selector != 'undefined') {
       if (ks_is_view_selector) {
         ks_view_names.each(function(v) {
-          $('view_' + v).removeClassName('ks-view-selector-selected');
+          $('view_selector_' + v).removeClassName('ks-view-selector-selected');
         });
 
         ks_view_selector_selected = view
-        $('view_' + view).addClassName('ks-view-selector-selected');
+        $('view_selector_' + view).addClassName('ks-view-selector-selected');
       }
     }
   }
@@ -428,12 +465,86 @@ if (ks_enabled) {
     $('ks-view-selector').show();
     if (typeof ks_view_names != 'undefined') {
       $('ks-view-selector-views').innerHTML = ks_view_names.map(function(view) {
-        return '<li id="view_#{view}">#{view}</li>'.interpolate({
+        return '<li id="view_selector_#{view}">#{view}</li>'.interpolate({
           view : view
         });
       }).join('');
     }
     ks_is_view_selector = true;
+  }
+
+  // ----------------------------------------------------------------------- //
+  // ----------------------------------------------------------------------- //
+
+  /*
+   * Job Selector stuff
+   */
+
+  var ks_job_selector_input;
+  var ks_job_selector_selected;
+
+  function ks_job_selector_select(job) {
+    console.debug('ks_job_selector_select(' + job + ')');
+    if (typeof ks_is_job_selector != 'undefined') {
+      if (ks_is_job_selector) {
+        ks_job_names.each(function(v) {
+          $('job_selector_' + v).removeClassName('ks-job-selector-selected');
+        });
+
+        ks_job_selector_selected = job
+        $('job_selector_' + job).addClassName('ks-job-selector-selected');
+      }
+    }
+  }
+
+  function ks_job_selector_first() {
+    ks_job_selector_select(ks_job_names[0]);
+  }
+
+  function ks_job_selector_hide() {
+    $('ks-job-selector').hide();
+    ks_is_job_selector = false;
+  }
+
+  function ks_job_selector_last() {
+    ks_job_selector_select(ks_job_names[ks_job_names.length - 1]);
+  }
+
+  function ks_job_selector_next() {
+    var idx = ks_job_names.indexOf(ks_job_selector_selected) + 1;
+    if (idx >= ks_job_names.length) {
+      idx = 0;
+    }
+
+    ks_job_selector_select(ks_job_names[idx]);
+  }
+
+  function ks_job_selector_open() {
+    if (typeof ks_job_selector_selected != 'undefined') {
+      ks_job_selector_hide();
+      window.location.href = ks_url + '/job/' + ks_job_selector_selected;
+    }
+  }
+
+  function ks_job_selector_prev() {
+    var idx = ks_job_names.indexOf(ks_job_selector_selected) - 1;
+    if (idx < 0) {
+      idx = ks_job_names.length - 1;
+    }
+
+    ks_job_selector_select(ks_job_names[idx]);
+  }
+
+  function ks_job_selector_show() {
+    $('ks-job-selector').show();
+    if (typeof ks_job_names != 'undefined') {
+      $('ks-job-selector-jobs').innerHTML = ks_job_names.map(function(job) {
+        return '<li id="job_selector_#{job}">#{job}</li>'.interpolate({
+          job : job
+        });
+      }).join('');
+    }
+    ks_is_job_selector = true;
   }
 }
 

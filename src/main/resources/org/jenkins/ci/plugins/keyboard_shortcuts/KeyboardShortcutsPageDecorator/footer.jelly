@@ -184,4 +184,10 @@
       <ul id="ks-view-selector-views" />
     </div>
   </div>
+  <div id="ks-job-selector" class="ks-banner" style="display: none">
+    <div class="ks-banner-section-top">Job Selector - Start Typing or Use Arrows</div>
+    <div class="ks-banner-section-bottom">
+      <ul id="ks-job-selector-jobs" />
+    </div>
+  </div>
 </j:jelly>
