@@ -87,7 +87,7 @@ if (keyboard_shortcuts_enabled) {
               window.location.href = keyboard_shortcuts_url + '/' + keyboard_shortcuts_url_job + '/configure';
             }
             else if (keyboard_shortcuts_is_view()) {
-              window.location.href = keyboard_shortcuts_url + keyboard_shortcuts_url_view + '/configure';
+              window.location.href = keyboard_shortcuts_url + '/' + keyboard_shortcuts_url_view + '/configure';
             }
             else {
               window.location.href = keyboard_shortcuts_url + '/configure';
