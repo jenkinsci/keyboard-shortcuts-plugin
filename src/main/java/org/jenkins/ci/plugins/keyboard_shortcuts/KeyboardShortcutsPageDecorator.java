@@ -28,9 +28,15 @@ import hudson.Extension;
 import hudson.model.Item;
 import hudson.model.PageDecorator;
 import hudson.model.TopLevelItem;
+import hudson.model.Job;
+import hudson.model.PermalinkProjectAction.Permalink;
 import hudson.model.View;
+
+import java.util.TreeMap;
+
 import jenkins.model.Jenkins;
 import net.sf.json.JSONArray;
+import net.sf.json.JSONObject;
 
 import org.apache.commons.lang.StringUtils;
 import org.kohsuke.stapler.DataBoundConstructor;
@@ -51,6 +57,34 @@ public final class KeyboardShortcutsPageDecorator extends PageDecorator
     final JSONArray jobNames = new JSONArray();
     jobNames.addAll(JobUtils.getAllJobNames());
     return jobNames.toString();
+  }
+
+  public static String getAllPermalinksAsJson()
+  {
+    final TopLevelItem topLevelItem = JobUtils.getJob();
+
+    if (topLevelItem != null)
+    {
+      for (final Job<?, ?> job : topLevelItem.getAllJobs())
+      {
+        final JSONArray permalinks = new JSONArray();
+
+        for (final Permalink permalink : job.getPermalinks())
+        {
+          if (permalink.resolve(job) != null)
+          {
+            final TreeMap<String, String> map = new TreeMap<String, String>();
+            map.put("id", permalink.getId());
+            map.put("displayName", permalink.getDisplayName());
+            permalinks.add(JSONObject.fromObject(map));
+          }
+        }
+
+        return permalinks.toString();
+      }
+    }
+
+    return "undefined";
   }
 
   public static String getAllViewJobNamesAsJson()

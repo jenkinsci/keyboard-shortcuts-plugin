@@ -28,15 +28,18 @@
   <link type="text/css" rel="stylesheet" href="${pluginUrl}/css/keyboard-shortcuts.css" />
   <script type="text/javascript">
     var ks_enabled = true;
-    var ks_is_job_page = ${it.jobPage};
-    var ks_is_view_page = ${it.viewPage};
-    var ks_url = '${it.baseUrl}';
-    var ks_url_job = '${it.baseJobUrl}';
-    var ks_url_view = '${it.baseViewUrl}';
-    var ks_job_names = ${it.allJobNamesAsJson};
-    var ks_view_names = ${it.allViewNamesAsJson};
-    var ks_view_job_names = ${it.allViewJobNamesAsJson};
-    var ks_is_view_selector = false;
+    var ks_is_job_page           = ${it.jobPage};
+    var ks_is_view_page          = ${it.viewPage};
+    var ks_url                   = '${it.baseUrl}';
+    var ks_url_job               = '${it.baseJobUrl}';
+    var ks_url_view              = '${it.baseViewUrl}';
+    var ks_job_names             = ${it.allJobNamesAsJson};
+    var ks_view_names            = ${it.allViewNamesAsJson};
+    var ks_view_job_names        = ${it.allViewJobNamesAsJson};
+    var ks_permalinks            = ${it.allPermalinksAsJson};
+    var ks_is_view_selector      = false;
+    var ks_is_job_selector       = false;
+    var ks_is_permalink_selector = false;
   </script>
   <!-- we require advanced features found in prototype-1.7 -->
   <script type="text/javascript" src="${pluginUrl}/js/prototype-1.7.js" />

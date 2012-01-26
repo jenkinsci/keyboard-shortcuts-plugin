@@ -251,4 +251,10 @@
       <ul id="ks-job-selector-jobs" />
     </div>
   </div>
+  <div id="ks-permalink-selector" class="ks-banner" style="display: none">
+    <div class="ks-banner-section-top">Permalink Selector - Start Typing or Use Arrows</div>
+    <div class="ks-banner-section-bottom">
+      <ul id="ks-permalink-selector-permalinks" />
+    </div>
+  </div>
 </j:jelly>

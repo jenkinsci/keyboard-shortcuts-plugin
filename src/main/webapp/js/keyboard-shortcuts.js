@@ -77,6 +77,9 @@ if (ks_enabled) {
           else if (ks_is_job_selector) {
             ks_job_selector_open();
           }
+          else if (ks_is_permalink_selector) {
+            ks_permalink_selector_open();
+          }
           break;
 
         case Event.KEY_ESC:
@@ -85,6 +88,9 @@ if (ks_enabled) {
           }
           else if (ks_is_job_selector) {
             ks_job_selector_hide();
+          }
+          else if (ks_is_permalink_selector) {
+            ks_permalink_selector_hide();
           }
           break;
 
@@ -96,6 +102,9 @@ if (ks_enabled) {
           else if (ks_is_job_selector) {
             ks_job_selector_prev();
           }
+          else if (ks_is_permalink_selector) {
+            ks_permalink_selector_prev();
+          }
           break;
 
         case Event.KEY_RIGHT:
@@ -105,6 +114,9 @@ if (ks_enabled) {
           }
           else if (ks_is_job_selector) {
             ks_job_selector_next();
+          }
+          else if (ks_is_permalink_selector) {
+            ks_permalink_selector_next();
           }
           break;
 
@@ -116,6 +128,9 @@ if (ks_enabled) {
           else if (ks_is_job_selector) {
             ks_job_selector_first();
           }
+          else if (ks_is_permalink_selector) {
+            ks_permalink_selector_first();
+          }
           break;
 
         case Event.KEY_END:
@@ -125,6 +140,9 @@ if (ks_enabled) {
           }
           else if (ks_is_job_selector) {
             ks_job_selector_last();
+          }
+          else if (ks_is_permalink_selector) {
+            ks_permalink_selector_last();
           }
           break;
       }
@@ -251,7 +269,7 @@ if (ks_enabled) {
       case 'p':
         if (ks_previous_character_was_character('g')) {
           if (ks_is_job()) {
-            window.alert('ks_job_permalink_selector');
+            ks_permalink_selector_show();
           }
           else {
             window.location.href = ks_url + '/people';
@@ -531,6 +549,82 @@ if (ks_enabled) {
       }).join('');
     }
     ks_is_job_selector = true;
+  }
+
+  // ----------------------------------------------------------------------- //
+  // ----------------------------------------------------------------------- //
+
+  /*
+   * Permalink Selector stuff
+   */
+
+  var ks_permalink_selector_input;
+  var ks_permalink_selector_selected;
+
+  function ks_permalink_selector_select(permalink) {
+    console.debug('ks_permalink_selector_select(' + permalink + ')');
+    if (ks_is_permalink_selector) {
+      ks_permalinks.collect(function(e) {
+        return $H(e).get('id');
+      }).each(function(id) {
+        $('permalink_selector_' + id).removeClassName('ks-permalink-selector-selected');
+      });
+
+      ks_permalink_selector_selected = permalink
+      $('permalink_selector_' + permalink).addClassName('ks-permalink-selector-selected');
+    }
+  }
+
+  function ks_permalink_selector_first() {
+    ks_permalink_selector_select($H(ks_permalinks[0]).get('id'));
+  }
+
+  function ks_permalink_selector_hide() {
+    $('ks-permalink-selector').hide();
+    ks_is_permalink_selector = false;
+  }
+
+  function ks_permalink_selector_last() {
+    ks_permalink_selector_select($H(ks_permalinks[ks_permalinks.length - 1]).get('id'));
+  }
+
+  function ks_permalink_selector_next() {
+    var idx = ks_permalinks.collect(function(e) {
+      return $H(e).get('id');
+    }).indexOf(ks_permalink_selector_selected) + 1;
+    if (idx >= ks_permalinks.length) {
+      idx = 0;
+    }
+
+    ks_permalink_selector_select($H(ks_permalinks[idx]).get('id'));
+  }
+
+  function ks_permalink_selector_open() {
+    if (typeof ks_permalink_selector_selected != 'undefined') {
+      ks_permalink_selector_hide();
+      window.location.href = ks_url + ks_url_job + '/' + ks_permalink_selector_selected;
+    }
+  }
+
+  function ks_permalink_selector_prev() {
+    var idx = ks_permalinks.collect(function(e) {
+      return $H(e).get('id');
+    }).indexOf(ks_permalink_selector_selected) - 1;
+    if (idx < 0) {
+      idx = ks_permalinks.length - 1;
+    }
+
+    ks_permalink_selector_select($H(ks_permalinks[idx]).get('id'));
+  }
+
+  function ks_permalink_selector_show() {
+    $('ks-permalink-selector').show();
+    if (typeof ks_permalinks != 'undefined') {
+      $('ks-permalink-selector-permalinks').innerHTML = ks_permalinks.map(function(permalink) {
+        return '<li id="permalink_selector_#{id}">#{displayName}</li>'.interpolate($H(permalink));
+      }).join('');
+    }
+    ks_is_permalink_selector = true;
   }
 }
 

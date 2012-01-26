@@ -25,6 +25,7 @@
 package org.jenkins.ci.plugins.keyboard_shortcuts;
 
 import hudson.model.Item;
+import hudson.model.TopLevelItem;
 
 import java.util.Collection;
 import java.util.SortedSet;
@@ -57,12 +58,12 @@ public final class JobUtils
     return set;
   }
 
-  public static Item getJob()
+  public static TopLevelItem getJob()
   {
     return getJob(Stapler.getCurrentRequest());
   }
 
-  public static Item getJob(final StaplerRequest currentRequest)
+  public static TopLevelItem getJob(final StaplerRequest currentRequest)
   {
     if (currentRequest != null)
     {

@@ -137,3 +137,24 @@ ul#ks-job-selector-jobs li.ks-job-selector-selected {
 	color: orange;
 	font-weight: bold;
 }
+
+ul#ks-permalink-selector-permalinks {
+	list-style-type: none;
+	margin: 0;
+	padding-top: 1em;
+	text-align: center;
+}
+
+ul#ks-permalink-selector-permalinks li {
+	color: white;
+	display: inline-block;
+	font-size: large;
+	padding-left: 0.5em;
+	padding-right: 0.5em;
+}
+
+ul#ks-permalink-selector-permalinks li.ks-permalink-selector-selected {
+	background: grey;
+	color: orange;
+	font-weight: bold;
+}
