@@ -98,11 +98,14 @@
 
 ul#ks-view-selector-views {
 	list-style-type: none;
+	margin: 0;
+	padding-top: 1em;
+	text-align: center;
 }
 
 ul#ks-view-selector-views li {
 	color: white;
-	display: inline;
+	display: inline-block;
 	font-size: large;
 	padding-left: 0.5em;
 	padding-right: 0.5em;
@@ -116,11 +119,14 @@ ul#ks-view-selector-views li.ks-view-selector-selected {
 
 ul#ks-job-selector-jobs {
 	list-style-type: none;
+	margin: 0;
+	padding-top: 1em;
+	text-align: center;
 }
 
 ul#ks-job-selector-jobs li {
 	color: white;
-	display: inline;
+	display: inline-block;
 	font-size: large;
 	padding-left: 0.5em;
 	padding-right: 0.5em;
