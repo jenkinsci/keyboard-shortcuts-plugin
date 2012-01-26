@@ -69,76 +69,64 @@ if (ks_enabled) {
     var ks_code = ks_get_keycode(e);
 
     if (ks_code != null) {
-      /* handle keydown inputs when inside view selector */
-      if (typeof ks_is_view_selector != 'undefined') {
-        if (ks_is_view_selector) {
-          switch (ks_code) {
-            case Event.KEY_RETURN:
-              ks_view_selector_open();
-              break;
-
-            case Event.KEY_ESC:
-              ks_view_selector_hide();
-              break;
-
-            case Event.KEY_LEFT:
-            case Event.KEY_UP:
-              ks_view_selector_prev();
-              break;
-
-            case Event.KEY_RIGHT:
-            case Event.KEY_DOWN:
-              ks_view_selector_next();
-              break;
-
-            case Event.KEY_HOME:
-            case Event.KEY_PAGEUP:
-              ks_view_selector_first();
-              break;
-
-            case Event.KEY_END:
-            case Event.KEY_PAGEDOWN:
-              ks_view_selector_last();
-              break;
+      switch (ks_code) {
+        case Event.KEY_RETURN:
+          if (ks_is_view_selector) {
+            ks_view_selector_open();
           }
-        }
-      }
-
-      /* handle keydown inputs when inside job selector */
-      if (typeof ks_is_job_selector != 'undefined') {
-        if (ks_is_job_selector) {
-          switch (ks_code) {
-            case Event.KEY_RETURN:
-              ks_job_selector_open();
-              break;
-
-            case Event.KEY_BACKSPACE:
-            case Event.KEY_DELETE:
-            case Event.KEY_ESC:
-              ks_job_selector_hide();
-              break;
-
-            case Event.KEY_LEFT:
-            case Event.KEY_UP:
-              ks_job_selector_prev();
-              break;
-
-            case Event.KEY_RIGHT:
-            case Event.KEY_DOWN:
-              ks_job_selector_next();
-              break;
-
-            case Event.KEY_HOME:
-            case Event.KEY_PAGEUP:
-              ks_job_selector_first();
-              break;
-
-            case Event.KEY_END:
-            case Event.KEY_PAGEDOWN:
-              ks_job_selector_last();
-              break;
+          else if (ks_is_job_selector) {
+            ks_job_selector_open();
           }
-        }
+          break;
+
+        case Event.KEY_ESC:
+          if (ks_is_view_selector) {
+            ks_view_selector_hide();
+          }
+          else if (ks_is_job_selector) {
+            ks_job_selector_hide();
+          }
+          break;
+
+        case Event.KEY_LEFT:
+        case Event.KEY_UP:
+          if (ks_is_view_selector) {
+            ks_view_selector_prev();
+          }
+          else if (ks_is_job_selector) {
+            ks_job_selector_prev();
+          }
+          break;
+
+        case Event.KEY_RIGHT:
+        case Event.KEY_DOWN:
+          if (ks_is_view_selector) {
+            ks_view_selector_next();
+          }
+          else if (ks_is_job_selector) {
+            ks_job_selector_next();
+          }
+          break;
+
+        case Event.KEY_HOME:
+        case Event.KEY_PAGEUP:
+          if (ks_is_view_selector) {
+            ks_view_selector_first();
+          }
+          else if (ks_is_job_selector) {
+            ks_job_selector_first();
+          }
+          break;
+
+        case Event.KEY_END:
+        case Event.KEY_PAGEDOWN:
+          if (ks_is_view_selector) {
+            ks_view_selector_last();
+          }
+          else if (ks_is_job_selector) {
+            ks_job_selector_last();
+          }
+          break;
       }
     }
   }
