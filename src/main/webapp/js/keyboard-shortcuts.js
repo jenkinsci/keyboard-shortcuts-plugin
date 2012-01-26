@@ -77,8 +77,6 @@ if (ks_enabled) {
               ks_view_selector_open();
               break;
 
-            case Event.KEY_BACKSPACE:
-            case Event.KEY_DELETE:
             case Event.KEY_ESC:
               ks_view_selector_hide();
               break;

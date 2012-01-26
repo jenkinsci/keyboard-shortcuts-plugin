@@ -80,6 +80,67 @@
             <table class="ks-help-section">
               <tbody>
                 <tr>
+                  <th colspan="3">${%KeyboardShortcuts.SelectorPanels.Title}</th>
+                </tr>
+                <tr>
+                  <td class="ks-help-section-key">&amp;larr;</td>
+                  <td>:</td>
+                  <td class="ks-help-section-desc">${%KeyboardShortcuts.SelectorPanels.LeftArrow}</td>
+                </tr>
+                <tr>
+                  <td class="ks-help-section-key">&amp;uarr;</td>
+                  <td>:</td>
+                  <td class="ks-help-section-desc">${%KeyboardShortcuts.SelectorPanels.UpArrow}</td>
+                </tr>
+                <tr>
+                  <td class="ks-help-section-key">&amp;rarr;</td>
+                  <td>:</td>
+                  <td class="ks-help-section-desc">${%KeyboardShortcuts.SelectorPanels.RightArrow}</td>
+                </tr>
+                <tr>
+                  <td class="ks-help-section-key">&amp;darr;</td>
+                  <td>:</td>
+                  <td class="ks-help-section-desc">${%KeyboardShortcuts.SelectorPanels.DownArrow}</td>
+                </tr>
+                <tr>
+                  <td class="ks-help-section-key">&amp;crarr;</td>
+                  <td>:</td>
+                  <td class="ks-help-section-desc">${%KeyboardShortcuts.SelectorPanels.CarriageReturn}</td>
+                </tr>
+                <tr>
+                  <td class="ks-help-section-key">end</td>
+                  <td>:</td>
+                  <td class="ks-help-section-desc">${%KeyboardShortcuts.SelectorPanels.End}</td>
+                </tr>
+                <tr>
+                  <td class="ks-help-section-key">escape</td>
+                  <td>:</td>
+                  <td class="ks-help-section-desc">${%KeyboardShortcuts.SelectorPanels.Escape}</td>
+                </tr>
+                <tr>
+                  <td class="ks-help-section-key">home</td>
+                  <td>:</td>
+                  <td class="ks-help-section-desc">${%KeyboardShortcuts.SelectorPanels.Home}</td>
+                </tr>
+                <tr>
+                  <td class="ks-help-section-key">pg-dn</td>
+                  <td>:</td>
+                  <td class="ks-help-section-desc">${%KeyboardShortcuts.SelectorPanels.PgDn}</td>
+                </tr>
+                <tr>
+                  <td class="ks-help-section-key">pg-up</td>
+                  <td>:</td>
+                  <td class="ks-help-section-desc">${%KeyboardShortcuts.SelectorPanels.PgUp}</td>
+                </tr>
+              </tbody>
+            </table>
+          </td>
+        </tr>
+        <tr>
+          <td>
+            <table class="ks-help-section">
+              <tbody>
+                <tr>
                   <th colspan="3">${%KeyboardShortcuts.ViewPages.Title}</th>
                 </tr>
                 <tr>
