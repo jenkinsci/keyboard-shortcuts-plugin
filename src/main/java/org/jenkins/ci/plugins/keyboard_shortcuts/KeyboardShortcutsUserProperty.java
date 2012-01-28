@@ -43,6 +43,7 @@ import org.kohsuke.stapler.StaplerRequest;
  * @author <a href="mailto:jieryn@gmail.com">Jesse Farinacci</a>
  */
 public final class KeyboardShortcutsUserProperty extends UserProperty {
+    @Extension
     public static final class DescriptorImpl extends UserPropertyDescriptor {
         public DescriptorImpl() {
             super(KeyboardShortcutsUserProperty.class);
@@ -93,6 +94,7 @@ public final class KeyboardShortcutsUserProperty extends UserProperty {
     public KeyboardShortcutsUserProperty(final boolean disabled) {
         super();
         LOG.info("KeyboardShortcutsUserProperty(" + disabled + ")");
+        this.disabled = disabled;
     }
 
     @Override
