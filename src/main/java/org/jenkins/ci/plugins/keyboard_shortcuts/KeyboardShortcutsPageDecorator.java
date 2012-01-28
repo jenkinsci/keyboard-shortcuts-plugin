@@ -30,9 +30,11 @@ import hudson.model.PageDecorator;
 import hudson.model.TopLevelItem;
 import hudson.model.Job;
 import hudson.model.PermalinkProjectAction.Permalink;
+import hudson.model.User;
 import hudson.model.View;
 
 import java.util.TreeMap;
+import java.util.logging.Logger;
 
 import jenkins.model.Jenkins;
 import net.sf.json.JSONArray;
@@ -50,122 +52,133 @@ import org.kohsuke.stapler.DataBoundConstructor;
  * @author <a href="mailto:jieryn@gmail.com">Jesse Farinacci</a>
  */
 @Extension
-public final class KeyboardShortcutsPageDecorator extends PageDecorator
-{
-  public static String getAllJobNamesAsJson()
-  {
-    final JSONArray jobNames = new JSONArray();
-    jobNames.addAll(JobUtils.getAllJobNames());
-    return jobNames.toString();
-  }
+public final class KeyboardShortcutsPageDecorator extends PageDecorator {
+    public static String getAllJobNamesAsJson() {
+        final JSONArray jobNames = new JSONArray();
+        jobNames.addAll(JobUtils.getAllJobNames());
+        return jobNames.toString();
+    }
 
-  public static String getAllPermalinksAsJson()
-  {
-    final TopLevelItem topLevelItem = JobUtils.getJob();
+    public static String getAllPermalinksAsJson() {
+        final TopLevelItem topLevelItem = JobUtils.getJob();
 
-    if (topLevelItem != null)
-    {
-      for (final Job<?, ?> job : topLevelItem.getAllJobs())
-      {
-        final JSONArray permalinks = new JSONArray();
+        if (topLevelItem != null) {
+            for (final Job<?, ?> job : topLevelItem.getAllJobs()) {
+                final JSONArray permalinks = new JSONArray();
 
-        for (final Permalink permalink : job.getPermalinks())
-        {
-          if (permalink.resolve(job) != null)
-          {
-            final TreeMap<String, String> map = new TreeMap<String, String>();
-            map.put("id", permalink.getId());
-            map.put("displayName", permalink.getDisplayName());
-            permalinks.add(JSONObject.fromObject(map));
-          }
+                for (final Permalink permalink : job.getPermalinks()) {
+                    if (permalink.resolve(job) != null) {
+                        final TreeMap<String, String> map = new TreeMap<String, String>();
+                        map.put("id", permalink.getId());
+                        map.put("displayName", permalink.getDisplayName());
+                        permalinks.add(JSONObject.fromObject(map));
+                    }
+                }
+
+                return permalinks.toString();
+            }
         }
 
-        return permalinks.toString();
-      }
+        return "undefined";
     }
 
-    return "undefined";
-  }
+    public static String getAllViewJobNamesAsJson() {
+        final View view = ViewUtils.getView();
 
-  public static String getAllViewJobNamesAsJson()
-  {
-    final View view = ViewUtils.getView();
+        if (view != null) {
+            final JSONArray viewJobNames = new JSONArray();
 
-    if (view != null)
-    {
-      final JSONArray viewJobNames = new JSONArray();
+            for (final TopLevelItem topLevelItem : view.getItems()) {
+                viewJobNames.add(topLevelItem.getDisplayName());
+            }
 
-      for (final TopLevelItem topLevelItem : view.getItems())
-      {
-        viewJobNames.add(topLevelItem.getDisplayName());
-      }
+            return viewJobNames.toString();
+        }
 
-      return viewJobNames.toString();
+        return "undefined";
     }
 
-    return "undefined";
-  }
-
-  public static String getAllViewNamesAsJson()
-  {
-    final JSONArray viewNames = new JSONArray();
-    viewNames.addAll(ViewUtils.getAllViewNames());
-    return viewNames.toString();
-  }
-
-  public static String getBaseJobUrl()
-  {
-    final Item job = JobUtils.getJob();
-
-    if (job != null)
-    {
-      return job.getUrl();
+    public static String getAllViewNamesAsJson() {
+        final JSONArray viewNames = new JSONArray();
+        viewNames.addAll(ViewUtils.getAllViewNames());
+        return viewNames.toString();
     }
 
-    return "undefined";
-  }
+    public static String getBaseJobUrl() {
+        final Item job = JobUtils.getJob();
 
-  public static String getBaseUrl()
-  {
-    return Jenkins.getInstance().getRootUrlFromRequest();
-  }
+        if (job != null) {
+            return job.getUrl();
+        }
 
-  public static String getBaseViewUrl()
-  {
-    final View view = ViewUtils.getView();
-    if (view != null)
-    {
-      final String viewUrl = view.getUrl();
-      if (StringUtils.isEmpty(viewUrl))
-      {
-        return "/";
-      }
-
-      return viewUrl;
+        return "undefined";
     }
 
-    return "undefined";
-  }
+    public static String getBaseUrl() {
+        return Jenkins.getInstance().getRootUrlFromRequest();
+    }
 
-  public static boolean isJobPage()
-  {
-    return JobUtils.getJob() != null;
-  }
+    public static String getBaseViewUrl() {
+        final View view = ViewUtils.getView();
+        if (view != null) {
+            final String viewUrl = view.getUrl();
+            if (StringUtils.isEmpty(viewUrl)) {
+                return "/";
+            }
 
-  public static boolean isViewPage()
-  {
-    return !isJobPage() && ViewUtils.getView() != null;
-  }
+            return viewUrl;
+        }
 
-  @DataBoundConstructor
-  public KeyboardShortcutsPageDecorator()
-  {
-    super();
-  }
+        return "undefined";
+    }
 
-  @Override
-  public String getDisplayName()
-  {
-    return Messages.Keyboard_Shortcuts_Plugin_DisplayName();
-  }
+    public static boolean isDisabled() {
+        LOG.info("isDisabled()");
+        return isDisabled(User.current());
+    }
+
+    public static boolean isDisabled(
+            final KeyboardShortcutsUserProperty property) {
+        LOG.info("isDisabled(property=" + property + ")");
+        if (property == null) {
+            return KeyboardShortcutsUserProperty.DEFAULT_DISABLED;
+        }
+
+        return property.isDisabled();
+    }
+
+    private static final Logger LOG = Logger.getLogger(KeyboardShortcutsPageDecorator.class
+                                            .getName());
+
+    public static boolean isDisabled(final User user) {
+        LOG.info("isDisabled(user=" + user + ")");
+        if (user == null) {
+            return KeyboardShortcutsUserProperty.DEFAULT_DISABLED;
+        }
+
+        // for (final UserProperty property : user.getProperties().values()) {
+        // LOG.info("PROPERTY: " + property.getClass().getName() + " "
+        // + property);
+        // }
+
+        return isDisabled(user.getProperty(KeyboardShortcutsUserProperty.class));
+    }
+
+    public static boolean isJobPage() {
+        return JobUtils.getJob() != null;
+    }
+
+    public static boolean isViewPage() {
+        return !isJobPage() && ViewUtils.getView() != null;
+    }
+
+    @DataBoundConstructor
+    public KeyboardShortcutsPageDecorator() {
+        super();
+    }
+
+    @Override
+    public String getDisplayName() {
+        return Messages.Keyboard_Shortcuts_Plugin_DisplayName();
+    }
 }

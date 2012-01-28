@@ -42,75 +42,62 @@ import org.kohsuke.stapler.StaplerRequest;
  * 
  * @author <a href="mailto:jieryn@gmail.com">Jesse Farinacci</a>
  */
-public final class JobUtils
-{
-  public static SortedSet<String> getAllJobNames()
-  {
-    final SortedSet<String> set = new TreeSet<String>();
+public final class JobUtils {
+    public static SortedSet<String> getAllJobNames() {
+        final SortedSet<String> set = new TreeSet<String>();
 
-    final Collection<String> jobNames = Jenkins.getInstance().getJobNames();
+        final Collection<String> jobNames = Jenkins.getInstance().getJobNames();
 
-    if (jobNames != null)
-    {
-      set.addAll(jobNames);
-    }
-
-    return set;
-  }
-
-  public static TopLevelItem getJob()
-  {
-    return getJob(Stapler.getCurrentRequest());
-  }
-
-  public static TopLevelItem getJob(final StaplerRequest currentRequest)
-  {
-    if (currentRequest != null)
-    {
-      final String pathInfo = currentRequest.getPathInfo();
-
-      if (StringUtils.isNotEmpty(pathInfo))
-      {
-        final int jidx = pathInfo.indexOf("/job/");
-        if (jidx >= 0)
-        {
-          final String jobPathInfo = pathInfo.substring(jidx + 5);
-
-          final int slash = jobPathInfo.indexOf("/");
-          if (slash >= 0)
-          {
-            return Jenkins.getInstance().getItem(
-                jobPathInfo.substring(0, slash));
-          }
-
-          return Jenkins.getInstance().getItem(jobPathInfo);
+        if (jobNames != null) {
+            set.addAll(jobNames);
         }
-      }
+
+        return set;
     }
 
-    return null;
-  }
-
-  public static String getJobName()
-  {
-    return getJobName(getJob());
-  }
-
-  public static String getJobName(final Item item)
-  {
-    if (item != null)
-    {
-      return item.getName();
+    public static TopLevelItem getJob() {
+        return getJob(Stapler.getCurrentRequest());
     }
 
-    return null;
-  }
+    public static TopLevelItem getJob(final StaplerRequest currentRequest) {
+        if (currentRequest != null) {
+            final String pathInfo = currentRequest.getPathInfo();
 
-  /**
-   * Static-only access.
-   */
-  private JobUtils()
-  {
-    // static-only access
-  }
+            if (StringUtils.isNotEmpty(pathInfo)) {
+                final int jidx = pathInfo.indexOf("/job/");
+                if (jidx >= 0) {
+                    final String jobPathInfo = pathInfo.substring(jidx + 5);
+
+                    final int slash = jobPathInfo.indexOf("/");
+                    if (slash >= 0) {
+                        return Jenkins.getInstance().getItem(
+                                jobPathInfo.substring(0, slash));
+                    }
+
+                    return Jenkins.getInstance().getItem(jobPathInfo);
+                }
+            }
+        }
+
+        return null;
+    }
+
+    public static String getJobName() {
+        return getJobName(getJob());
+    }
+
+    public static String getJobName(final Item item) {
+        if (item != null) {
+            return item.getName();
+        }
+
+        return null;
+    }
+
+    /**
+     * Static-only access.
+     */
+    private JobUtils() {
+        // static-only access
+    }
 }

@@ -27,7 +27,7 @@
   <j:set var="pluginUrl" value="${request.contextPath}/plugin/keyboard-shortcuts-plugin" />
   <link type="text/css" rel="stylesheet" href="${pluginUrl}/css/keyboard-shortcuts.css" />
   <script type="text/javascript">
-    var ks_enabled = true;
+    var ks_enabled               = !${it.disabled};
     var ks_is_job_page           = ${it.jobPage};
     var ks_is_view_page          = ${it.viewPage};
     var ks_url                   = '${it.baseUrl}';

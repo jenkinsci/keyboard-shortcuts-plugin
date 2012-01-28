@@ -41,83 +41,67 @@ import org.kohsuke.stapler.StaplerRequest;
  * 
  * @author <a href="mailto:jieryn@gmail.com">Jesse Farinacci</a>
  */
-public final class ViewUtils
-{
-  public static SortedSet<String> getAllViewNames()
-  {
-    return getAllViewNames(Jenkins.getInstance().getViews());
-  }
-
-  public static SortedSet<String> getAllViewNames(final Collection<View> views)
-  {
-    final SortedSet<String> viewNames = new TreeSet<String>();
-
-    if (views != null)
-    {
-      for (final View view : views)
-      {
-        if (view != null)
-        {
-          if (StringUtils.isNotEmpty(view.getViewName()))
-          {
-            viewNames.add(view.getViewName());
-          }
-        }
-      }
+public final class ViewUtils {
+    public static SortedSet<String> getAllViewNames() {
+        return getAllViewNames(Jenkins.getInstance().getViews());
     }
 
-    return viewNames;
-  }
+    public static SortedSet<String> getAllViewNames(final Collection<View> views) {
+        final SortedSet<String> viewNames = new TreeSet<String>();
 
-  public static View getView()
-  {
-    return getView(Stapler.getCurrentRequest());
-  }
-
-  protected static View getView(final StaplerRequest currentRequest)
-  {
-    if (currentRequest != null)
-    {
-      final String pathInfo = currentRequest.getPathInfo();
-
-      if (StringUtils.isEmpty(pathInfo))
-      {
-        return Jenkins.getInstance().getPrimaryView();
-      }
-
-      else if ("/".equals(pathInfo))
-      {
-        return Jenkins.getInstance().getPrimaryView();
-      }
-
-      else
-      {
-        final int vidx = pathInfo.indexOf("/view/");
-
-        if (vidx >= 0)
-        {
-          final String viewPathInfo = pathInfo.substring(vidx + 6);
-
-          final int slash = viewPathInfo.indexOf("/");
-          if (slash >= 0)
-          {
-            return Jenkins.getInstance().getView(
-                viewPathInfo.substring(0, slash));
-          }
-
-          return Jenkins.getInstance().getView(viewPathInfo);
+        if (views != null) {
+            for (final View view : views) {
+                if (view != null) {
+                    if (StringUtils.isNotEmpty(view.getViewName())) {
+                        viewNames.add(view.getViewName());
+                    }
+                }
+            }
         }
-      }
+
+        return viewNames;
     }
 
-    return null;
-  }
+    public static View getView() {
+        return getView(Stapler.getCurrentRequest());
+    }
 
-  /**
-   * Static-only access.
-   */
-  private ViewUtils()
-  {
-    // static-only access
-  }
+    protected static View getView(final StaplerRequest currentRequest) {
+        if (currentRequest != null) {
+            final String pathInfo = currentRequest.getPathInfo();
+
+            if (StringUtils.isEmpty(pathInfo)) {
+                return Jenkins.getInstance().getPrimaryView();
+            }
+
+            else if ("/".equals(pathInfo)) {
+                return Jenkins.getInstance().getPrimaryView();
+            }
+
+            else {
+                final int vidx = pathInfo.indexOf("/view/");
+
+                if (vidx >= 0) {
+                    final String viewPathInfo = pathInfo.substring(vidx + 6);
+
+                    final int slash = viewPathInfo.indexOf("/");
+                    if (slash >= 0) {
+                        return Jenkins.getInstance().getView(
+                                viewPathInfo.substring(0, slash));
+                    }
+
+                    return Jenkins.getInstance().getView(viewPathInfo);
+                }
+            }
+        }
+
+        return null;
+    }
+
+    /**
+     * Static-only access.
+     */
+    private ViewUtils() {
+        // static-only access
+    }
 }
