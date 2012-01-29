@@ -34,7 +34,6 @@ import hudson.model.User;
 import hudson.model.View;
 
 import java.util.TreeMap;
-import java.util.logging.Logger;
 
 import jenkins.model.Jenkins;
 import net.sf.json.JSONArray;
@@ -133,13 +132,11 @@ public final class KeyboardShortcutsPageDecorator extends PageDecorator {
     }
 
     public static boolean isDisabled() {
-        LOG.info("isDisabled()");
         return isDisabled(User.current());
     }
 
     public static boolean isDisabled(
             final KeyboardShortcutsUserProperty property) {
-        LOG.info("isDisabled(property=" + property + ")");
         if (property == null) {
             return KeyboardShortcutsUserProperty.DEFAULT_DISABLED;
         }
@@ -147,19 +144,10 @@ public final class KeyboardShortcutsPageDecorator extends PageDecorator {
         return property.isDisabled();
     }
 
-    private static final Logger LOG = Logger.getLogger(KeyboardShortcutsPageDecorator.class
-                                            .getName());
-
     public static boolean isDisabled(final User user) {
-        LOG.info("isDisabled(user=" + user + ")");
         if (user == null) {
             return KeyboardShortcutsUserProperty.DEFAULT_DISABLED;
         }
-
-        // for (final UserProperty property : user.getProperties().values()) {
-        // LOG.info("PROPERTY: " + property.getClass().getName() + " "
-        // + property);
-        // }
 
         return isDisabled(user.getProperty(KeyboardShortcutsUserProperty.class));
     }

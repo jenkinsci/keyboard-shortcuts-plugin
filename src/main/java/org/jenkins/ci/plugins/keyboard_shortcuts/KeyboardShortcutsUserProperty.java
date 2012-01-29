@@ -28,11 +28,6 @@ import hudson.Extension;
 import hudson.model.UserProperty;
 import hudson.model.UserPropertyDescriptor;
 import hudson.model.User;
-
-import java.io.IOException;
-import java.util.logging.Level;
-import java.util.logging.Logger;
-
 import net.sf.json.JSONException;
 import net.sf.json.JSONObject;
 
@@ -45,10 +40,6 @@ import org.kohsuke.stapler.StaplerRequest;
 public final class KeyboardShortcutsUserProperty extends UserProperty {
     @Extension
     public static final class DescriptorImpl extends UserPropertyDescriptor {
-        public DescriptorImpl() {
-            super(KeyboardShortcutsUserProperty.class);
-        }
-
         @Override
         public String getDisplayName() {
             return Messages.Keyboard_Shortcuts_Plugin_DisplayName();
@@ -59,9 +50,8 @@ public final class KeyboardShortcutsUserProperty extends UserProperty {
                 final StaplerRequest request, final JSONObject formData)
                 throws FormException {
             try {
-                LOG.info("newInstance: " + formData);
-                return new KeyboardShortcutsUserProperty(
-                        formData.getBoolean("disabled"));
+                return request.bindJSON(KeyboardShortcutsUserProperty.class,
+                        formData);
             }
 
             catch (final JSONException e) {
@@ -71,64 +61,37 @@ public final class KeyboardShortcutsUserProperty extends UserProperty {
 
         @Override
         public KeyboardShortcutsUserProperty newInstance(final User user) {
+            if (user != null) {
+                final KeyboardShortcutsUserProperty existing = user
+                        .getProperty(KeyboardShortcutsUserProperty.class);
+                if (existing != null) {
+                    return existing;
+                }
+            }
+
             return new KeyboardShortcutsUserProperty();
         }
     }
 
-    public static final boolean        DEFAULT_DISABLED = false;
+    public static final boolean DEFAULT_DISABLED = false;
 
-    @Extension
-    public static final DescriptorImpl DESCRIPTOR       = new DescriptorImpl();
-
-    private static final Logger        LOG              = Logger.getLogger(KeyboardShortcutsUserProperty.class
-                                                                .getName());
-
-    private boolean                    disabled;
+    private boolean             disabled;
 
     public KeyboardShortcutsUserProperty() {
         this(DEFAULT_DISABLED);
-        LOG.info("KeyboardShortcutsUserProperty()");
     }
 
     @DataBoundConstructor
     public KeyboardShortcutsUserProperty(final boolean disabled) {
         super();
-        LOG.info("KeyboardShortcutsUserProperty(" + disabled + ")");
         this.disabled = disabled;
-    }
-
-    @Override
-    public UserPropertyDescriptor getDescriptor() {
-        return DESCRIPTOR;
     }
 
     public boolean isDisabled() {
         return disabled;
     }
 
-    private void save() {
-        LOG.info("SAVE: " + user);
-        if (user != null) {
-            try {
-                user.save();
-            }
-
-            catch (final IOException e) {
-                LOG.warning(e.getMessage());
-                if (LOG.isLoggable(Level.INFO)) {
-                    LOG.log(Level.INFO, e.getMessage(), e);
-                }
-            }
-        }
-    }
-
     public void setDisabled(final boolean disabled) {
         this.disabled = disabled;
-    }
-
-    @Override
-    public String toString() {
-        return KeyboardShortcutsUserProperty.class.getName() + " - disabled? "
-                + disabled;
     }
 }
