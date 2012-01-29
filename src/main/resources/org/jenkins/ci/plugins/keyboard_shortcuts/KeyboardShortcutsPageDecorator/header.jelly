@@ -31,14 +31,16 @@
     var ks_is_job_page           = ${it.jobPage};
     var ks_is_view_page          = ${it.viewPage};
     var ks_url                   = '${it.baseUrl}';
-    var ks_url_job               = '${it.baseJobUrl}';
     var ks_url_view              = '${it.baseViewUrl}';
-    var ks_job_names             = ${it.allJobNamesAsJson};
+    var ks_url_job               = '${it.baseJobUrl}';
     var ks_view_names            = ${it.allViewNamesAsJson};
+    var ks_job_names             = ${it.allJobNamesAsJson};
     var ks_view_job_names        = ${it.allViewJobNamesAsJson};
+    var ks_nodes                 = ${it.allNodesAsJson};
     var ks_permalinks            = ${it.allPermalinksAsJson};
     var ks_is_view_selector      = false;
     var ks_is_job_selector       = false;
+    var ks_is_node_selector      = false;
     var ks_is_permalink_selector = false;
   </script>
   <!-- we require advanced features found in prototype-1.7 -->

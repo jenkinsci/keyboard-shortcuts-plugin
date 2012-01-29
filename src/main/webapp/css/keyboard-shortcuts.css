@@ -158,3 +158,24 @@ ul#ks-permalink-selector-permalinks li.ks-permalink-selector-selected {
 	color: orange;
 	font-weight: bold;
 }
+
+ul#ks-node-selector-nodes {
+	list-style-type: none;
+	margin: 0;
+	padding-top: 1em;
+	text-align: center;
+}
+
+ul#ks-node-selector-nodes li {
+	color: white;
+	display: inline-block;
+	font-size: large;
+	padding-left: 0.5em;
+	padding-right: 0.5em;
+}
+
+ul#ks-node-selector-nodes li.ks-node-selector-selected {
+	background: grey;
+	color: orange;
+	font-weight: bold;
+}

@@ -58,6 +58,10 @@ public final class KeyboardShortcutsPageDecorator extends PageDecorator {
         return jobNames.toString();
     }
 
+    public static String getAllNodesAsJson() {
+        return NodeUtils.getAllNodesAsJsonArray().toString();
+    }
+
     public static String getAllPermalinksAsJson() {
         final TopLevelItem topLevelItem = JobUtils.getJob();
 

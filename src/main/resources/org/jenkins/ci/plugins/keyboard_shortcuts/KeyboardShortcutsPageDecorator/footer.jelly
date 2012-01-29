@@ -83,6 +83,11 @@
                   <td class="ks-help-section-desc">${%KeyboardShortcuts.GeneralApplication.GoToNodes}</td>
                 </tr>
                 <tr>
+                  <td class="ks-help-section-key">g-N</td>
+                  <td>:</td>
+                  <td class="ks-help-section-desc">${%KeyboardShortcuts.GeneralApplication.NodeSelector}</td>
+                </tr>
+                <tr>
                   <td class="ks-help-section-key">g-p</td>
                   <td>:</td>
                   <td class="ks-help-section-desc">${%KeyboardShortcuts.GeneralApplication.GoToPeople}</td>
@@ -279,6 +284,12 @@
     <div class="ks-banner-section-top">Permalink Selector - Start Typing or Use Arrows</div>
     <div class="ks-banner-section-bottom">
       <ul id="ks-permalink-selector-permalinks" />
+    </div>
+  </div>
+  <div id="ks-node-selector" class="ks-banner" style="display: none">
+    <div class="ks-banner-section-top">Computer Node Selector - Start Typing or Use Arrows</div>
+    <div class="ks-banner-section-bottom">
+      <ul id="ks-node-selector-nodes" />
     </div>
   </div>
 </j:jelly>
