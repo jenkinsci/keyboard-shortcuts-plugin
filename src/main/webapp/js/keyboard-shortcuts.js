@@ -169,6 +169,19 @@ if (ks_enabled) {
           if (ks_is_selector()) {
             if (!ks_selector_filter.empty()) {
               ks_selector_filter = ks_selector_filter.substring(0, ks_selector_filter.length - 1);
+
+              if (ks_is_view_selector) {
+                ks_view_selector_filter();
+              }
+              else if (ks_is_job_selector) {
+                ks_job_selector_filter();
+              }
+              else if (ks_is_node_selector) {
+                ks_node_selector_filter();
+              }
+              else if (ks_is_permalink_selector) {
+                ks_permalink_selector_filter();
+              }
             }
           }
           break;
@@ -196,10 +209,24 @@ if (ks_enabled) {
         case '?':
           ks_show_help();
           break;
-      }
 
-      ks_selector_filter += ks_character;
-      console.debug('ks_selector_filter: ' + ks_selector_filter);
+        default:
+          ks_selector_filter += ks_character.toLowerCase();
+
+          if (ks_is_view_selector) {
+            ks_view_selector_filter();
+          }
+          else if (ks_is_job_selector) {
+            ks_job_selector_filter();
+          }
+          else if (ks_is_node_selector) {
+            ks_node_selector_filter();
+          }
+          else if (ks_is_permalink_selector) {
+            ks_permalink_selector_filter();
+          }
+          break;
+      }
     }
 
     else {
@@ -394,6 +421,8 @@ if (ks_enabled) {
   }
 
   function ks_show_help() {
+    ks_selector_filter = '';
+
     if (ks_is_view_selector) {
       ks_view_selector_hide();
     }
@@ -406,6 +435,7 @@ if (ks_enabled) {
     else if (ks_is_permalink_selector) {
       ks_permalink_selector_hide();
     }
+
     $('ks-help').show();
   }
 
@@ -464,6 +494,12 @@ if (ks_enabled) {
     }
   }
 
+  function ks_filter_matching(filter, list) {
+    return list.findAll(function(o) {
+      return o.toLowerCase().startsWith(filter);
+    });
+  }
+
   // ----------------------------------------------------------------------- //
   // ----------------------------------------------------------------------- //
 
@@ -489,7 +525,8 @@ if (ks_enabled) {
   }
 
   function ks_view_selector_first() {
-    ks_view_selector_select(ks_view_names[0]);
+    var ks_matching = ks_filter_matching(ks_selector_filter, ks_view_names);
+    ks_view_selector_select(ks_matching[0]);
   }
 
   function ks_view_selector_hide() {
@@ -498,16 +535,18 @@ if (ks_enabled) {
   }
 
   function ks_view_selector_last() {
-    ks_view_selector_select(ks_view_names[ks_view_names.length - 1]);
+    var ks_matching = ks_filter_matching(ks_selector_filter, ks_view_names);
+    ks_view_selector_select(ks_matching[ks_matching.length - 1]);
   }
 
   function ks_view_selector_next() {
-    var idx = ks_view_names.indexOf(ks_view_selector_selected) + 1;
-    if (idx >= ks_view_names.length) {
+    var ks_matching = ks_filter_matching(ks_selector_filter, ks_view_names);
+    var idx = ks_matching.indexOf(ks_view_selector_selected) + 1;
+    if (idx >= ks_matching.length) {
       idx = 0;
     }
 
-    ks_view_selector_select(ks_view_names[idx]);
+    ks_view_selector_select(ks_matching[idx]);
   }
 
   function ks_view_selector_open() {
@@ -518,16 +557,18 @@ if (ks_enabled) {
   }
 
   function ks_view_selector_prev() {
-    var idx = ks_view_names.indexOf(ks_view_selector_selected) - 1;
+    var ks_matching = ks_filter_matching(ks_selector_filter, ks_view_names);
+    var idx = ks_matching.indexOf(ks_view_selector_selected) - 1;
     if (idx < 0) {
-      idx = ks_view_names.length - 1;
+      idx = ks_matching.length - 1;
     }
 
-    ks_view_selector_select(ks_view_names[idx]);
+    ks_view_selector_select(ks_matching[idx]);
   }
 
   function ks_view_selector_show() {
     $('ks-view-selector').show();
+
     if (typeof ks_view_names != 'undefined') {
       $('ks-view-selector-views').innerHTML = ks_view_names.map(function(view) {
         return '<li id="view_selector_#{view}">#{view}</li>'.interpolate({
@@ -535,7 +576,38 @@ if (ks_enabled) {
         });
       }).join('');
     }
+
     ks_is_view_selector = true;
+    ks_view_selector_first();
+  }
+
+  function ks_view_selector_filter() {
+    if (typeof ks_is_view_selector != 'undefined') {
+      if (ks_is_view_selector) {
+        $('ks-view-selector-filter').innerText = ks_selector_filter;
+
+        if (ks_selector_filter.empty()) {
+          $('ks-view-selector-filter-empty').show();
+          $('ks-view-selector-filter').hide();
+        }
+        else {
+          $('ks-view-selector-filter-empty').hide();
+          $('ks-view-selector-filter').show();
+        }
+
+        ks_view_names.each(function(v) {
+          $('view_selector_' + v).removeClassName('ks-view-selector-selected');
+          $('view_selector_' + v).show();
+
+          var ks_match = v.toLowerCase().startsWith(ks_selector_filter);
+          if (!ks_match) {
+            $('view_selector_' + v).hide();
+          }
+        });
+
+        ks_view_selector_first();
+      }
+    }
   }
 
   // ----------------------------------------------------------------------- //
@@ -563,7 +635,8 @@ if (ks_enabled) {
   }
 
   function ks_job_selector_first() {
-    ks_job_selector_select(ks_job_names[0]);
+    var ks_matching = ks_filter_matching(ks_selector_filter, ks_job_names);
+    ks_job_selector_select(ks_matching[0]);
   }
 
   function ks_job_selector_hide() {
@@ -572,16 +645,18 @@ if (ks_enabled) {
   }
 
   function ks_job_selector_last() {
-    ks_job_selector_select(ks_job_names[ks_job_names.length - 1]);
+    var ks_matching = ks_filter_matching(ks_selector_filter, ks_job_names);
+    ks_job_selector_select(ks_matching[ks_matching.length - 1]);
   }
 
   function ks_job_selector_next() {
-    var idx = ks_job_names.indexOf(ks_job_selector_selected) + 1;
-    if (idx >= ks_job_names.length) {
+    var ks_matching = ks_filter_matching(ks_selector_filter, ks_job_names);
+    var idx = ks_matching.indexOf(ks_job_selector_selected) + 1;
+    if (idx >= ks_matching.length) {
       idx = 0;
     }
 
-    ks_job_selector_select(ks_job_names[idx]);
+    ks_job_selector_select(ks_matching[idx]);
   }
 
   function ks_job_selector_open() {
@@ -592,16 +667,18 @@ if (ks_enabled) {
   }
 
   function ks_job_selector_prev() {
-    var idx = ks_job_names.indexOf(ks_job_selector_selected) - 1;
+    var ks_matching = ks_filter_matching(ks_selector_filter, ks_job_names);
+    var idx = ks_matching.indexOf(ks_job_selector_selected) - 1;
     if (idx < 0) {
-      idx = ks_job_names.length - 1;
+      idx = ks_matching.length - 1;
     }
 
-    ks_job_selector_select(ks_job_names[idx]);
+    ks_job_selector_select(ks_matching[idx]);
   }
 
   function ks_job_selector_show() {
     $('ks-job-selector').show();
+
     if (typeof ks_job_names != 'undefined') {
       $('ks-job-selector-jobs').innerHTML = ks_job_names.map(function(job) {
         return '<li id="job_selector_#{job}">#{job}</li>'.interpolate({
@@ -609,7 +686,9 @@ if (ks_enabled) {
         });
       }).join('');
     }
+
     ks_is_job_selector = true;
+    ks_job_selector_first();
   }
 
   // ----------------------------------------------------------------------- //
