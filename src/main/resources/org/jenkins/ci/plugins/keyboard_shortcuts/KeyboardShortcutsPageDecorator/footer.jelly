@@ -269,25 +269,37 @@
     </div>
   </div>
   <div id="ks-view-selector" class="ks-banner" style="display: none">
-    <div class="ks-banner-section-top">View Selector - Start Typing or Use Arrows</div>
+    <div class="ks-banner-section-top">
+      <span id="ks-view-selector-filter-empty">${%KeyboardShortcuts.Selector.FilterEmpty.View}</span>
+      <span id="ks-view-selector-filter" style="display: none" />
+    </div>
     <div class="ks-banner-section-bottom">
       <ul id="ks-view-selector-views" />
     </div>
   </div>
   <div id="ks-job-selector" class="ks-banner" style="display: none">
-    <div class="ks-banner-section-top">Job Selector - Start Typing or Use Arrows</div>
+    <div class="ks-banner-section-top">
+      <span id="ks-job-selector-filter-empty">${%KeyboardShortcuts.Selector.FilterEmpty.Job}</span>
+      <span id="ks-job-selector-filter" style="display: none" />
+    </div>
     <div class="ks-banner-section-bottom">
       <ul id="ks-job-selector-jobs" />
     </div>
   </div>
   <div id="ks-permalink-selector" class="ks-banner" style="display: none">
-    <div class="ks-banner-section-top">Permalink Selector - Start Typing or Use Arrows</div>
+    <div class="ks-banner-section-top">
+      <span id="ks-permalink-selector-filter-empty">${%KeyboardShortcuts.Selector.FilterEmpty.Permalink}</span>
+      <span id="ks-permalink-selector-filter" style="display: none" />
+    </div>
     <div class="ks-banner-section-bottom">
       <ul id="ks-permalink-selector-permalinks" />
     </div>
   </div>
   <div id="ks-node-selector" class="ks-banner" style="display: none">
-    <div class="ks-banner-section-top">Computer Node Selector - Start Typing or Use Arrows</div>
+    <div class="ks-banner-section-top">
+      <span id="ks-node-selector-filter-empty">${%KeyboardShortcuts.Selector.FilterEmpty.Node}</span>
+      <span id="ks-node-selector-filter" style="display: none" />
+    </div>
     <div class="ks-banner-section-bottom">
       <ul id="ks-node-selector-nodes" />
     </div>
