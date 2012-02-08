@@ -369,6 +369,18 @@ if (ks_enabled) {
   }
 
   function ks_show_help() {
+    if (ks_is_view_selector) {
+      ks_view_selector_hide();
+    }
+    else if (ks_is_job_selector) {
+      ks_job_selector_hide();
+    }
+    else if (ks_is_node_selector) {
+      ks_node_selector_hide();
+    }
+    else if (ks_is_permalink_selector) {
+      ks_permalink_selector_hide();
+    }
     $('ks-help').show();
   }
 
