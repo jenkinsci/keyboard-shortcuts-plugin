@@ -423,18 +423,10 @@ if (ks_enabled) {
   function ks_show_help() {
     ks_selector_filter = '';
 
-    if (ks_is_view_selector) {
-      ks_view_selector_hide();
-    }
-    else if (ks_is_job_selector) {
-      ks_job_selector_hide();
-    }
-    else if (ks_is_node_selector) {
-      ks_node_selector_hide();
-    }
-    else if (ks_is_permalink_selector) {
-      ks_permalink_selector_hide();
-    }
+    ks_view_selector_hide();
+    ks_job_selector_hide();
+    ks_node_selector_hide();
+    ks_permalink_selector_hide();
 
     $('ks-help').show();
   }
@@ -500,6 +492,16 @@ if (ks_enabled) {
     });
   }
 
+  function ks_map_name(list) {
+    return ks_list_hash_map_get(list, 'name');
+  }
+
+  function ks_list_hash_map_get(list, key) {
+    return list.map(function(item) {
+      return $H(item).get(key);
+    });
+  }
+
   // ----------------------------------------------------------------------- //
   // ----------------------------------------------------------------------- //
 
@@ -512,20 +514,18 @@ if (ks_enabled) {
 
   function ks_view_selector_select(view) {
     console.debug('ks_view_selector_select(' + view + ')');
-    if (typeof ks_is_view_selector != 'undefined') {
-      if (ks_is_view_selector) {
-        ks_view_names.each(function(v) {
-          $('view_selector_' + v).removeClassName('ks-view-selector-selected');
-        });
+    if (ks_is_view_selector) {
+      ks_map_name(ks_views).each(function(v) {
+        $('view_selector_' + v).removeClassName('ks-view-selector-selected');
+      });
 
-        ks_view_selector_selected = view
-        $('view_selector_' + view).addClassName('ks-view-selector-selected');
-      }
+      ks_view_selector_selected = view
+      $('view_selector_' + view).addClassName('ks-view-selector-selected');
     }
   }
 
   function ks_view_selector_first() {
-    var ks_matching = ks_filter_matching(ks_selector_filter, ks_view_names);
+    var ks_matching = ks_filter_matching(ks_selector_filter, ks_map_name(ks_views));
     ks_view_selector_select(ks_matching[0]);
   }
 
@@ -535,12 +535,12 @@ if (ks_enabled) {
   }
 
   function ks_view_selector_last() {
-    var ks_matching = ks_filter_matching(ks_selector_filter, ks_view_names);
+    var ks_matching = ks_filter_matching(ks_selector_filter, ks_map_name(ks_views));
     ks_view_selector_select(ks_matching[ks_matching.length - 1]);
   }
 
   function ks_view_selector_next() {
-    var ks_matching = ks_filter_matching(ks_selector_filter, ks_view_names);
+    var ks_matching = ks_filter_matching(ks_selector_filter, ks_map_name(ks_views));
     var idx = ks_matching.indexOf(ks_view_selector_selected) + 1;
     if (idx >= ks_matching.length) {
       idx = 0;
@@ -557,7 +557,7 @@ if (ks_enabled) {
   }
 
   function ks_view_selector_prev() {
-    var ks_matching = ks_filter_matching(ks_selector_filter, ks_view_names);
+    var ks_matching = ks_filter_matching(ks_selector_filter, ks_map_name(ks_views));
     var idx = ks_matching.indexOf(ks_view_selector_selected) - 1;
     if (idx < 0) {
       idx = ks_matching.length - 1;
@@ -569,11 +569,9 @@ if (ks_enabled) {
   function ks_view_selector_show() {
     $('ks-view-selector').show();
 
-    if (typeof ks_view_names != 'undefined') {
-      $('ks-view-selector-views').innerHTML = ks_view_names.map(function(view) {
-        return '<li id="view_selector_#{view}">#{view}</li>'.interpolate({
-          view : view
-        });
+    if (typeof ks_views != 'undefined') {
+      $('ks-view-selector-views').innerHTML = ks_views.map(function(view) {
+        return '<li id="view_selector_#{name}">#{name}</li>'.interpolate($H(view));
       }).join('');
     }
 
@@ -582,31 +580,29 @@ if (ks_enabled) {
   }
 
   function ks_view_selector_filter() {
-    if (typeof ks_is_view_selector != 'undefined') {
-      if (ks_is_view_selector) {
-        $('ks-view-selector-filter').innerText = ks_selector_filter;
+    if (ks_is_view_selector) {
+      $('ks-view-selector-filter').innerText = ks_selector_filter;
 
-        if (ks_selector_filter.empty()) {
-          $('ks-view-selector-filter-empty').show();
-          $('ks-view-selector-filter').hide();
-        }
-        else {
-          $('ks-view-selector-filter-empty').hide();
-          $('ks-view-selector-filter').show();
-        }
-
-        ks_view_names.each(function(v) {
-          $('view_selector_' + v).removeClassName('ks-view-selector-selected');
-          $('view_selector_' + v).show();
-
-          var ks_match = v.toLowerCase().startsWith(ks_selector_filter);
-          if (!ks_match) {
-            $('view_selector_' + v).hide();
-          }
-        });
-
-        ks_view_selector_first();
+      if (ks_selector_filter.empty()) {
+        $('ks-view-selector-filter-empty').show();
+        $('ks-view-selector-filter').hide();
       }
+      else {
+        $('ks-view-selector-filter-empty').hide();
+        $('ks-view-selector-filter').show();
+      }
+
+      ks_map_name(ks_views).each(function(v) {
+        $('view_selector_' + v).removeClassName('ks-view-selector-selected');
+        $('view_selector_' + v).show();
+
+        var ks_match = v.toLowerCase().startsWith(ks_selector_filter);
+        if (!ks_match) {
+          $('view_selector_' + v).hide();
+        }
+      });
+
+      ks_view_selector_first();
     }
   }
 
@@ -622,20 +618,18 @@ if (ks_enabled) {
 
   function ks_job_selector_select(job) {
     console.debug('ks_job_selector_select(' + job + ')');
-    if (typeof ks_is_job_selector != 'undefined') {
-      if (ks_is_job_selector) {
-        ks_job_names.each(function(v) {
-          $('job_selector_' + v).removeClassName('ks-job-selector-selected');
-        });
+    if (ks_is_job_selector) {
+      ks_map_name(ks_jobs).each(function(j) {
+        $('job_selector_' + j).removeClassName('ks-job-selector-selected');
+      });
 
-        ks_job_selector_selected = job
-        $('job_selector_' + job).addClassName('ks-job-selector-selected');
-      }
+      ks_job_selector_selected = job
+      $('job_selector_' + job).addClassName('ks-job-selector-selected');
     }
   }
 
   function ks_job_selector_first() {
-    var ks_matching = ks_filter_matching(ks_selector_filter, ks_job_names);
+    var ks_matching = ks_filter_matching(ks_selector_filter, ks_map_name(ks_jobs));
     ks_job_selector_select(ks_matching[0]);
   }
 
@@ -645,12 +639,12 @@ if (ks_enabled) {
   }
 
   function ks_job_selector_last() {
-    var ks_matching = ks_filter_matching(ks_selector_filter, ks_job_names);
+    var ks_matching = ks_filter_matching(ks_selector_filter, ks_map_name(ks_jobs));
     ks_job_selector_select(ks_matching[ks_matching.length - 1]);
   }
 
   function ks_job_selector_next() {
-    var ks_matching = ks_filter_matching(ks_selector_filter, ks_job_names);
+    var ks_matching = ks_filter_matching(ks_selector_filter, ks_map_name(ks_jobs));
     var idx = ks_matching.indexOf(ks_job_selector_selected) + 1;
     if (idx >= ks_matching.length) {
       idx = 0;
@@ -667,7 +661,7 @@ if (ks_enabled) {
   }
 
   function ks_job_selector_prev() {
-    var ks_matching = ks_filter_matching(ks_selector_filter, ks_job_names);
+    var ks_matching = ks_filter_matching(ks_selector_filter, ks_map_name(ks_jobs));
     var idx = ks_matching.indexOf(ks_job_selector_selected) - 1;
     if (idx < 0) {
       idx = ks_matching.length - 1;
@@ -679,11 +673,9 @@ if (ks_enabled) {
   function ks_job_selector_show() {
     $('ks-job-selector').show();
 
-    if (typeof ks_job_names != 'undefined') {
-      $('ks-job-selector-jobs').innerHTML = ks_job_names.map(function(job) {
-        return '<li id="job_selector_#{job}">#{job}</li>'.interpolate({
-          job : job
-        });
+    if (typeof ks_jobs != 'undefined') {
+      $('ks-job-selector-jobs').innerHTML = ks_jobs.map(function(job) {
+        return '<li id="job_selector_#{name}">#{name}</li>'.interpolate($H(job));
       }).join('');
     }
 
@@ -691,11 +683,38 @@ if (ks_enabled) {
     ks_job_selector_first();
   }
 
+  function ks_job_selector_filter() {
+    if (ks_is_job_selector) {
+      $('ks-job-selector-filter').innerText = ks_selector_filter;
+
+      if (ks_selector_filter.empty()) {
+        $('ks-job-selector-filter-empty').show();
+        $('ks-job-selector-filter').hide();
+      }
+      else {
+        $('ks-job-selector-filter-empty').hide();
+        $('ks-job-selector-filter').show();
+      }
+
+      ks_map_name(ks_jobs).each(function(j) {
+        $('job_selector_' + j).removeClassName('ks-job-selector-selected');
+        $('job_selector_' + j).show();
+
+        var ks_match = j.toLowerCase().startsWith(ks_selector_filter);
+        if (!ks_match) {
+          $('job_selector_' + j).hide();
+        }
+      });
+
+      ks_job_selector_first();
+    }
+  }
+
   // ----------------------------------------------------------------------- //
   // ----------------------------------------------------------------------- //
 
   /*
-   * Computer Node Selector stuff
+   * Node Selector stuff
    */
 
   var ks_node_selector_input;
@@ -704,10 +723,8 @@ if (ks_enabled) {
   function ks_node_selector_select(node) {
     console.debug('ks_node_selector_select(' + node + ')');
     if (ks_is_node_selector) {
-      ks_nodes.collect(function(e) {
-        return $H(e).get('name');
-      }).each(function(name) {
-        $('node_selector_' + name).removeClassName('ks-node-selector-selected');
+      ks_map_name(ks_nodes).each(function(v) {
+        $('node_selector_' + v).removeClassName('ks-node-selector-selected');
       });
 
       ks_node_selector_selected = node
@@ -716,7 +733,8 @@ if (ks_enabled) {
   }
 
   function ks_node_selector_first() {
-    ks_node_selector_select($H(ks_nodes[0]).get('name'));
+    var ks_matching = ks_filter_matching(ks_selector_filter, ks_map_name(ks_nodes));
+    ks_node_selector_select(ks_matching[0]);
   }
 
   function ks_node_selector_hide() {
@@ -725,18 +743,18 @@ if (ks_enabled) {
   }
 
   function ks_node_selector_last() {
-    ks_node_selector_select($H(ks_nodes[ks_nodes.length - 1]).get('name'));
+    var ks_matching = ks_filter_matching(ks_selector_filter, ks_map_name(ks_nodes));
+    ks_node_selector_select(ks_matching[ks_matching.length - 1]);
   }
 
   function ks_node_selector_next() {
-    var namex = ks_nodes.collect(function(e) {
-      return $H(e).get('name');
-    }).indexOf(ks_node_selector_selected) + 1;
-    if (namex >= ks_nodes.length) {
-      namex = 0;
+    var ks_matching = ks_filter_matching(ks_selector_filter, ks_map_name(ks_nodes));
+    var idx = ks_matching.indexOf(ks_node_selector_selected) + 1;
+    if (idx >= ks_matching.length) {
+      idx = 0;
     }
 
-    ks_node_selector_select($H(ks_nodes[namex]).get('name'));
+    ks_node_selector_select(ks_matching[idx]);
   }
 
   function ks_node_selector_open() {
@@ -747,24 +765,53 @@ if (ks_enabled) {
   }
 
   function ks_node_selector_prev() {
-    var namex = ks_nodes.collect(function(e) {
-      return $H(e).get('name');
-    }).indexOf(ks_node_selector_selected) - 1;
-    if (namex < 0) {
-      namex = ks_nodes.length - 1;
+    var ks_matching = ks_filter_matching(ks_selector_filter, ks_map_name(ks_nodes));
+    var idx = ks_matching.indexOf(ks_node_selector_selected) - 1;
+    if (idx < 0) {
+      idx = ks_matching.length - 1;
     }
 
-    ks_node_selector_select($H(ks_nodes[namex]).get('name'));
+    ks_node_selector_select(ks_matching[idx]);
   }
 
   function ks_node_selector_show() {
     $('ks-node-selector').show();
+
     if (typeof ks_nodes != 'undefined') {
       $('ks-node-selector-nodes').innerHTML = ks_nodes.map(function(node) {
-        return '<li id="node_selector_#{name}">#{displayName}</li>'.interpolate($H(node));
+        return '<li id="node_selector_#{name}">#{name}</li>'.interpolate($H(node));
       }).join('');
     }
+
     ks_is_node_selector = true;
+    ks_node_selector_first();
+  }
+
+  function ks_node_selector_filter() {
+    if (ks_is_node_selector) {
+      $('ks-node-selector-filter').innerText = ks_selector_filter;
+
+      if (ks_selector_filter.empty()) {
+        $('ks-node-selector-filter-empty').show();
+        $('ks-node-selector-filter').hide();
+      }
+      else {
+        $('ks-node-selector-filter-empty').hide();
+        $('ks-node-selector-filter').show();
+      }
+
+      ks_map_name(ks_nodes).each(function(v) {
+        $('node_selector_' + v).removeClassName('ks-node-selector-selected');
+        $('node_selector_' + v).show();
+
+        var ks_match = v.toLowerCase().startsWith(ks_selector_filter);
+        if (!ks_match) {
+          $('node_selector_' + v).hide();
+        }
+      });
+
+      ks_node_selector_first();
+    }
   }
 
   // ----------------------------------------------------------------------- //
@@ -780,10 +827,8 @@ if (ks_enabled) {
   function ks_permalink_selector_select(permalink) {
     console.debug('ks_permalink_selector_select(' + permalink + ')');
     if (ks_is_permalink_selector) {
-      ks_permalinks.collect(function(e) {
-        return $H(e).get('id');
-      }).each(function(id) {
-        $('permalink_selector_' + id).removeClassName('ks-permalink-selector-selected');
+      ks_map_name(ks_permalinks).each(function(v) {
+        $('permalink_selector_' + v).removeClassName('ks-permalink-selector-selected');
       });
 
       ks_permalink_selector_selected = permalink
@@ -792,7 +837,8 @@ if (ks_enabled) {
   }
 
   function ks_permalink_selector_first() {
-    ks_permalink_selector_select($H(ks_permalinks[0]).get('id'));
+    var ks_matching = ks_filter_matching(ks_selector_filter, ks_map_name(ks_permalinks));
+    ks_permalink_selector_select(ks_matching[0]);
   }
 
   function ks_permalink_selector_hide() {
@@ -801,18 +847,18 @@ if (ks_enabled) {
   }
 
   function ks_permalink_selector_last() {
-    ks_permalink_selector_select($H(ks_permalinks[ks_permalinks.length - 1]).get('id'));
+    var ks_matching = ks_filter_matching(ks_selector_filter, ks_map_name(ks_permalinks));
+    ks_permalink_selector_select(ks_matching[ks_matching.length - 1]);
   }
 
   function ks_permalink_selector_next() {
-    var idx = ks_permalinks.collect(function(e) {
-      return $H(e).get('id');
-    }).indexOf(ks_permalink_selector_selected) + 1;
-    if (idx >= ks_permalinks.length) {
+    var ks_matching = ks_filter_matching(ks_selector_filter, ks_map_name(ks_permalinks));
+    var idx = ks_matching.indexOf(ks_permalink_selector_selected) + 1;
+    if (idx >= ks_matching.length) {
       idx = 0;
     }
 
-    ks_permalink_selector_select($H(ks_permalinks[idx]).get('id'));
+    ks_permalink_selector_select(ks_matching[idx]);
   }
 
   function ks_permalink_selector_open() {
@@ -823,24 +869,53 @@ if (ks_enabled) {
   }
 
   function ks_permalink_selector_prev() {
-    var idx = ks_permalinks.collect(function(e) {
-      return $H(e).get('id');
-    }).indexOf(ks_permalink_selector_selected) - 1;
+    var ks_matching = ks_filter_matching(ks_selector_filter, ks_map_name(ks_permalinks));
+    var idx = ks_matching.indexOf(ks_permalink_selector_selected) - 1;
     if (idx < 0) {
-      idx = ks_permalinks.length - 1;
+      idx = ks_matching.length - 1;
     }
 
-    ks_permalink_selector_select($H(ks_permalinks[idx]).get('id'));
+    ks_permalink_selector_select(ks_matching[idx]);
   }
 
   function ks_permalink_selector_show() {
     $('ks-permalink-selector').show();
+
     if (typeof ks_permalinks != 'undefined') {
       $('ks-permalink-selector-permalinks').innerHTML = ks_permalinks.map(function(permalink) {
-        return '<li id="permalink_selector_#{id}">#{displayName}</li>'.interpolate($H(permalink));
+        return '<li id="permalink_selector_#{name}">#{name}</li>'.interpolate($H(permalink));
       }).join('');
     }
+
     ks_is_permalink_selector = true;
+    ks_permalink_selector_first();
+  }
+
+  function ks_permalink_selector_filter() {
+    if (ks_is_permalink_selector) {
+      $('ks-permalink-selector-filter').innerText = ks_selector_filter;
+
+      if (ks_selector_filter.empty()) {
+        $('ks-permalink-selector-filter-empty').show();
+        $('ks-permalink-selector-filter').hide();
+      }
+      else {
+        $('ks-permalink-selector-filter-empty').hide();
+        $('ks-permalink-selector-filter').show();
+      }
+
+      ks_map_name(ks_permalinks).each(function(v) {
+        $('permalink_selector_' + v).removeClassName('ks-permalink-selector-selected');
+        $('permalink_selector_' + v).show();
+
+        var ks_match = v.toLowerCase().startsWith(ks_selector_filter);
+        if (!ks_match) {
+          $('permalink_selector_' + v).hide();
+        }
+      });
+
+      ks_permalink_selector_first();
+    }
   }
 }
 

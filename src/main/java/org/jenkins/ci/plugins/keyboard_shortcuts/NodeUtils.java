@@ -48,32 +48,41 @@ public final class NodeUtils {
     public static JSONArray getAllNodesAsJsonArray() {
         final JSONArray nodes = new JSONArray();
 
-        for (final Node node : getAllNodes()) {
-            if (node == null) {
-                continue;
-            }
-
-            if (StringUtils.isEmpty(node.getNodeName())) {
-                continue;
-            }
-
-            if (StringUtils.isEmpty(node.getDisplayName())) {
-                continue;
-            }
-
-            final TreeMap<String, String> map = new TreeMap<String, String>();
-            map.put("name", node.getNodeName());
-            map.put("displayName", node.getDisplayName());
-            nodes.add(JSONObject.fromObject(map));
-        }
+        int idx = 0;
 
         // why isn't master a node? i don't get it
-        final TreeMap<String, String> map = new TreeMap<String, String>();
-        map.put("name", "(master)");
-        map.put("displayName", "master");
-        nodes.add(JSONObject.fromObject(map));
+        nodes.add(toJSONObject("(master)", "master", idx++));
+
+        for (final Node node : getAllNodes()) {
+            nodes.add(toJSONObject(node, idx++));
+        }
 
         return nodes;
+    }
+
+    public static JSONObject toJSONObject(final Node node, final int idx) {
+        if (node == null) {
+            return null;
+        }
+
+        return toJSONObject(node.getNodeName(), node.getDisplayName(), idx);
+    }
+
+    protected static JSONObject toJSONObject(final String nodeName,
+            final String displayName, final int idx) {
+        if (StringUtils.isEmpty(nodeName)) {
+            return null;
+        }
+
+        if (StringUtils.isEmpty(displayName)) {
+            return null;
+        }
+
+        final TreeMap<String, String> map = new TreeMap<String, String>();
+        map.put("idx", "ks_selector_" + Integer.toString(idx));
+        map.put("url", nodeName);
+        map.put("name", displayName);
+        return JSONObject.fromObject(map);
     }
 
     /**

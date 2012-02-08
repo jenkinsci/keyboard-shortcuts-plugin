@@ -27,10 +27,11 @@ package org.jenkins.ci.plugins.keyboard_shortcuts;
 import hudson.model.View;
 
 import java.util.Collection;
-import java.util.SortedSet;
-import java.util.TreeSet;
+import java.util.TreeMap;
 
 import jenkins.model.Jenkins;
+import net.sf.json.JSONArray;
+import net.sf.json.JSONObject;
 
 import org.apache.commons.lang.StringUtils;
 import org.kohsuke.stapler.Stapler;
@@ -42,24 +43,23 @@ import org.kohsuke.stapler.StaplerRequest;
  * @author <a href="mailto:jieryn@gmail.com">Jesse Farinacci</a>
  */
 public final class ViewUtils {
-    public static SortedSet<String> getAllViewNames() {
-        return getAllViewNames(Jenkins.getInstance().getViews());
+    public static Collection<View> getAllViews() {
+        return Jenkins.getInstance().getViews();
     }
 
-    public static SortedSet<String> getAllViewNames(final Collection<View> views) {
-        final SortedSet<String> viewNames = new TreeSet<String>();
+    public static JSONArray getAllViewsAsJsonArray() {
+        final JSONArray views = new JSONArray();
 
-        if (views != null) {
-            for (final View view : views) {
-                if (view != null) {
-                    if (StringUtils.isNotEmpty(view.getViewName())) {
-                        viewNames.add(view.getViewName());
-                    }
-                }
+        int idx = 0;
+        for (final View view : getAllViews()) {
+            if (view == null) {
+                continue;
             }
+
+            views.add(toJSONObject(view, idx++));
         }
 
-        return viewNames;
+        return views;
     }
 
     public static View getView() {
@@ -96,6 +96,33 @@ public final class ViewUtils {
         }
 
         return null;
+    }
+
+    protected static JSONObject toJSONObject(final String displayName,
+            final String url, final int idx) {
+        if (StringUtils.isEmpty(displayName)) {
+            return null;
+        }
+
+        if (StringUtils.isEmpty(url)) {
+            return null;
+        }
+
+        final TreeMap<String, String> map = new TreeMap<String, String>();
+
+        map.put("idx", "ks_selector_" + Integer.toString(idx));
+        map.put("url", url);
+        map.put("name", displayName);
+
+        return JSONObject.fromObject(map);
+    }
+
+    public static JSONObject toJSONObject(final View view, final int idx) {
+        if (view == null) {
+            return null;
+        }
+
+        return toJSONObject(view.getDisplayName(), view.getUrl(), idx);
     }
 
     /**

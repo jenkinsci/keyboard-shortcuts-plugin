@@ -28,10 +28,11 @@ import hudson.model.Item;
 import hudson.model.TopLevelItem;
 
 import java.util.Collection;
-import java.util.SortedSet;
-import java.util.TreeSet;
+import java.util.TreeMap;
 
 import jenkins.model.Jenkins;
+import net.sf.json.JSONArray;
+import net.sf.json.JSONObject;
 
 import org.apache.commons.lang.StringUtils;
 import org.kohsuke.stapler.Stapler;
@@ -43,16 +44,23 @@ import org.kohsuke.stapler.StaplerRequest;
  * @author <a href="mailto:jieryn@gmail.com">Jesse Farinacci</a>
  */
 public final class JobUtils {
-    public static SortedSet<String> getAllJobNames() {
-        final SortedSet<String> set = new TreeSet<String>();
+    public static Collection<Item> getAllJobs() {
+        return Jenkins.getInstance().getAllItems();
+    }
 
-        final Collection<String> jobNames = Jenkins.getInstance().getJobNames();
+    public static JSONArray getAllJobsAsJsonArray() {
+        return getJobsAsJsonArray(getAllJobs());
+    }
 
-        if (jobNames != null) {
-            set.addAll(jobNames);
+    private static JSONArray getJobsAsJsonArray(final Collection<Item> jobs) {
+        final JSONArray array = new JSONArray();
+
+        int idx = 0;
+        for (final Item job : jobs) {
+            array.add(toJSONObject(job, idx++));
         }
 
-        return set;
+        return array;
     }
 
     public static TopLevelItem getJob() {
@@ -92,6 +100,31 @@ public final class JobUtils {
         }
 
         return null;
+    }
+
+    public static JSONObject toJSONObject(final Item job, final int idx) {
+        if (job == null) {
+            return null;
+        }
+
+        return toJSONObject(job.getUrl(), job.getDisplayName(), idx);
+    }
+
+    protected static JSONObject toJSONObject(final String url,
+            final String displayName, final int idx) {
+        if (StringUtils.isEmpty(url)) {
+            return null;
+        }
+
+        if (StringUtils.isEmpty(displayName)) {
+            return null;
+        }
+
+        final TreeMap<String, String> map = new TreeMap<String, String>();
+        map.put("idx", "ks_selector_" + Integer.toString(idx));
+        map.put("url", url);
+        map.put("name", displayName);
+        return JSONObject.fromObject(map);
     }
 
     /**

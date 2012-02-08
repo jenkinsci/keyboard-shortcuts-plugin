@@ -52,12 +52,6 @@ import org.kohsuke.stapler.DataBoundConstructor;
  */
 @Extension
 public final class KeyboardShortcutsPageDecorator extends PageDecorator {
-    public static String getAllJobNamesAsJson() {
-        final JSONArray jobNames = new JSONArray();
-        jobNames.addAll(JobUtils.getAllJobNames());
-        return jobNames.toString();
-    }
-
     public static String getAllNodesAsJson() {
         return NodeUtils.getAllNodesAsJsonArray().toString();
     }
@@ -72,8 +66,8 @@ public final class KeyboardShortcutsPageDecorator extends PageDecorator {
                 for (final Permalink permalink : job.getPermalinks()) {
                     if (permalink.resolve(job) != null) {
                         final TreeMap<String, String> map = new TreeMap<String, String>();
-                        map.put("id", permalink.getId());
-                        map.put("displayName", permalink.getDisplayName());
+                        map.put("url", permalink.getId());
+                        map.put("name", permalink.getDisplayName());
                         permalinks.add(JSONObject.fromObject(map));
                     }
                 }
@@ -101,10 +95,12 @@ public final class KeyboardShortcutsPageDecorator extends PageDecorator {
         return "undefined";
     }
 
-    public static String getAllViewNamesAsJson() {
-        final JSONArray viewNames = new JSONArray();
-        viewNames.addAll(ViewUtils.getAllViewNames());
-        return viewNames.toString();
+    public static String getAllViewsAsJson() {
+        return ViewUtils.getAllViewsAsJsonArray().toString();
+    }
+
+    public static String getAllJobsAsJson() {
+        return JobUtils.getAllJobsAsJsonArray().toString();
     }
 
     public static String getBaseJobUrl() {

@@ -33,9 +33,9 @@
     var ks_url                   = '${it.baseUrl}';
     var ks_url_view              = '${it.baseViewUrl}';
     var ks_url_job               = '${it.baseJobUrl}';
-    var ks_view_names            = ${it.allViewNamesAsJson};
-    var ks_job_names             = ${it.allJobNamesAsJson};
     var ks_view_job_names        = ${it.allViewJobNamesAsJson};
+    var ks_jobs                  = ${it.allJobsAsJson};
+    var ks_views                 = ${it.allViewsAsJson};
     var ks_nodes                 = ${it.allNodesAsJson};
     var ks_permalinks            = ${it.allPermalinksAsJson};
     var ks_is_view_selector      = false;
