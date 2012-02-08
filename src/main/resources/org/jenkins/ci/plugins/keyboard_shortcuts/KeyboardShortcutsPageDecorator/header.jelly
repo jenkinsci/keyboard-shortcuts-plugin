@@ -42,6 +42,7 @@
     var ks_is_job_selector       = false;
     var ks_is_node_selector      = false;
     var ks_is_permalink_selector = false;
+    var ks_selector_filter       = '';
   </script>
   <!-- we require advanced features found in prototype-1.7 -->
   <script type="text/javascript" src="${pluginUrl}/js/prototype-1.7.js" />

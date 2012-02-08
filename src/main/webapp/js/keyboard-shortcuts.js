@@ -163,6 +163,15 @@ if (ks_enabled) {
             ks_permalink_selector_last();
           }
           break;
+
+        case Event.KEY_BACKSPACE:
+        case Event.KEY_DELETE:
+          if (ks_is_selector()) {
+            if (!ks_selector_filter.empty()) {
+              ks_selector_filter = ks_selector_filter.substring(0, ks_selector_filter.length - 1);
+            }
+          }
+          break;
       }
     }
   }
@@ -182,182 +191,194 @@ if (ks_enabled) {
     var ks_code = ks_get_keycode(e);
     var ks_character = String.fromCharCode(ks_code);
 
-    switch (ks_character) {
+    if (ks_is_selector()) {
+      switch (ks_character) {
+        case '?':
+          ks_show_help();
+          break;
+      }
 
-      case '?':
-        ks_show_help();
-        break;
+      ks_selector_filter += ks_character;
+      console.debug('ks_selector_filter: ' + ks_selector_filter);
+    }
 
-      case '/':
-        $('search-box').focus();
-        break;
+    else {
+      switch (ks_character) {
+        case '?':
+          ks_show_help();
+          break;
 
-      case 'b':
-        if (ks_is_job()) {
-          window.location.href = ks_url + '/' + ks_url_job + '/build?delay=0sec';
-        }
-        else if (ks_is_view()) {
-          if (typeof ks_view_job_selected != 'undefined') {
-            window.location.href = ks_url + '/job/' + ks_view_job_selected + '/build?delay=0sec';
-          }
-        }
-        break;
+        case '/':
+          $('search-box').focus();
+          break;
 
-      case 'c':
-        if (ks_previous_character_was_character('g')) {
+        case 'b':
           if (ks_is_job()) {
-            window.location.href = ks_url + '/' + ks_url_job + '/changes';
-          }
-        }
-        break;
-
-      case 'C':
-        if (ks_previous_character_was_character('g')) {
-          if (ks_is_job()) {
-            window.location.href = ks_url + '/' + ks_url_job + '/configure';
+            window.location.href = ks_url + '/' + ks_url_job + '/build?delay=0sec';
           }
           else if (ks_is_view()) {
-            window.location.href = ks_url + '/' + ks_url_view + '/configure';
+            if (typeof ks_view_job_selected != 'undefined') {
+              window.location.href = ks_url + '/job/' + ks_view_job_selected + '/build?delay=0sec';
+            }
+          }
+          break;
+
+        case 'c':
+          if (ks_previous_character_was_character('g')) {
+            if (ks_is_job()) {
+              window.location.href = ks_url + '/' + ks_url_job + '/changes';
+            }
+          }
+          break;
+
+        case 'C':
+          if (ks_previous_character_was_character('g')) {
+            if (ks_is_job()) {
+              window.location.href = ks_url + '/' + ks_url_job + '/configure';
+            }
+            else if (ks_is_view()) {
+              window.location.href = ks_url + '/' + ks_url_view + '/configure';
+            }
+            else {
+              window.location.href = ks_url + '/configure';
+            }
+          }
+          break;
+
+        case 'h':
+          if (ks_previous_character_was_character('g')) {
+            window.location.href = ks_url;
+          }
+          break;
+
+        case 'H':
+          if (ks_previous_character_was_character('g')) {
+            if (ks_is_view()) {
+              window.location.href = ks_url + '/' + ks_url_view + '/builds';
+            }
+          }
+          break;
+
+        case 'j':
+          if (ks_previous_character_was_character('g')) {
+            ks_job_selector_show();
           }
           else {
-            window.location.href = ks_url + '/configure';
+            if (ks_is_view()) {
+              ks_view_job_next();
+            }
           }
-        }
-        break;
+          break;
 
-      case 'h':
-        if (ks_previous_character_was_character('g')) {
-          window.location.href = ks_url;
-        }
-        break;
-
-      case 'H':
-        if (ks_previous_character_was_character('g')) {
-          if (ks_is_view()) {
-            window.location.href = ks_url + '/' + ks_url_view + '/builds';
-          }
-        }
-        break;
-
-      case 'j':
-        if (ks_previous_character_was_character('g')) {
-          ks_job_selector_show();
-        }
-        else {
-          if (ks_is_view()) {
-            ks_view_job_next();
-          }
-        }
-        break;
-
-      case 'k':
-        if (ks_is_view()) {
-          ks_view_job_prev();
-        }
-        break;
-
-      case 'm':
-        if (ks_previous_character_was_character('g')) {
-          if (ks_is_job()) {
-            window.location.href = ks_url + '/' + ks_url_job + '/modules';
-          }
-          else {
-            window.location.href = ks_url + '/manage';
-          }
-        }
-        break;
-
-      case 'n':
-        if (ks_previous_character_was_character('g')) {
-          window.location.href = ks_url + '/computer';
-        }
-        else {
-          if (ks_is_view()) {
-            ks_view_job_next();
-          }
-        }
-        break;
-
-      case 'N':
-        if (ks_previous_character_was_character('g')) {
-          ks_node_selector_show();
-        }
-        break;
-
-      case 'o':
-        if (ks_is_view()) {
-          ks_view_job_open();
-        }
-        break;
-
-      case 'p':
-        if (ks_previous_character_was_character('g')) {
-          if (ks_is_job()) {
-            ks_permalink_selector_show();
-          }
-          else {
-            window.location.href = ks_url + '/people';
-          }
-        }
-        else {
+        case 'k':
           if (ks_is_view()) {
             ks_view_job_prev();
           }
-        }
-        break;
+          break;
 
-      case 'P':
-        if (ks_previous_character_was_character('g')) {
-          if (ks_is_job()) {
-            window.location.href = ks_url + '/' + ks_url_job + '/scmPollLog';
+        case 'm':
+          if (ks_previous_character_was_character('g')) {
+            if (ks_is_job()) {
+              window.location.href = ks_url + '/' + ks_url_job + '/modules';
+            }
+            else {
+              window.location.href = ks_url + '/manage';
+            }
+          }
+          break;
+
+        case 'n':
+          if (ks_previous_character_was_character('g')) {
+            window.location.href = ks_url + '/computer';
           }
           else {
-            window.location.href = ks_url + '/pluginManager';
+            if (ks_is_view()) {
+              ks_view_job_next();
+            }
           }
-        }
-        break;
+          break;
 
-      case 'r':
-        window.location.href = window.location.href;
-        break;
-
-      case 's':
-        if (ks_previous_character_was_character('g')) {
-          if (ks_is_job()) {
-            window.location.href = ks_url + '/' + ks_url_job;
+        case 'N':
+          if (ks_previous_character_was_character('g')) {
+            ks_node_selector_show();
           }
-        }
-        break;
+          break;
 
-      case 't':
-        if (ks_previous_character_was_character('g')) {
-          if (ks_is_job()) {
-            window.location.href = ks_url + '/' + ks_url_job + '/buildTimeTrend';
+        case 'o':
+          if (ks_is_view()) {
+            ks_view_job_open();
           }
-        }
-        break;
+          break;
 
-      case 'v':
-        if (ks_previous_character_was_character('g')) {
-          ks_view_selector_show();
-        }
-        break;
-
-      case 'w':
-        if (ks_previous_character_was_character('g')) {
-          if (ks_is_job()) {
-            window.location.href = ks_url + '/' + ks_url_job + '/ws';
+        case 'p':
+          if (ks_previous_character_was_character('g')) {
+            if (ks_is_job()) {
+              ks_permalink_selector_show();
+            }
+            else {
+              window.location.href = ks_url + '/people';
+            }
           }
-        }
-        break;
+          else {
+            if (ks_is_view()) {
+              ks_view_job_prev();
+            }
+          }
+          break;
 
-      default:
-        // console.debug('code: ' + ks_code + ', character: ' + ks_character);
-        break;
+        case 'P':
+          if (ks_previous_character_was_character('g')) {
+            if (ks_is_job()) {
+              window.location.href = ks_url + '/' + ks_url_job + '/scmPollLog';
+            }
+            else {
+              window.location.href = ks_url + '/pluginManager';
+            }
+          }
+          break;
+
+        case 'r':
+          window.location.href = window.location.href;
+          break;
+
+        case 's':
+          if (ks_previous_character_was_character('g')) {
+            if (ks_is_job()) {
+              window.location.href = ks_url + '/' + ks_url_job;
+            }
+          }
+          break;
+
+        case 't':
+          if (ks_previous_character_was_character('g')) {
+            if (ks_is_job()) {
+              window.location.href = ks_url + '/' + ks_url_job + '/buildTimeTrend';
+            }
+          }
+          break;
+
+        case 'v':
+          if (ks_previous_character_was_character('g')) {
+            ks_view_selector_show();
+          }
+          break;
+
+        case 'w':
+          if (ks_previous_character_was_character('g')) {
+            if (ks_is_job()) {
+              window.location.href = ks_url + '/' + ks_url_job + '/ws';
+            }
+          }
+          break;
+
+        default:
+          // console.debug('code: ' + ks_code + ', character: ' + ks_character);
+          break;
+      }
+
+      ks_previous_code = ks_code;
+      ks_previous_character = String.fromCharCode(ks_code);
     }
-
-    ks_previous_code = ks_code;
-    ks_previous_character = String.fromCharCode(ks_code);
   }
 
   function ks_is_job() {
@@ -366,6 +387,10 @@ if (ks_enabled) {
 
   function ks_is_view() {
     return typeof ks_is_view_page != 'undefined' && ks_is_view_page;
+  }
+
+  function ks_is_selector() {
+    return ks_is_view_selector || ks_is_job_selector || ks_is_node_selector || ks_is_permalink_selector;
   }
 
   function ks_show_help() {
