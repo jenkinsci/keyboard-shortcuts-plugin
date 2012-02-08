@@ -100,14 +100,6 @@ public final class ViewUtils {
 
     protected static JSONObject toJSONObject(final String displayName,
             final String url, final int idx) {
-        if (StringUtils.isEmpty(displayName)) {
-            return null;
-        }
-
-        if (StringUtils.isEmpty(url)) {
-            return null;
-        }
-
         final TreeMap<String, String> map = new TreeMap<String, String>();
 
         map.put("idx", "ks_selector_" + Integer.toString(idx));
