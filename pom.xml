@@ -36,7 +36,7 @@
   </parent>
 
   <artifactId>keyboard-shortcuts-plugin</artifactId>
-  <version>1.0-SNAPSHOT</version>
+  <version>1.0-beta-2</version>
   <packaging>hpi</packaging>
 
   <name>Keyboard Shortcuts Plugin</name>
