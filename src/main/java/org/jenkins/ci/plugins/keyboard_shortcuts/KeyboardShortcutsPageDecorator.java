@@ -63,9 +63,11 @@ public final class KeyboardShortcutsPageDecorator extends PageDecorator {
             for (final Job<?, ?> job : topLevelItem.getAllJobs()) {
                 final JSONArray permalinks = new JSONArray();
 
+                int idx = 0;
                 for (final Permalink permalink : job.getPermalinks()) {
                     if (permalink.resolve(job) != null) {
                         final TreeMap<String, String> map = new TreeMap<String, String>();
+                        map.put("idx", "ks_selector_" + Integer.toString(idx++));
                         map.put("url", permalink.getId());
                         map.put("name", permalink.getDisplayName());
                         permalinks.add(JSONObject.fromObject(map));
