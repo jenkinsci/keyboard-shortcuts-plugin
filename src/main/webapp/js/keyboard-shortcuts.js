@@ -535,8 +535,14 @@ if (ks_enabled) {
         $(v).removeClassName('ks-selector-selected');
       });
 
-      ks_view_selector_selected = view;
-      $(view).addClassName('ks-selector-selected');
+      if (typeof view != 'undefined') {
+        ks_view_selector_selected = view;
+        $(view).addClassName('ks-selector-selected');
+        $('ks-selector-items-empty').hide();
+      }
+      else {
+        $('ks-selector-items-empty').show();
+      }
     }
   }
 
@@ -638,8 +644,14 @@ if (ks_enabled) {
         $(v).removeClassName('ks-selector-selected');
       });
 
-      ks_job_selector_selected = job;
-      $(job).addClassName('ks-selector-selected');
+      if (typeof job != 'undefined') {
+        ks_job_selector_selected = job;
+        $(job).addClassName('ks-selector-selected');
+        $('ks-selector-items-empty').hide();
+      }
+      else {
+        $('ks-selector-items-empty').show();
+      }
     }
   }
 
@@ -741,8 +753,14 @@ if (ks_enabled) {
         $(v).removeClassName('ks-selector-selected');
       });
 
-      ks_node_selector_selected = node;
-      $(node).addClassName('ks-selector-selected');
+      if (typeof node != 'undefined') {
+        ks_node_selector_selected = node;
+        $(node).addClassName('ks-selector-selected');
+        $('ks-selector-items-empty').hide();
+      }
+      else {
+        $('ks-selector-items-empty').show();
+      }
     }
   }
 
@@ -844,8 +862,14 @@ if (ks_enabled) {
         $(v).removeClassName('ks-selector-selected');
       });
 
-      ks_permalink_selector_selected = permalink;
-      $(permalink).addClassName('ks-selector-selected');
+      if (typeof permalink != 'undefined') {
+        ks_permalink_selector_selected = permalink;
+        $(permalink).addClassName('ks-selector-selected');
+        $('ks-selector-items-empty').hide();
+      }
+      else {
+        $('ks-selector-items-empty').show();
+      }
     }
   }
 

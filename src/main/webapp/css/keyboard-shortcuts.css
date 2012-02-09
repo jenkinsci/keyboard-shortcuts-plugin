@@ -21,6 +21,7 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
  * THE SOFTWARE.
  */
+
 .ks-banner {
 	background: #000;
 	border-radius: 10px;
@@ -115,4 +116,11 @@ ul#ks-selector-items li.ks-selector-selected {
 	background: grey;
 	color: orange;
 	font-weight: bold;
+}
+
+span#ks-selector-items-empty {
+	color: red;
+	font-size: large;
+	font-weight: bold;
+	text-align: center;
 }

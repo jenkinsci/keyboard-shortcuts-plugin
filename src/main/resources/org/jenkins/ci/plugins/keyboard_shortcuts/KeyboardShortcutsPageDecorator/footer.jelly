@@ -278,7 +278,7 @@
     </div>
     <div class="ks-banner-section-bottom">
       <ul id="ks-selector-items" />
-      <span id="ks-selector-items-empty" style="display: none" />
+      <span id="ks-selector-items-empty" style="display: none">${%KeyboardShortcuts.Selector.FilterResultsEmpty}</span>
     </div>
   </div>
 </j:jelly>
