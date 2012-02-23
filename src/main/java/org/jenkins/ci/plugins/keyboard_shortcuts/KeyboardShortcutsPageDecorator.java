@@ -116,6 +116,12 @@ public final class KeyboardShortcutsPageDecorator extends PageDecorator {
     }
 
     public static String getBaseUrl() {
+        final String rootUrl = Jenkins.getInstance().getRootUrl();
+
+        if (StringUtils.isNotEmpty(rootUrl)) {
+            return rootUrl;
+        }
+
         return Jenkins.getInstance().getRootUrlFromRequest();
     }
 
