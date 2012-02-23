@@ -898,7 +898,7 @@ if (ks_enabled) {
       ks_selector_hide();
       var item = ks_find_item_by_idx(ks_permalinks, ks_permalink_selector_selected);
       if (item != null) {
-        window.location.href = ks_url + $H(item).get('url');
+        window.location.href = ks_url + ks_url_job + $H(item).get('url');
       }
     }
   }
