@@ -230,11 +230,11 @@ if (ks_enabled) {
 
         case 'b':
           if (ks_is_job()) {
-            window.location.href = ks_url + '/' + ks_url_job + '/build?delay=0sec';
+            ks_set_window_location(ks_url + '/' + ks_url_job + '/build?delay=0sec');
           }
           else if (ks_is_view()) {
             if (typeof ks_view_job_selected != 'undefined') {
-              window.location.href = ks_url + '/job/' + ks_view_job_selected + '/build?delay=0sec';
+              ks_set_window_location(ks_url + '/job/' + ks_view_job_selected + '/build?delay=0sec');
             }
           }
           break;
@@ -242,7 +242,7 @@ if (ks_enabled) {
         case 'c':
           if (ks_previous_character_was_character('g')) {
             if (ks_is_job()) {
-              window.location.href = ks_url + '/' + ks_url_job + '/changes';
+              ks_set_window_location(ks_url + '/' + ks_url_job + '/changes');
             }
           }
           break;
@@ -250,27 +250,27 @@ if (ks_enabled) {
         case 'C':
           if (ks_previous_character_was_character('g')) {
             if (ks_is_job()) {
-              window.location.href = ks_url + '/' + ks_url_job + '/configure';
+              ks_set_window_location(ks_url + '/' + ks_url_job + '/configure');
             }
             else if (ks_is_view()) {
-              window.location.href = ks_url + '/' + ks_url_view + '/configure';
+              ks_set_window_location(ks_url + '/' + ks_url_view + '/configure');
             }
             else {
-              window.location.href = ks_url + '/configure';
+              ks_set_window_location(ks_url + '/configure');
             }
           }
           break;
 
         case 'h':
           if (ks_previous_character_was_character('g')) {
-            window.location.href = ks_url;
+            ks_set_window_location(ks_url);
           }
           break;
 
         case 'H':
           if (ks_previous_character_was_character('g')) {
             if (ks_is_view()) {
-              window.location.href = ks_url + '/' + ks_url_view + '/builds';
+              ks_set_window_location(ks_url + '/' + ks_url_view + '/builds');
             }
           }
           break;
@@ -295,17 +295,17 @@ if (ks_enabled) {
         case 'm':
           if (ks_previous_character_was_character('g')) {
             if (ks_is_job()) {
-              window.location.href = ks_url + '/' + ks_url_job + '/modules';
+              ks_set_window_location(ks_url + '/' + ks_url_job + '/modules');
             }
             else {
-              window.location.href = ks_url + '/manage';
+              ks_set_window_location(ks_url + '/manage');
             }
           }
           break;
 
         case 'n':
           if (ks_previous_character_was_character('g')) {
-            window.location.href = ks_url + '/computer';
+            ks_set_window_location(ks_url + '/computer');
           }
           else {
             if (ks_is_view()) {
@@ -332,7 +332,7 @@ if (ks_enabled) {
               ks_permalink_selector_show();
             }
             else {
-              window.location.href = ks_url + '/people';
+              ks_set_window_location(ks_url + '/people');
             }
           }
           else {
@@ -345,22 +345,22 @@ if (ks_enabled) {
         case 'P':
           if (ks_previous_character_was_character('g')) {
             if (ks_is_job()) {
-              window.location.href = ks_url + '/' + ks_url_job + '/scmPollLog';
+              ks_set_window_location(ks_url + '/' + ks_url_job + '/scmPollLog');
             }
             else {
-              window.location.href = ks_url + '/pluginManager';
+              ks_set_window_location(ks_url + '/pluginManager');
             }
           }
           break;
 
         case 'r':
-          window.location.href = window.location.href;
+          ks_set_window_location(window.location.href);
           break;
 
         case 's':
           if (ks_previous_character_was_character('g')) {
             if (ks_is_job()) {
-              window.location.href = ks_url + '/' + ks_url_job;
+              ks_set_window_location(ks_url + '/' + ks_url_job);
             }
           }
           break;
@@ -368,7 +368,7 @@ if (ks_enabled) {
         case 't':
           if (ks_previous_character_was_character('g')) {
             if (ks_is_job()) {
-              window.location.href = ks_url + '/' + ks_url_job + '/buildTimeTrend';
+              ks_set_window_location(ks_url + '/' + ks_url_job + '/buildTimeTrend');
             }
           }
           break;
@@ -382,7 +382,7 @@ if (ks_enabled) {
         case 'w':
           if (ks_previous_character_was_character('g')) {
             if (ks_is_job()) {
-              window.location.href = ks_url + '/' + ks_url_job + '/ws';
+              ks_set_window_location(ks_url + '/' + ks_url_job + '/ws');
             }
           }
           break;
@@ -395,6 +395,14 @@ if (ks_enabled) {
       ks_previous_code = ks_code;
       ks_previous_character = String.fromCharCode(ks_code);
     }
+  }
+
+  function ks_compact_href(href) {
+    return href.strip().gsub('(?!:)//', '/');
+  }
+
+  function ks_set_window_location(href) {
+    window.location.href = ks_compact_href(href);
   }
 
   function ks_is_job() {
@@ -465,7 +473,7 @@ if (ks_enabled) {
 
   function ks_view_job_open() {
     if (typeof ks_view_job_selected != 'undefined') {
-      window.location.href = ks_url + '/' + ks_url_view + '/job/' + ks_view_job_selected;
+      ks_set_window_location(ks_url + '/' + ks_url_view + '/job/' + ks_view_job_selected);
     }
   }
 
@@ -571,7 +579,7 @@ if (ks_enabled) {
       ks_selector_hide();
       var item = ks_find_item_by_idx(ks_views, ks_view_selector_selected);
       if (item != null) {
-        window.location.href = ks_url + $H(item).get('url');
+        ks_set_window_location(ks_url + $H(item).get('url'));
       }
     }
   }
@@ -680,7 +688,7 @@ if (ks_enabled) {
       ks_selector_hide();
       var item = ks_find_item_by_idx(ks_jobs, ks_job_selector_selected);
       if (item != null) {
-        window.location.href = ks_url + $H(item).get('url');
+        ks_set_window_location(ks_url + $H(item).get('url'));
       }
     }
   }
@@ -789,7 +797,7 @@ if (ks_enabled) {
       ks_selector_hide();
       var item = ks_find_item_by_idx(ks_nodes, ks_node_selector_selected);
       if (item != null) {
-        window.location.href = ks_url + '/computer/' + $H(item).get('url');
+        ks_set_window_location(ks_url + '/computer/' + $H(item).get('url'));
       }
     }
   }
@@ -898,7 +906,7 @@ if (ks_enabled) {
       ks_selector_hide();
       var item = ks_find_item_by_idx(ks_permalinks, ks_permalink_selector_selected);
       if (item != null) {
-        window.location.href = ks_url + ks_url_job + $H(item).get('url');
+        ks_set_window_location(ks_url + ks_url_job + $H(item).get('url'));
       }
     }
   }
