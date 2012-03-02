@@ -44,7 +44,5 @@
     var ks_is_permalink_selector = false;
     var ks_selector_filter       = '';
   </script>
-  <!-- we require advanced features found in prototype-1.7 -->
-  <script type="text/javascript" src="${pluginUrl}/js/prototype-1.7.js" />
   <script type="text/javascript" src="${pluginUrl}/js/keyboard-shortcuts.js" />
 </j:jelly>
