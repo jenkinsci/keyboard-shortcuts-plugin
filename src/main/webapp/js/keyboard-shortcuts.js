@@ -479,13 +479,13 @@ if (ks_enabled) {
 
   function ks_filter_matching(filter, list) {
     return list.findAll(function(o) {
-      return o.toLowerCase().startsWith(filter);
+      return o.toLowerCase().indexOf(filter) >= 0;
     });
   }
 
   function ks_filter_matching_idx(filter, list) {
     return list.findAll(function(o) {
-      return $H(o).get('name').toLowerCase().startsWith(filter);
+      return $H(o).get('name').toLowerCase().indexOf(filter) >= 0;
     }).map(function(o) {
       return $H(o).get('idx');
     });
@@ -626,7 +626,7 @@ if (ks_enabled) {
         $(hview.get('idx')).removeClassName('ks-selector-selected');
         $(hview.get('idx')).show();
 
-        var ks_match = hview.get('name').toLowerCase().startsWith(ks_selector_filter);
+        var ks_match = hview.get('name').toLowerCase().indexOf(ks_selector_filter) >= 0;
         if (!ks_match) {
           $(hview.get('idx')).hide();
         }
@@ -735,7 +735,7 @@ if (ks_enabled) {
         $(hjob.get('idx')).removeClassName('ks-selector-selected');
         $(hjob.get('idx')).show();
 
-        var ks_match = hjob.get('name').toLowerCase().startsWith(ks_selector_filter);
+        var ks_match = hjob.get('name').toLowerCase().indexOf(ks_selector_filter) >= 0;
         if (!ks_match) {
           $(hjob.get('idx')).hide();
         }
@@ -844,7 +844,7 @@ if (ks_enabled) {
         $(hnode.get('idx')).removeClassName('ks-selector-selected');
         $(hnode.get('idx')).show();
 
-        var ks_match = hnode.get('name').toLowerCase().startsWith(ks_selector_filter);
+        var ks_match = hnode.get('name').toLowerCase().indexOf(ks_selector_filter) >= 0;
         if (!ks_match) {
           $(hnode.get('idx')).hide();
         }
@@ -953,7 +953,7 @@ if (ks_enabled) {
         $(hpermalink.get('idx')).removeClassName('ks-selector-selected');
         $(hpermalink.get('idx')).show();
 
-        var ks_match = hpermalink.get('name').toLowerCase().startsWith(ks_selector_filter);
+        var ks_match = hpermalink.get('name').toLowerCase().indexOf(ks_selector_filter) >= 0;
         if (!ks_match) {
           $(hpermalink.get('idx')).hide();
         }
