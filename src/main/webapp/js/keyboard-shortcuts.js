@@ -32,6 +32,11 @@ if (ks_enabled) {
     Event.observe(document, 'keypress', ks_keypress);
   });
 
+  /* JENKINS-13106 - event.stopPropagation() and event.cancelBubble=true both fail */
+  function clearSearchBox() {
+    Form.Element.clear('search-box');
+  }
+
   /* try to play nicely with forms, so no keyboard shortcuts */
   function ks_in_form() {
     return document.activeElement == null || 'INPUT' == document.activeElement.tagName
@@ -226,6 +231,7 @@ if (ks_enabled) {
 
         case '/':
           $('search-box').focus();
+          setTimeout("clearSearchBox(/* someone kill me */)", 1);
           break;
 
         case 'b':
