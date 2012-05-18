@@ -24,16 +24,16 @@
 
 .ks-banner {
 	background: #000;
-	border-radius: 10px;
-	-moz-border-radius: 10px;
 	-webkit-border-radius: 10px;
+	-moz-border-radius: 10px;
+	border-radius: 10px;
 	filter: alpha(opacity = 85);
 	left: 5%;
 	margin: 0;
 	padding: 3em;
-	position: absolute;
-	opacity: .85;
+	position: fixed;
 	-moz-opacity: .85;
+	opacity: .85;
 	overflow: auto;
 	top: 5%;
 	width: 85%;
