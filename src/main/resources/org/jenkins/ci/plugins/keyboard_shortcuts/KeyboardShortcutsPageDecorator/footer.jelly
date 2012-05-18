@@ -224,12 +224,17 @@
                 <tr>
                   <td class="ks-help-section-key">g-c</td>
                   <td>:</td>
-                  <td class="ks-help-section-desc">${%KeyboardShortcuts.JobPages.GoToChanges}</td>
+                  <td class="ks-help-section-desc">${%KeyboardShortcuts.JobPages.GoToLastConsole}</td>
                 </tr>
                 <tr>
                   <td class="ks-help-section-key">g-C</td>
                   <td>:</td>
                   <td class="ks-help-section-desc">${%KeyboardShortcuts.JobPages.GoToConfigure}</td>
+                </tr>
+                <tr>
+                  <td class="ks-help-section-key">g-g</td>
+                  <td>:</td>
+                  <td class="ks-help-section-desc">${%KeyboardShortcuts.JobPages.GoToChanges}</td>
                 </tr>
                 <tr>
                   <td class="ks-help-section-key">g-m</td>

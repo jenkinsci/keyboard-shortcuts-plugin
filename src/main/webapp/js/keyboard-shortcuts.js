@@ -248,7 +248,7 @@ if (ks_enabled) {
         case 'c':
           if (ks_previous_character_was_character('g')) {
             if (ks_is_job()) {
-              ks_set_window_location(ks_url + '/' + ks_url_job + '/changes');
+              ks_set_window_location(ks_url + '/' + ks_url_job + '/lastBuild/console');
             }
           }
           break;
@@ -263,6 +263,14 @@ if (ks_enabled) {
             }
             else {
               ks_set_window_location(ks_url + '/configure');
+            }
+          }
+          break;
+
+        case 'g':
+          if (ks_previous_character_was_character('g')) {
+            if (ks_is_job()) {
+              ks_set_window_location(ks_url + '/' + ks_url_job + '/changes');
             }
           }
           break;
