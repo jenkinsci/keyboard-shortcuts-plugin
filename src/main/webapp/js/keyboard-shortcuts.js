@@ -32,7 +32,10 @@ if (ks_enabled) {
     Event.observe(document, 'keypress', ks_keypress);
   });
 
-  /* JENKINS-13106 - event.stopPropagation() and event.cancelBubble=true both fail */
+  /*
+   * JENKINS-13106 - event.stopPropagation() and event.cancelBubble=true both
+   * fail
+   */
   function clearSearchBox() {
     Form.Element.clear('search-box');
   }
@@ -294,14 +297,20 @@ if (ks_enabled) {
             ks_job_selector_show();
           }
           else {
-            if (ks_is_view()) {
+            if (ks_is_search()) {
+              ks_search_item_next();
+            }
+            else if (ks_is_view()) {
               ks_view_job_next();
             }
           }
           break;
 
         case 'k':
-          if (ks_is_view()) {
+          if (ks_is_search()) {
+            ks_search_item_prev();
+          }
+          else if (ks_is_view()) {
             ks_view_job_prev();
           }
           break;
@@ -322,7 +331,10 @@ if (ks_enabled) {
             ks_set_window_location(ks_url + '/computer');
           }
           else {
-            if (ks_is_view()) {
+            if (ks_is_search()) {
+              ks_search_item_next();
+            }
+            else if (ks_is_view()) {
               ks_view_job_next();
             }
           }
@@ -335,7 +347,10 @@ if (ks_enabled) {
           break;
 
         case 'o':
-          if (ks_is_view()) {
+          if (ks_is_search()) {
+            ks_search_item_open();
+          }
+          else if (ks_is_view()) {
             ks_view_job_open();
           }
           break;
@@ -350,7 +365,10 @@ if (ks_enabled) {
             }
           }
           else {
-            if (ks_is_view()) {
+            if (ks_is_search()) {
+              ks_search_item_prev();
+            }
+            else if (ks_is_view()) {
               ks_view_job_prev();
             }
           }
@@ -425,6 +443,10 @@ if (ks_enabled) {
 
   function ks_is_view() {
     return typeof ks_is_view_page != 'undefined' && ks_is_view_page;
+  }
+
+  function ks_is_search() {
+    return typeof ks_is_search_page != 'undefined' && ks_is_search_page;
   }
 
   function ks_is_selector() {
@@ -974,6 +996,47 @@ if (ks_enabled) {
       });
 
       ks_permalink_selector_first();
+    }
+  }
+
+  function ks_search_item_next() {
+    var lis = $('main-panel').select('li');
+    var lids = lis.collect(function(li) {
+      return li.id;
+    });
+
+    lis.each(function(li) {
+      li.removeClassName('ks-search-item-selected');
+    });
+
+    var lidx = ($A(lids).indexOf(ks_search_item_selected) + 1) % lids.length;
+    ks_search_item_selected = lids[lidx];
+    $(ks_search_item_selected).addClassName('ks-search-item-selected');
+  }
+
+  function ks_search_item_prev() {
+    var lis = $('main-panel').select('li');
+    var lids = lis.collect(function(li) {
+      return li.id;
+    });
+
+    lis.each(function(li) {
+      li.removeClassName('ks-search-item-selected');
+    });
+
+    var lidx = ($A(lids).indexOf(ks_search_item_selected) - 1) % lids.length;
+    if (lidx < 0) {
+      lidx = lids.length - 1;
+    }
+    ks_search_item_selected = lids[lidx];
+    $(ks_search_item_selected).addClassName('ks-search-item-selected');
+  }
+
+  function ks_search_item_open() {
+    if (typeof ks_search_item_selected != 'undefined') {
+      $(ks_search_item_selected).select('a').each(function(a) {
+        ks_set_window_location(a.href);
+      });
     }
   }
 }

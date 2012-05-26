@@ -41,6 +41,8 @@ import net.sf.json.JSONObject;
 
 import org.apache.commons.lang.StringUtils;
 import org.kohsuke.stapler.DataBoundConstructor;
+import org.kohsuke.stapler.Stapler;
+import org.kohsuke.stapler.StaplerRequest;
 
 /**
  * The <a
@@ -52,6 +54,10 @@ import org.kohsuke.stapler.DataBoundConstructor;
  */
 @Extension
 public final class KeyboardShortcutsPageDecorator extends PageDecorator {
+    public static String getAllJobsAsJson() {
+        return JobUtils.getAllJobsAsJsonArray().toString();
+    }
+
     public static String getAllNodesAsJson() {
         return NodeUtils.getAllNodesAsJsonArray().toString();
     }
@@ -99,10 +105,6 @@ public final class KeyboardShortcutsPageDecorator extends PageDecorator {
 
     public static String getAllViewsAsJson() {
         return ViewUtils.getAllViewsAsJsonArray().toString();
-    }
-
-    public static String getAllJobsAsJson() {
-        return JobUtils.getAllJobsAsJsonArray().toString();
     }
 
     public static String getBaseJobUrl() {
@@ -162,6 +164,18 @@ public final class KeyboardShortcutsPageDecorator extends PageDecorator {
 
     public static boolean isJobPage() {
         return JobUtils.getJob() != null;
+    }
+
+    public static boolean isSearchPage() {
+        return isSearchPage(Stapler.getCurrentRequest());
+    }
+
+    public static boolean isSearchPage(StaplerRequest request) {
+        if (request == null) {
+            return false;
+        }
+
+        return request.getPathInfo().contains("/search/");
     }
 
     public static boolean isViewPage() {

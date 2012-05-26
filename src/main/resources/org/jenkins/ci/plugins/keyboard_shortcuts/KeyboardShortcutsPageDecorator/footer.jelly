@@ -164,6 +164,40 @@
               </tbody>
             </table>
           </td>
+          <td>
+            <table class="ks-help-section">
+              <tbody>
+                <tr>
+                  <th colspan="3">${%KeyboardShortcuts.SearchPanel.Title}</th>
+                </tr>
+                <tr>
+                  <td class="ks-help-section-key">j</td>
+                  <td>:</td>
+                  <td class="ks-help-section-desc">${%KeyboardShortcuts.SearchPanel.NextItem}</td>
+                </tr>
+                <tr>
+                  <td class="ks-help-section-key">k</td>
+                  <td>:</td>
+                  <td class="ks-help-section-desc">${%KeyboardShortcuts.SearchPanel.PreviousItem}</td>
+                </tr>
+                <tr>
+                  <td class="ks-help-section-key">n</td>
+                  <td>:</td>
+                  <td class="ks-help-section-desc">${%KeyboardShortcuts.SearchPanel.NextItem}</td>
+                </tr>
+                <tr>
+                  <td class="ks-help-section-key">o</td>
+                  <td>:</td>
+                  <td class="ks-help-section-desc">${%KeyboardShortcuts.SearchPanel.OpenCurrentItem}</td>
+                </tr>
+                <tr>
+                  <td class="ks-help-section-key">p</td>
+                  <td>:</td>
+                  <td class="ks-help-section-desc">${%KeyboardShortcuts.SearchPanel.PreviousItem}</td>
+                </tr>
+              </tbody>
+            </table>
+          </td>
         </tr>
         <tr>
           <td>

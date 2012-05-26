@@ -124,3 +124,7 @@ span#ks-selector-items-empty {
 	font-weight: bold;
 	text-align: center;
 }
+
+li.ks-search-item-selected {
+	background-color: orange;
+}
