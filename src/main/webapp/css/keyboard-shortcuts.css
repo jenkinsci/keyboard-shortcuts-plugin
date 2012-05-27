@@ -28,6 +28,7 @@
 	-moz-border-radius: 10px;
 	border-radius: 10px;
 	filter: alpha(opacity = 85);
+	font-size: larger;
 	left: 5%;
 	margin: 0;
 	padding: 3em;
@@ -42,7 +43,7 @@
 
 .ks-banner-section-top {
 	color: orange;
-	font-size: x-large;
+	font-size: larger;
 	font-weight: bold;
 	text-align: center;
 }
@@ -70,7 +71,6 @@
 
 .ks-help-section th {
 	color: orange;
-	font-size: large;
 	font-weight: bold;
 	border-bottom-color: orange;
 	border-bottom-style: solid;
@@ -79,7 +79,6 @@
 
 .ks-help-section td {
 	color: white;
-	font-size: medium;
 }
 
 .ks-help-section td.ks-help-section-key {
@@ -107,7 +106,6 @@ ul#ks-selector-items {
 ul#ks-selector-items li {
 	color: white;
 	display: inline-block;
-	font-size: large;
 	padding-left: 0.5em;
 	padding-right: 0.5em;
 }
@@ -120,7 +118,6 @@ ul#ks-selector-items li.ks-selector-selected {
 
 span#ks-selector-items-empty {
 	color: red;
-	font-size: large;
 	font-weight: bold;
 	text-align: center;
 }
