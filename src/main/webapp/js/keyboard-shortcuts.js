@@ -26,6 +26,7 @@ if (ks_enabled) {
   var ks_previous_code;
   var ks_previous_char;
   var ks_view_job_selected;
+  var ks_cached_pattern = { regex: null, pattern: null };
 
   Event.observe(window, 'load', function() {
     Event.observe(document, 'keydown', ks_keydown);
@@ -44,6 +45,14 @@ if (ks_enabled) {
   function ks_in_form() {
     return document.activeElement == null || 'INPUT' == document.activeElement.tagName
         || 'TEXTAREA' == document.activeElement.tagName;
+  }
+
+  function ks_is_fuzzy_match(name, pattern) {
+    if (ks_cached_pattern.pattern != pattern) {
+      ks_cached_pattern.regex = new RegExp(pattern.replace(/\W/, "").split('').join('\\w*'), 'i');
+      ks_cached_pattern.pattern = pattern;
+    }
+    return name.match(ks_cached_pattern.regex);
   }
 
   function ks_get_keycode(event) {
@@ -515,13 +524,13 @@ if (ks_enabled) {
 
   function ks_filter_matching(filter, list) {
     return list.findAll(function(o) {
-      return o.toLowerCase().indexOf(filter) >= 0;
+      return ks_is_fuzzy_match(o, filter);
     });
   }
 
   function ks_filter_matching_idx(filter, list) {
     return list.findAll(function(o) {
-      return $H(o).get('name').toLowerCase().indexOf(filter) >= 0;
+      return ks_is_fuzzy_match($H(o).get('name'), filter);
     }).map(function(o) {
       return $H(o).get('idx');
     });
@@ -662,8 +671,7 @@ if (ks_enabled) {
         $(hview.get('idx')).removeClassName('ks-selector-selected');
         $(hview.get('idx')).show();
 
-        var ks_match = hview.get('name').toLowerCase().indexOf(ks_selector_filter) >= 0;
-        if (!ks_match) {
+        if (!ks_is_fuzzy_match(hview.get('name'), ks_selector_filter)) {
           $(hview.get('idx')).hide();
         }
       });
@@ -771,8 +779,7 @@ if (ks_enabled) {
         $(hjob.get('idx')).removeClassName('ks-selector-selected');
         $(hjob.get('idx')).show();
 
-        var ks_match = hjob.get('name').toLowerCase().indexOf(ks_selector_filter) >= 0;
-        if (!ks_match) {
+        if (!ks_is_fuzzy_match(hjob.get('name'), ks_selector_filter)) {
           $(hjob.get('idx')).hide();
         }
       });
@@ -880,8 +887,7 @@ if (ks_enabled) {
         $(hnode.get('idx')).removeClassName('ks-selector-selected');
         $(hnode.get('idx')).show();
 
-        var ks_match = hnode.get('name').toLowerCase().indexOf(ks_selector_filter) >= 0;
-        if (!ks_match) {
+        if (!ks_is_fuzzy_match(hnode.get('name'), ks_selector_filter)) {
           $(hnode.get('idx')).hide();
         }
       });
@@ -989,8 +995,7 @@ if (ks_enabled) {
         $(hpermalink.get('idx')).removeClassName('ks-selector-selected');
         $(hpermalink.get('idx')).show();
 
-        var ks_match = hpermalink.get('name').toLowerCase().indexOf(ks_selector_filter) >= 0;
-        if (!ks_match) {
+        if (!ks_is_fuzzy_match(hpermalink.get('name'), ks_selector_filter)) {
           $(hpermalink.get('idx')).hide();
         }
       });
