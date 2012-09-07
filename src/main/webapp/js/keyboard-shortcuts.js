@@ -496,6 +496,7 @@ if (ks_enabled) {
         }
         ks_view_job_selected = ks_view_job_names[idx];
         $('job_' + ks_view_job_selected).addClassName('ks-view-job-selected');
+        $('job_' + ks_view_job_selected).scrollIntoView();
       }
     }
   }
@@ -512,6 +513,7 @@ if (ks_enabled) {
         }
         ks_view_job_selected = ks_view_job_names[idx];
         $('job_' + ks_view_job_selected).addClassName('ks-view-job-selected');
+        $('job_' + ks_view_job_selected).scrollIntoView();
       }
     }
   }
