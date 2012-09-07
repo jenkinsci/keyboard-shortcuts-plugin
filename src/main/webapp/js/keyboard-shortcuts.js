@@ -497,6 +497,8 @@ if (ks_enabled) {
         ks_view_job_selected = ks_view_job_names[idx];
         $('job_' + ks_view_job_selected).addClassName('ks-view-job-selected');
         $('job_' + ks_view_job_selected).scrollIntoView();
+        // JENKINS-15080 - compensate a bit for the annoying top bar that just gets in the way
+        window.scrollBy(0, -50);
       }
     }
   }
@@ -514,6 +516,8 @@ if (ks_enabled) {
         ks_view_job_selected = ks_view_job_names[idx];
         $('job_' + ks_view_job_selected).addClassName('ks-view-job-selected');
         $('job_' + ks_view_job_selected).scrollIntoView();
+        // JENKINS-15080 - compensate a bit for the annoying top bar that just gets in the way
+        window.scrollBy(0, -50);
       }
     }
   }
