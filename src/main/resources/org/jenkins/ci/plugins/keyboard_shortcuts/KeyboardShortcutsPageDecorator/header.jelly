@@ -31,6 +31,7 @@
     var ks_is_job_page           = ${it.jobPage};
     var ks_is_view_page          = ${it.viewPage};
     var ks_is_search_page        = ${it.searchPage};
+    var ks_is_node_page          = ${it.nodePage};
     var ks_url                   = '${it.baseUrl}';
     var ks_url_view              = '${it.baseViewUrl}';
     var ks_url_job               = '${it.baseJobUrl}';
@@ -45,6 +46,7 @@
     var ks_is_permalink_selector = false;
     var ks_selector_filter       = '';
     var ks_search_item_selected  = '';
+    var ks_node_selected         = '';
   </script>
   <script type="text/javascript" src="${pluginUrl}/js/keyboard-shortcuts.js" />
 </j:jelly>

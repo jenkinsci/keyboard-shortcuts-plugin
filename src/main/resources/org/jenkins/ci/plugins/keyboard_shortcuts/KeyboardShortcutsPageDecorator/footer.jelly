@@ -303,6 +303,40 @@
               </tbody>
             </table>
           </td>
+          <td>
+            <table class="ks-help-section">
+              <tbody>
+                <tr>
+                  <th colspan="3">${%KeyboardShortcuts.NodePanel.Title}</th>
+                </tr>
+                <tr>
+                  <td class="ks-help-section-key">j</td>
+                  <td>:</td>
+                  <td class="ks-help-section-desc">${%KeyboardShortcuts.NodePanel.NextNode}</td>
+                </tr>
+                <tr>
+                  <td class="ks-help-section-key">k</td>
+                  <td>:</td>
+                  <td class="ks-help-section-desc">${%KeyboardShortcuts.NodePanel.PreviousNode}</td>
+                </tr>
+                <tr>
+                  <td class="ks-help-section-key">n</td>
+                  <td>:</td>
+                  <td class="ks-help-section-desc">${%KeyboardShortcuts.NodePanel.NextNode}</td>
+                </tr>
+                <tr>
+                  <td class="ks-help-section-key">o</td>
+                  <td>:</td>
+                  <td class="ks-help-section-desc">${%KeyboardShortcuts.NodePanel.OpenCurrentNode}</td>
+                </tr>
+                <tr>
+                  <td class="ks-help-section-key">p</td>
+                  <td>:</td>
+                  <td class="ks-help-section-desc">${%KeyboardShortcuts.NodePanel.PreviousNode}</td>
+                </tr>
+              </tbody>
+            </table>
+          </td>
         </tr>
       </table>
     </div>

@@ -166,6 +166,18 @@ public final class KeyboardShortcutsPageDecorator extends PageDecorator {
         return JobUtils.getJob() != null;
     }
 
+    public static boolean isNodePage() {
+        return isNodePage(Stapler.getCurrentRequest());
+    }
+
+    public static boolean isNodePage(StaplerRequest request) {
+        if (request == null) {
+            return false;
+        }
+
+        return request.getPathInfo().endsWith("/computer/");
+    }
+
     public static boolean isSearchPage() {
         return isSearchPage(Stapler.getCurrentRequest());
     }
