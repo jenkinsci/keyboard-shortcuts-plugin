@@ -26,7 +26,10 @@ if (ks_enabled) {
   var ks_previous_code;
   var ks_previous_char;
   var ks_view_job_selected;
-  var ks_cached_pattern = { regex: null, pattern: null };
+  var ks_cached_pattern = {
+    regex : null,
+    pattern : null
+  };
 
   Event.observe(window, 'load', function() {
     Event.observe(document, 'keydown', ks_keydown);
@@ -248,11 +251,11 @@ if (ks_enabled) {
 
         case 'b':
           if (ks_is_job()) {
-            ks_set_window_location(ks_url + '/' + ks_url_job + '/build?delay=0sec');
+            ks_post(ks_url + '/' + ks_url_job + '/build?delay=0sec');
           }
           else if (ks_is_view()) {
             if (typeof ks_view_job_selected != 'undefined') {
-              ks_set_window_location(ks_url + '/job/' + ks_view_job_selected + '/build?delay=0sec');
+              ks_post(ks_url + '/job/' + ks_view_job_selected + '/build?delay=0sec');
             }
           }
           break;
@@ -446,6 +449,10 @@ if (ks_enabled) {
     window.location.href = ks_compact_href(href);
   }
 
+  function ks_post(href) {
+    new Ajax.Request(ks_compact_href(href));
+  }
+
   function ks_is_job() {
     return typeof ks_is_job_page != 'undefined' && ks_is_job_page;
   }
@@ -497,7 +504,8 @@ if (ks_enabled) {
         ks_view_job_selected = ks_view_job_names[idx];
         $('job_' + ks_view_job_selected).addClassName('ks-view-job-selected');
         $('job_' + ks_view_job_selected).scrollIntoView();
-        // JENKINS-15080 - compensate a bit for the annoying top bar that just gets in the way
+        // JENKINS-15080 - compensate a bit for the annoying top bar that just
+        // gets in the way
         window.scrollBy(0, -50);
       }
     }
@@ -516,7 +524,8 @@ if (ks_enabled) {
         ks_view_job_selected = ks_view_job_names[idx];
         $('job_' + ks_view_job_selected).addClassName('ks-view-job-selected');
         $('job_' + ks_view_job_selected).scrollIntoView();
-        // JENKINS-15080 - compensate a bit for the annoying top bar that just gets in the way
+        // JENKINS-15080 - compensate a bit for the annoying top bar that just
+        // gets in the way
         window.scrollBy(0, -50);
       }
     }
