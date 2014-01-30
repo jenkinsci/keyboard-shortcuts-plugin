@@ -252,11 +252,25 @@ if (ks_enabled) {
         case 'b':
           if (ks_previous_character_was_character('g')) {
             if (ks_is_job()) {
-              ks_post(ks_url + '/' + ks_url_job + '/build?delay=0sec');
+              if (ks_is_job_parameterized) {
+                // if job have build parameters
+                ks_set_window_location(ks_url + '/' + ks_url_job + '/build?delay=0sec');
+              }
+              else {
+                // if job have no build parameters
+                ks_post(ks_url + '/' + ks_url_job + '/build?delay=0sec');
+              }
             }
             else if (ks_is_view()) {
               if (typeof ks_view_job_selected != 'undefined') {
-                ks_post(ks_url + '/job/' + ks_view_job_selected + '/build?delay=0sec');
+                if (ks_is_job_parameterized) {
+                  // if job have build parameters
+                  ks_set_window_location(ks_url + '/job/' + ks_view_job_selected + '/build?delay=0sec');
+                }
+                else {
+                  // if job have no build parameters
+                  ks_post(ks_url + '/job/' + ks_view_job_selected + '/build?delay=0sec');
+                }
               }
             }
           }
@@ -444,7 +458,7 @@ if (ks_enabled) {
   }
 
   function ks_compact_href(href) {
-    return href.strip().gsub('(?!:)//', '/');
+    return href.strip().gsub('//', '/').replace('http:/', 'http://').replace('https:/', 'https://');
   }
 
   function ks_set_window_location(href) {

@@ -35,6 +35,7 @@
     var ks_url                   = '${it.baseUrl}';
     var ks_url_view              = '${it.baseViewUrl}';
     var ks_url_job               = '${it.baseJobUrl}';
+    var ks_is_job_parameterized  = ${it.jobParameterized};
     var ks_view_job_names        = ${it.allViewJobNamesAsJson};
     var ks_jobs                  = ${it.allJobsAsJson};
     var ks_views                 = ${it.allViewsAsJson};
