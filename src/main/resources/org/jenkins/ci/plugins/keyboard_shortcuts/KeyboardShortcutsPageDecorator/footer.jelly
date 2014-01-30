@@ -207,7 +207,7 @@
                   <th colspan="3">${%KeyboardShortcuts.ViewPages.Title}</th>
                 </tr>
                 <tr>
-                  <td class="ks-help-section-key">b</td>
+                  <td class="ks-help-section-key">g-b</td>
                   <td>:</td>
                   <td class="ks-help-section-desc">${%KeyboardShortcuts.ViewPages.BuildCurrentJobItem}</td>
                 </tr>
@@ -251,7 +251,7 @@
                   <th colspan="3">${%KeyboardShortcuts.JobPages.Title}</th>
                 </tr>
                 <tr>
-                  <td class="ks-help-section-key">b</td>
+                  <td class="ks-help-section-key">g-b</td>
                   <td>:</td>
                   <td class="ks-help-section-desc">${%KeyboardShortcuts.JobPages.BuildNow}</td>
                 </tr>

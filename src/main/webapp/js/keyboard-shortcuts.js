@@ -250,12 +250,14 @@ if (ks_enabled) {
           break;
 
         case 'b':
-          if (ks_is_job()) {
-            ks_post(ks_url + '/' + ks_url_job + '/build?delay=0sec');
-          }
-          else if (ks_is_view()) {
-            if (typeof ks_view_job_selected != 'undefined') {
-              ks_post(ks_url + '/job/' + ks_view_job_selected + '/build?delay=0sec');
+          if (ks_previous_character_was_character('g')) {
+            if (ks_is_job()) {
+              ks_post(ks_url + '/' + ks_url_job + '/build?delay=0sec');
+            }
+            else if (ks_is_view()) {
+              if (typeof ks_view_job_selected != 'undefined') {
+                ks_post(ks_url + '/job/' + ks_view_job_selected + '/build?delay=0sec');
+              }
             }
           }
           break;
