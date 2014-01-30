@@ -25,6 +25,7 @@
 package org.jenkins.ci.plugins.keyboard_shortcuts;
 
 import hudson.Extension;
+import hudson.model.AbstractProject;
 import hudson.model.Item;
 import hudson.model.PageDecorator;
 import hudson.model.TopLevelItem;
@@ -164,6 +165,27 @@ public final class KeyboardShortcutsPageDecorator extends PageDecorator {
 
     public static boolean isJobPage() {
         return JobUtils.getJob() != null;
+    }
+
+    public static boolean isJobParameterized() {
+        // if job have build parameters
+        return isJobParameterized(Stapler.getCurrentRequest());
+    }
+
+    public static boolean isJobParameterized(StaplerRequest request) {
+        // if job have build parameters
+        if (request == null) {
+            return false;
+        }
+        
+        if (JobUtils.getJob() != null) {
+            TopLevelItem topLevelItem = JobUtils.getJob();
+            for (final Job<?, ?> job : topLevelItem.getAllJobs()) {
+                AbstractProject ap = (AbstractProject)job;
+                return ap.isParameterized();
+            }
+        }
+        return false;
     }
 
     public static boolean isNodePage() {
