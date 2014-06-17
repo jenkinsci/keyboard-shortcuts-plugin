@@ -23,7 +23,6 @@
  */
 
 if (ks_enabled) {
-  var ks_previous_code;
   var ks_previous_char;
   var ks_view_job_selected;
   var ks_cached_pattern = {
@@ -72,6 +71,24 @@ if (ks_enabled) {
     }
 
     return null;
+  }
+
+  function ks_get_character(event) {
+    if (event == null) {
+      event = window.event;
+    }
+
+    var code;
+    if (typeof event.charCode != 'undefined') {
+      code = event.charCode;
+    }
+    else {
+      code = ks_get_keycode(event);
+    }
+    if (code == 0) {
+      return null;
+    }
+    return String.fromCharCode(code);
   }
 
   function ks_keydown(e) {
@@ -210,13 +227,16 @@ if (ks_enabled) {
 
     // ---
 
-    var ks_code = ks_get_keycode(e);
-    var ks_character = String.fromCharCode(ks_code);
+    var ks_character = ks_get_character(e);
 
     if (ks_is_selector()) {
       switch (ks_character) {
         case '?':
           ks_show_help();
+          break;
+
+        case null:
+          // ignore non printable characters
           break;
 
         default:
@@ -452,8 +472,7 @@ if (ks_enabled) {
           break;
       }
 
-      ks_previous_code = ks_code;
-      ks_previous_character = String.fromCharCode(ks_code);
+      ks_previous_character = ks_character;
     }
   }
 
