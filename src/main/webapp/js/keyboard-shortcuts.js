@@ -686,7 +686,7 @@ if (ks_enabled) {
 
   function ks_view_selector_filter() {
     if (ks_is_view_selector) {
-      $('ks-selector-filter').innerText = ks_selector_filter;
+      $('ks-selector-filter').update(ks_selector_filter);
 
       if (ks_selector_filter.empty()) {
         $('ks-view-selector-filter-empty').show();
@@ -794,7 +794,7 @@ if (ks_enabled) {
 
   function ks_job_selector_filter() {
     if (ks_is_job_selector) {
-      $('ks-selector-filter').innerText = ks_selector_filter;
+      $('ks-selector-filter').update(ks_selector_filter);
 
       if (ks_selector_filter.empty()) {
         $('ks-job-selector-filter-empty').show();
@@ -902,7 +902,7 @@ if (ks_enabled) {
 
   function ks_node_selector_filter() {
     if (ks_is_node_selector) {
-      $('ks-selector-filter').innerText = ks_selector_filter;
+      $('ks-selector-filter').update(ks_selector_filter);
 
       if (ks_selector_filter.empty()) {
         $('ks-node-selector-filter-empty').show();
@@ -1010,7 +1010,7 @@ if (ks_enabled) {
 
   function ks_permalink_selector_filter() {
     if (ks_is_permalink_selector) {
-      $('ks-selector-filter').innerText = ks_selector_filter;
+      $('ks-selector-filter').update(ks_selector_filter);
 
       if (ks_selector_filter.empty()) {
         $('ks-permalink-selector-filter-empty').show();
