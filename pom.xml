@@ -35,7 +35,7 @@
   </parent>
 
   <artifactId>keyboard-shortcuts-plugin</artifactId>
-  <version>1.4-SNAPSHOT</version>
+  <version>1.4</version>
   <packaging>hpi</packaging>
 
   <name>Keyboard Shortcuts Plugin</name>
@@ -71,7 +71,7 @@
     <connection>scm:git:git://github.com/jenkinsci/${project.artifactId}.git</connection>
     <developerConnection>scm:git:git@github.com:jenkinsci/${project.artifactId}.git</developerConnection>
     <url>https://github.com/jenkinsci/${project.artifactId}</url>
-    <tag>HEAD</tag>
+    <tag>keyboard-shortcuts-plugin-1.4</tag>
   </scm>
 
   <repositories>
