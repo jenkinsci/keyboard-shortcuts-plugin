@@ -37,6 +37,7 @@ import hudson.model.View;
 import java.util.TreeMap;
 
 import jenkins.model.Jenkins;
+import jenkins.model.ParameterizedJobMixIn;
 import net.sf.json.JSONArray;
 import net.sf.json.JSONObject;
 
@@ -181,8 +182,10 @@ public final class KeyboardShortcutsPageDecorator extends PageDecorator {
         if (JobUtils.getJob() != null) {
             TopLevelItem topLevelItem = JobUtils.getJob();
             for (final Job<?, ?> job : topLevelItem.getAllJobs()) {
-                AbstractProject ap = (AbstractProject)job;
-                return ap.isParameterized();
+                if(job instanceof ParameterizedJobMixIn.ParameterizedJob) {
+                    ParameterizedJobMixIn.ParameterizedJob pj = (ParameterizedJobMixIn.ParameterizedJob) job;
+                    return pj.isParameterized();
+                }
             }
         }
         return false;
