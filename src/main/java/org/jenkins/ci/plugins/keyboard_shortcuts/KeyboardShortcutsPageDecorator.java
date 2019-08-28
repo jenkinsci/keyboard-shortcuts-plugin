@@ -181,8 +181,7 @@ public final class KeyboardShortcutsPageDecorator extends PageDecorator {
         if (JobUtils.getJob() != null) {
             TopLevelItem topLevelItem = JobUtils.getJob();
             for (final Job<?, ?> job : topLevelItem.getAllJobs()) {
-                AbstractProject ap = (AbstractProject)job;
-                return ap.isParameterized();
+                return (job instanceof AbstractProject) && ((AbstractProject)job).isParameterized();
             }
         }
         return false;
