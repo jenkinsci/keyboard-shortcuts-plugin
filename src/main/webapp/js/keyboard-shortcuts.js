@@ -51,7 +51,7 @@ if (ks_enabled) {
 
   function ks_is_fuzzy_match(name, pattern) {
     if (ks_cached_pattern.pattern != pattern) {
-      ks_cached_pattern.regex = new RegExp(pattern.replace(/\W/, "").split('').join('\\w*'), 'i');
+      ks_cached_pattern.regex = new RegExp(pattern.replace(/\W/, "").split('').join('\.*'), 'i');
       ks_cached_pattern.pattern = pattern;
     }
     return name.match(ks_cached_pattern.regex);
