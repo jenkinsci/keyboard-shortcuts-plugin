@@ -87,7 +87,14 @@
       <artifactId>commons-lang</artifactId>
       <version>2.6</version>
     </dependency>
-  </dependencies>
+    
+    <!-- https://mvnrepository.com/artifact/org.jenkins-ci.plugins/cloudbees-folder -->
+	<dependency>
+	    <groupId>org.jenkins-ci.plugins</groupId>
+	    <artifactId>cloudbees-folder</artifactId>
+	    <version>5.3</version>
+	</dependency>
+  </dependencies>  
 
   <build>
     <extensions>

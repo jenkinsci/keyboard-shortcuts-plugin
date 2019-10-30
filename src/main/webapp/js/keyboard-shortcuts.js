@@ -25,6 +25,7 @@
 if (ks_enabled) {
   var ks_previous_char;
   var ks_view_job_selected;
+  var ks_folder_job_selected;
   var ks_cached_pattern = {
     regex : null,
     pattern : null
@@ -293,6 +294,18 @@ if (ks_enabled) {
                 }
               }
             }
+            else if(ks_is_folder()){
+              if (typeof ks_folder_job_selected != 'undefined') {
+                if (ks_is_job_parameterized) {
+                  // if job have build parameters
+                  ks_set_window_location(ks_url + '/' + ks_url_folder + '/job/' + ks_folder_job_selected + '/build?delay=0sec');
+                }
+                else {
+                  // if job have no build parameters
+                  ks_post(ks_url + '/' + ks_url_folder + '/job/' + ks_folder_job_selected + '/build?delay=0sec');
+                }
+              }
+            }
           }
           break;
 
@@ -351,6 +364,9 @@ if (ks_enabled) {
             else if (ks_is_view()) {
               ks_view_job_next();
             }
+            else if (ks_is_folder()) {
+              ks_folder_job_next();
+            }
           }
           break;
 
@@ -360,6 +376,9 @@ if (ks_enabled) {
           }
           else if (ks_is_view()) {
             ks_view_job_prev();
+          }
+          else if (ks_is_folder()) {
+            ks_folder_job_prev();
           }
           break;
 
@@ -385,6 +404,9 @@ if (ks_enabled) {
             else if (ks_is_view()) {
               ks_view_job_next();
             }
+            else if (ks_is_folder()) {
+              ks_view_job_next();
+            }
           }
           break;
 
@@ -400,6 +422,9 @@ if (ks_enabled) {
           }
           else if (ks_is_view()) {
             ks_view_job_open();
+          }
+          else if (ks_is_folder()) {
+            ks_folder_job_open();
           }
           break;
 
@@ -418,6 +443,9 @@ if (ks_enabled) {
             }
             else if (ks_is_view()) {
               ks_view_job_prev();
+            }
+            else if (ks_is_folder()) {
+              ks_folder_job_prev();
             }
           }
           break;
@@ -503,6 +531,9 @@ if (ks_enabled) {
   function ks_is_selector() {
     return ks_is_view_selector || ks_is_job_selector || ks_is_node_selector || ks_is_permalink_selector;
   }
+  function ks_is_folder(){
+    return typeof ks_is_folder_page != 'undefined' && ks_is_folder_page;
+  }
 
   function ks_show_help() {
     ks_selector_hide();
@@ -523,6 +554,52 @@ if (ks_enabled) {
     }
 
     return ks_previous_character == character;
+  }
+  function ks_folder_job_next() {
+    ks_hide_help();
+    if (typeof ks_folder_job_names != 'undefined') {
+      if (ks_folder_job_names.length > 0) {
+        ks_folder_job_names.each(function(job) {
+          $('job_' + job).removeClassName('ks-folder-job-selected');
+        });
+        var idx = ks_folder_job_names.indexOf(ks_folder_job_selected) + 1;
+        if (idx >= ks_folder_job_names.length) {
+          idx = 0;
+        }
+        ks_folder_job_selected = ks_folder_job_names[idx];
+        $('job_' + ks_folder_job_selected).addClassName('ks-folder-job-selected');
+        $('job_' + ks_folder_job_selected).scrollIntoView();
+        // JENKINS-15080 - compensate a bit for the annoying top bar that just
+        // gets in the way
+        window.scrollBy(0, -50);
+      }
+    }
+  }
+
+  function ks_folder_job_prev() {
+    if (typeof ks_folder_job_names != 'undefined') {
+      if (ks_folder_job_names.length > 0) {
+        ks_folder_job_names.each(function(job) {
+          $('job_' + job).removeClassName('ks-folder-job-selected');
+        });
+        var idx = ks_folder_job_names.indexOf(ks_folder_job_selected) - 1;
+        if (idx < 0) {
+          idx = ks_folder_job_names.length - 1;
+        }
+        ks_folder_job_selected = ks_folder_job_names[idx];
+        $('job_' + ks_folder_job_selected).addClassName('ks-folder-job-selected');
+        $('job_' + ks_folder_job_selected).scrollIntoView();
+        // JENKINS-15080 - compensate a bit for the annoying top bar that just
+        // gets in the way
+        window.scrollBy(0, -50);
+      }
+    }
+  }
+
+  function ks_folder_job_open() {
+    if (typeof ks_folder_job_selected != 'undefined') {
+      ks_set_window_location(ks_url + '/' + ks_url_folder + '/job/' + ks_folder_job_selected);
+    }
   }
 
   function ks_view_job_next() {

@@ -92,7 +92,7 @@
 	text-align: left;
 }
 
-#projectstatus tr.ks-view-job-selected {
+#projectstatus tr.ks-view-job-selected,#projectstatus tr.ks-folder-job-selected {
 	background-color: orange;
 }
 

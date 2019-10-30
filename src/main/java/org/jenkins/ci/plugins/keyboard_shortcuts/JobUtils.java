@@ -37,6 +37,7 @@ import net.sf.json.JSONObject;
 import org.apache.commons.lang.StringUtils;
 import org.kohsuke.stapler.Stapler;
 import org.kohsuke.stapler.StaplerRequest;
+import com.cloudbees.hudson.plugins.folder.Folder;
 
 /**
  * Common utilities for {@link hudson.model.View}s.
@@ -69,21 +70,31 @@ public final class JobUtils {
 
     public static TopLevelItem getJob(final StaplerRequest currentRequest) {
         if (currentRequest != null) {
+            TopLevelItem item = null;
+            int jidx = 0;
             final String pathInfo = currentRequest.getPathInfo();
 
             if (StringUtils.isNotEmpty(pathInfo)) {
-                final int jidx = pathInfo.indexOf("/job/");
-                if (jidx >= 0) {
-                    final String jobPathInfo = pathInfo.substring(jidx + 5);
+
+                while (pathInfo.indexOf("/job/", jidx) >= 0) {
+                    jidx = pathInfo.indexOf("/job/", jidx) + 5;
+                    final String jobPathInfo = pathInfo.substring(jidx);
 
                     final int slash = jobPathInfo.indexOf("/");
+                    String itemName;
                     if (slash >= 0) {
-                        return Jenkins.getInstance().getItem(
-                                jobPathInfo.substring(0, slash));
+                        itemName = jobPathInfo.substring(0, slash);
+                    } else {
+                        itemName = jobPathInfo;
                     }
 
-                    return Jenkins.getInstance().getItem(jobPathInfo);
+                    if (item == null) {
+                        item = Jenkins.getInstance().getItem(itemName);
+                    } else if (item instanceof Folder) {
+                        item = ((Folder) item).getItem(itemName);
+                    }
                 }
+                return item;
             }
         }
 
@@ -125,6 +136,13 @@ public final class JobUtils {
         map.put("url", url);
         map.put("name", displayName);
         return JSONObject.fromObject(map);
+    }
+
+    /**
+     * 
+     */
+    public static Collection<TopLevelItem> getItems(Folder folder) {
+        return folder.getItems();
     }
 
     /**

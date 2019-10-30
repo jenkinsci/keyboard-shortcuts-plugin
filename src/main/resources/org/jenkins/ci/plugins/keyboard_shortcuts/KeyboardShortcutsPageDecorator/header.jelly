@@ -32,11 +32,14 @@
     var ks_is_view_page          = ${it.viewPage};
     var ks_is_search_page        = ${it.searchPage};
     var ks_is_node_page          = ${it.nodePage};
+    var ks_is_folder_page        = ${it.folderPage};
     var ks_url                   = '${it.baseUrl}';
     var ks_url_view              = '${it.baseViewUrl}';
     var ks_url_job               = '${it.baseJobUrl}';
+    var ks_url_folder            = '${it.baseFolderUrl}';
     var ks_is_job_parameterized  = ${it.jobParameterized};
     var ks_view_job_names        = ${it.allViewJobNamesAsJson};
+    var ks_folder_job_names      = ${it.allFolderJobNamesAsJson};
     var ks_jobs                  = ${it.allJobsAsJson};
     var ks_views                 = ${it.allViewsAsJson};
     var ks_nodes                 = ${it.allNodesAsJson};

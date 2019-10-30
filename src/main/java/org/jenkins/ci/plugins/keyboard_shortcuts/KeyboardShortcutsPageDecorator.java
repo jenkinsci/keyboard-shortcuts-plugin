@@ -45,6 +45,7 @@ import org.apache.commons.lang.StringUtils;
 import org.kohsuke.stapler.DataBoundConstructor;
 import org.kohsuke.stapler.Stapler;
 import org.kohsuke.stapler.StaplerRequest;
+import com.cloudbees.hudson.plugins.folder.Folder;
 
 /**
  * The <a
@@ -56,6 +57,18 @@ import org.kohsuke.stapler.StaplerRequest;
  */
 @Extension
 public final class KeyboardShortcutsPageDecorator extends PageDecorator {
+    public static String getAllFolderJobNamesAsJson() {// to-do
+        TopLevelItem folder = JobUtils.getJob();
+        final JSONArray folderJobNames = new JSONArray();
+        if (folder instanceof Folder) {
+            for (TopLevelItem item : JobUtils.getItems((Folder) folder)) {
+                folderJobNames.add(item.getDisplayName());
+            }
+            return folderJobNames.toString();
+        }
+        return "undefined";
+    }
+
     public static String getAllJobsAsJson() {
         return JobUtils.getAllJobsAsJsonArray().toString();
     }
@@ -143,6 +156,14 @@ public final class KeyboardShortcutsPageDecorator extends PageDecorator {
         return "undefined";
     }
 
+    public static String getBaseFolderUrl() {
+        final Item folder = JobUtils.getJob();
+        if (folder != null && folder instanceof Folder) {
+            return folder.getUrl();
+        }
+        return "undefined";
+    }
+
     public static boolean isDisabled() {
         return isDisabled(User.current());
     }
@@ -165,7 +186,7 @@ public final class KeyboardShortcutsPageDecorator extends PageDecorator {
     }
 
     public static boolean isJobPage() {
-        return JobUtils.getJob() != null;
+        return JobUtils.getJob() != null && !isFolderPage();
     }
 
     public static boolean isJobParameterized() {
@@ -182,7 +203,7 @@ public final class KeyboardShortcutsPageDecorator extends PageDecorator {
         if (JobUtils.getJob() != null) {
             TopLevelItem topLevelItem = JobUtils.getJob();
             for (final Job<?, ?> job : topLevelItem.getAllJobs()) {
-                if(job instanceof ParameterizedJobMixIn.ParameterizedJob) {
+                if (job instanceof ParameterizedJobMixIn.ParameterizedJob) {
                     ParameterizedJobMixIn.ParameterizedJob pj = (ParameterizedJobMixIn.ParameterizedJob) job;
                     return pj.isParameterized();
                 }
@@ -216,7 +237,11 @@ public final class KeyboardShortcutsPageDecorator extends PageDecorator {
     }
 
     public static boolean isViewPage() {
-        return !isJobPage() && ViewUtils.getView() != null;
+        return !isJobPage() && !isFolderPage() && ViewUtils.getView() != null;
+    }
+
+    public static boolean isFolderPage() {
+        return (JobUtils.getJob(Stapler.getCurrentRequest()) instanceof Folder);
     }
 
     @DataBoundConstructor
