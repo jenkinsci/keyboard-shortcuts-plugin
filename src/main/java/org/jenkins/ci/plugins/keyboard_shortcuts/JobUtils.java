@@ -138,9 +138,6 @@ public final class JobUtils {
         return JSONObject.fromObject(map);
     }
 
-    /**
-     * 
-     */
     public static Collection<TopLevelItem> getItems(Folder folder) {
         return folder.getItems();
     }
