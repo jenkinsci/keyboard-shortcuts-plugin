@@ -57,7 +57,7 @@ import com.cloudbees.hudson.plugins.folder.Folder;
  */
 @Extension
 public final class KeyboardShortcutsPageDecorator extends PageDecorator {
-    public static String getAllFolderJobNamesAsJson() {// to-do
+    public static String getAllFolderJobNamesAsJson() {
         TopLevelItem folder = JobUtils.getJob();
         final JSONArray folderJobNames = new JSONArray();
         if (folder instanceof Folder) {
